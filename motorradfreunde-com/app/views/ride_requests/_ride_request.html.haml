@@ -1,0 +1,10 @@
+%li[ride_request]{class: ("deleted" if ride_request.deleted)}
+  - case ride_request.start_at.to_date
+  - when Date.today
+    = link_to l(ride_request.start_at.to_date, format: :wday_day_month) + " (heute)", ride_request
+  - when (Date.today+1.day)
+    = link_to l(ride_request.start_at.to_date, format: :wday_day_month) + " (morgen)", ride_request
+  - else
+    = link_to l(ride_request.start_at.to_date, format: :wday_day_month), ride_request
+
+  %small=t "tags.#{ride_request.driving_style}"

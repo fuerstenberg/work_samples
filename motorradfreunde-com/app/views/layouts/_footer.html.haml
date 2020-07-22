@@ -1,0 +1,20 @@
+- if show_footer?
+  .footer
+    .container
+      .row
+        %ul.col-sm-4
+          / %li= link_to "Partner werden",   [:partner, :page]
+          %li= link_to "Werbebanner",   [:banners, :page]
+          -# TODO: %li= link_to "Feedback",  conversation_messages_path(:new, user_id: User.find_by(email: 'rene.fuerstenberg@googlemail.com'))
+          / %li= link_to "Hilfe",     [:help, :page]
+          %li= link_to "AGB",       [:terms, :page]
+          %li= link_to "Impressum", [:impress, :page]
+
+        %ul.col-sm-4
+          %li= link_to "Termine", [:events]
+          %li= link_to "Bikes",   [:bikes]
+          %li= link_to "Biker",   [:users]
+          %li= link_to "POIs",    [:pois]
+
+        .col-sm-4
+          .fb-like-box{data: {"href" => "https://www.facebook.com/motorradfreundecom", "colorscheme" => "light", "show-faces" => "true", "header" => "false", "stream" => "false", "show-border" => "false"}}

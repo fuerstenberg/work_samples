@@ -1,0 +1,70 @@
+- meta @event
+- title @event
+- subtitle do
+  =l @event.start_at, format: :longest
+  - if @event.start_at.to_date < @event.end_at.to_date
+    &mdash;
+    =l @event.end_at, format: :longest
+  - if @event.geocoded?
+    &mdash;
+    = @event.formatted_zip_city
+    \/
+    = @event.formatted_country
+
+- map highlight_item: @event
+
+.event-info.mb-4{itemscope: true, itemtype: "http://data-vocabulary.org/Event"}
+  .card
+    .card-block
+      %dl.row
+        %dt.col-sm-4 Beginn
+        %dd.col-sm-8
+          - if @event.end_at < Time.now
+            %span{:style => "text-decoration: line-through;"}
+              =l @event.start_at, format: :longest
+            %br
+            %strong Der Termin hat bereits stattgefunden.
+          - else
+            =l @event.start_at, format: :longest
+        - if @event.start_at < @event.end_at
+          %dt.col-sm-4 Ende
+          %dd.col-sm-8=l @event.end_at, format: :longest
+
+        %dt.col-sm-4 Treffpunkt
+        %dd.col-sm-8
+          %address= @event.formatted_address
+
+        %dt.col-sm-4 Beschreibung
+        %dd.col-sm-8{itemprop: "description"}= @event.description_html
+        - if @event.url.present?
+          %dt.col-sm-4 Webseite zum Termin
+          %dd.col-sm-8= link_to @event.url, @event.url, :target => :blank
+        - if @event.user
+          %dt.col-sm-4 erstellt von
+          %dd.col-sm-8= link_to @event.user, @event.user
+
+        %dt.col-sm-4 zuletzt geändert
+        %dd.col-sm-8
+          =l @event.updated_at
+
+          %span{style: "display: none;"}
+            %span{itemprop: "summary"}= @event
+            %span{itemprop: "dtstart", datetime: (@event.start_at.iso8601 if @event.start_at)}
+            %span{itemprop: "dtend",   datetime: (@event.end_at.iso8601 if @event.end_at)}
+            %a{itemprop: "url", href: url_for(@event)}
+              %span{itemprop: "summary"}= @event
+            %span{itemprop: "geo", itemscope: true, itemtype: "http://data-vocabulary.org/​Geo"}
+              %meta{itemprop: "latitude",  content: @event.address.to_coordinates[0]}
+              %meta{itemprop: "longitude", content: @event.address.to_coordinates[1]}
+
+        %dt.col-sm-4 Entfernung zu dir
+        %dd.col-sm-8
+          - distance_from_me_to @event
+
+= render partial: "comments/comments", object: @event
+
+- content_for :main_action do
+  - if can? :update, @event
+    = link_to "Termin bearbeiten", [:edit, @event], :class => "btn btn-success btn-large"
+  - if can? :destroy, @event
+    = link_to "Termin löschen", @event, method: :delete, class: "btn btn-danger btn-large", data: { confirm: 'Wirklich löschen?' }

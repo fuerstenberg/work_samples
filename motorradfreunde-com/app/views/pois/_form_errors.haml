@@ -1,0 +1,8 @@
+- f = form_errors
+
+- if f.object.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(f.object.errors.count, "error")} prohibited this location from being saved:"
+    %ul
+      - f.object.errors.full_messages.each do |msg|
+        %li= msg

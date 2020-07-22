@@ -1,0 +1,17 @@
+- cache ["videos/video", video] do
+  .col-12.col-sm-6.col-md-4.mb-4
+    = link_to video, title: video, class: "card video-card", id: dom_id(video, :card) do
+      = image_tag video.thumbnail, class: "card-image img-fluid", alt: video
+      .card-block.video-card__block
+        %h2.card-title= video
+        %p.card-text=truncate video.description, length: 50
+      .card-footer
+        - if size = video.impressions_count
+          %span.badge.badge-default
+            = icon 'eye'
+            = size
+
+        - if size = video.impressions_count
+          %span.badge.badge-default
+            = icon 'clock'
+            = Time.at(video.duration).gmtime.strftime('%R:%S')

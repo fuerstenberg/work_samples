@@ -1,0 +1,20 @@
+- timeline_event = event_created
+
+%li.item.event_created[timeline_event]
+  .calendar= timeline_event.subject.start_at.day
+  .content_box
+    .head
+      = link_to timeline_event.actor, timeline_event.actor
+      hat den Termin
+      = link_to timeline_event.subject, timeline_event.subject
+      erstellt
+    .content
+      %strong= timeline_event.subject
+      %br
+      =l timeline_event.subject.start_at
+    .foot
+      == vor #{time_ago_in_words timeline_event.created_at}
+
+  %ul.list.comments
+    = render :partial => "comments/comment", :collection => timeline_event.subject.comments
+    = render :partial => "comments/form",    :object     => timeline_event.subject.comments.build(:user => current_user)

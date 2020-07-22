@@ -1,0 +1,37 @@
+- poi = shop
+- if poi.is_shop?
+  %dl.row
+    %dt.col-sm-3 shop
+    %dd.col-sm-9
+      %dl
+        - if poi.shop_beschreibung.present?
+          %dt.shop_beschreibung= t 'mongoid.attributes.poi.poi.shop_beschreibung'
+          %dd.shop_beschreibung= poi.shop_beschreibung
+
+        - if poi.shop_bekleidung.present?
+          %dt.shop_bekleidung= t 'mongoid.attributes.poi.poi.shop_bekleidung'
+          %dd.shop_bekleidung= poi.shop_bekleidung
+
+        - if poi.shop_bekleidung_helme.present?
+          %dt.shop_bekleidung_helme= t 'mongoid.attributes.poi.poi.shop_bekleidung_helme'
+          %dd.shop_bekleidung_helme= poi.shop_bekleidung_helme
+
+        - if poi.shop_bekleidung_leder.present?
+          %dt.shop_bekleidung_leder= t 'mongoid.attributes.poi.poi.shop_bekleidung_leder'
+          %dd.shop_bekleidung_leder= poi.shop_bekleidung_leder
+
+        - if poi.shop_bekleidung_textil.present?
+          %dt.shop_bekleidung_textil= t 'mongoid.attributes.poi.poi.shop_bekleidung_textil'
+          %dd.shop_bekleidung_textil= poi.shop_bekleidung_textil
+
+        - if poi.shop_finanzierung.present?
+          %dt.shop_finanzierung= t 'mongoid.attributes.poi.poi.shop_finanzierung'
+          %dd.shop_finanzierung= poi.shop_finanzierung
+
+        - if poi.shop_geschenkgutscheine.present?
+          %dt.shop_geschenkgutscheine= t 'mongoid.attributes.poi.poi.shop_geschenkgutscheine'
+          %dd.shop_geschenkgutscheine= poi.shop_geschenkgutscheine
+
+        - if poi.shop_zubehoer.present?
+          %dt.shop_zubehoer= t 'mongoid.attributes.poi.poi.shop_zubehoer'
+          %dd.shop_zubehoer= poi.shop_zubehoer

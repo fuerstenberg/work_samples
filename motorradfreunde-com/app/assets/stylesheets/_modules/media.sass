@@ -1,0 +1,48 @@
+.media
+  // Bugfix siehe Forum .media-Elemente haben nicht die volle Breite, vielleicht in neuerer Version von Bootstrap gefixt
+  width: 100%
+
+  &.media_question > .media-body > .media-heading > p,
+  &.media_question > .media-body > p
+    font-size: 120%
+
+  &.activity,
+  &.article,
+  &.comment,
+  &.media_answer,
+  &.new_media_comment
+    border-top: 1px solid #EEEEEE
+    padding-top: 10px
+
+  .media-left,
+  .media-right
+    .img-circle
+      // Bugfix siehe Forum .media-Elemente haben nicht die volle Breite, vielleicht in neuerer Version von Bootstrap gefixt
+      min-width: 50px
+      max-width: 50px
+
+  .media-heading
+    h2, h3, h4, h5
+      font-size: 130%
+      font-weight: 500
+      line-height: 137%
+
+      a
+        color: $red
+
+  .media-body
+    // Bugfix siehe Forum .media-Elemente haben nicht die volle Breite, vielleicht in neuerer Version von Bootstrap gefixt
+    width: 100%
+
+    img
+      width: 100%
+
+  .stats
+    font-size: 85%
+    color: #999
+
+
+.media .media_answer .media.comment .media-left .img-circle
+  // Bugfix siehe Forum .media-Elemente haben nicht die volle Breite, vielleicht in neuerer Version von Bootstrap gefixt
+  min-width: 40px
+  max-width: 40px

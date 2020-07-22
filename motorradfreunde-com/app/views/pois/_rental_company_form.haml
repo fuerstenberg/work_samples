@@ -1,0 +1,10 @@
+- f = rental_company_form
+
+.is_rental_company_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Vermietung
+
+  .form-group.row
+    = f.label :vermietung_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :vermietung_beschreibung, class: 'form-control'

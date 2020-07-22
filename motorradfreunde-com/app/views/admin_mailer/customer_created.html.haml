@@ -1,0 +1,53 @@
+%h1= link_to @customer, [:admin, @customer]
+%table
+  %tr
+    %td token
+    %td= @customer.token
+  %tr
+    %td state
+    %td= @customer.state
+  %tr
+    %td name
+    %td= @customer.name
+  %tr
+    %td contact
+    %td= @customer.contact
+  %tr
+    %td street
+    %td= @customer.street
+  %tr
+    %td zip
+    %td= @customer.zip
+  %tr
+    %td city
+    %td= @customer.city
+  %tr
+    %td country
+    %td= @customer.country
+  %tr
+    %td phone
+    %td= @customer.phone
+  %tr
+    %td fax
+    %td= @customer.fax
+  %tr
+    %td email
+    %td= @customer.email
+  %tr
+    %td description
+    %td= @customer.description
+  %tr
+    %td log
+    %td= @customer.log
+  %tr
+    %td advertised_by_email_at
+    %td= @customer.advertised_by_email_at
+  %tr
+    %td advertised_by_fax_at
+    %td= @customer.advertised_by_fax_at
+  %tr
+    %td created_at
+    %td= @customer.created_at
+  %tr
+    %td updated_at
+    %td= @customer.updated_at

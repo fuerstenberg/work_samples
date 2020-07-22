@@ -1,0 +1,27 @@
+- object = address
+%dl.row
+  %dt.col-sm-3 Adresse
+  %dd.col-sm-9
+    = object.address.street
+    %br/
+    = object.address.zip
+    = object.address.city
+    %br/
+    = object.address.country
+
+  - if object.address.region.present?
+    %dt.col-sm-3 Region
+    %dd.col-sm-9= object.address.region
+
+  - if object.address.coordinates.present?
+    %dt.col-sm-3 Koordinaten
+    %dd.col-sm-9
+      - if object.address.coordinates[1] > 0
+        == #{object.address.coordinates[1]}° N
+      - else
+        == #{object.address.coordinates[1]}° S
+      ,
+      - if object.address.coordinates[0] > 0
+        == #{object.address.coordinates[0]}° O
+      - else
+        == #{object.address.coordinates[0]}° W

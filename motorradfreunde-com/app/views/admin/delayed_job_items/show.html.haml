@@ -1,0 +1,47 @@
+- title "Delayed job ##{@delayed_job_item.id}"
+
+- content_for :actions do
+  = link_to "Zurück zur Übersicht", [:admin, :delayed_job_items], class: "btn btn-default"
+  = link_to "Löschen", [:admin, :delayed_job_item], method: :delete, data: {confirm: "Wirklich löschen?"}, class: "btn btn-danger"
+
+%table.table.table-striped
+  %tr
+    %th Id
+    %td= @delayed_job_item.id
+  %tr
+    %th Priority
+    %td= @delayed_job_item.priority
+  %tr
+    %th Attempts
+    %td
+      %strong= @delayed_job_item.attempts
+  %tr
+    %th Queue
+    %td= @delayed_job_item.queue
+  %tr
+    %th Locked by
+    %td= @delayed_job_item.locked_by
+  %tr
+    %th Locked at
+    %td=l @delayed_job_item.locked_at rescue nil
+  %tr
+    %th Run at
+    %td=l @delayed_job_item.run_at rescue nil
+  %tr
+    %th Failed at
+    %td=l @delayed_job_item.failed_at rescue nil
+  %tr
+    %th Created at
+    %td=l @delayed_job_item.created_at rescue nil
+  %tr
+    %th Updated at
+    %td=l @delayed_job_item.updated_at rescue nil
+  %tr
+    %th Handler
+    %td
+      %pre= @delayed_job_item.handler
+  %tr
+    %th Last error
+    %td
+      - if @delayed_job_item.last_error.present?
+        %pre= @delayed_job_item.last_error

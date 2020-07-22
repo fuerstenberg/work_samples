@@ -1,0 +1,13 @@
+- photo = small_photo
+
+- unless photo.new_record?
+  .col-md-3
+    = link_to image_tag(photo.url(:limit_800_800), class: "image-thumbnail"), photo.url(:limit_1000_1000), class: "lightbox", rel: :group, alt: "#{photo.photogenic}"
+
+    - if can? :update, photo
+      = link_to "Als Profilbild festlegen", [:avatar, current_user, photo], method: :put, class: :avatar
+
+    - if can? :destroy, photo
+      = link_to [current_user, photo], class: :delete, method: :delete, data: { confirm: "Soll das Bild wirklich gelöscht werden?" } do
+        %i.icon-remove
+        Bild löschen

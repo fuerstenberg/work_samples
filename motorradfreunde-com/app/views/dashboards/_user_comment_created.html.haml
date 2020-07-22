@@ -1,0 +1,37 @@
+- timeline_event = user_comment_created
+
+
+%li.item.comment.user_comment_created[timeline_event.subject]
+  = preview timeline_event.actor, link: timeline_event.actor
+  .content_box
+    .head
+      - if current_user == timeline_event.actor or timeline_event.secondary_subject == current_user
+        = link_to raw("&times;"), timeline_event.subject, method: :delete, class: 'close', remote: true, title: "entfernen"
+
+      - if timeline_event.secondary_subject.is_a?(User) and timeline_event.actor == current_user
+        -# name = (timeline_event.secondary_subject == current_user) ? 'deine' : "#{timeline_event.secondary_subject}'s"
+
+        - if timeline_event.secondary_subject == current_user
+          == #{link_to 'Du', timeline_event.actor } hast etwas an #{link_to 'deine Pinnwand', :dashboards} geschrieben
+        - else
+          == #{link_to 'Du', timeline_event.actor } hast etwas an #{link_to "#{timeline_event.secondary_subject}'s", [timeline_event.secondary_subject, :dashboards]} Pinnwand geschrieben
+
+      - elsif timeline_event.actor != current_user and timeline_event.secondary_subject != timeline_event.actor
+        - name = current_user == timeline_event.secondary_subject ? 'deine': "#{timeline_event.secondary_subject}'s"
+        == #{link_to timeline_event.actor , timeline_event.actor } hat etwas an #{link_to name, [timeline_event.secondary_subject, :dashboards]} Pinnwand geschrieben
+
+      - else
+        -# name = timeline_event.actor == timeline_event.secondary_subject ? 'ihre/seine' : 'deine'
+        - if timeline_event.actor == timeline_event.secondary_subject
+          == #{link_to timeline_event.actor , [timeline_event.actor, :dashboards] } hat etwas an ihre/seine Pinnwand geschrieben
+        - else
+          == #{link_to timeline_event.actor , [timeline_event.actor, :dashboards] } hat etwas an #{link_to 'deine Pinnwand', [:account, :dashboard]} geschrieben
+    .content
+      = timeline_event.subject.body_html
+
+    .foot
+      == vor #{time_ago_in_words timeline_event.created_at}
+
+  %ul.list.comments{:id => dom_id(timeline_event.subject)}
+    = render :partial => "comments/comment", :collection => timeline_event.subject.comments
+    = render :partial => "comments/form", :object => timeline_event.subject.comments.build(:user => current_user)

@@ -1,0 +1,5 @@
+= render layout: "layouts/activity", object: activity, locals: { activity_title: "hat eine Antwort im Forum geschrieben" } do
+  %p
+    Beitrag:
+    = link_to activity.trackable.question, activity.trackable.question
+  %p= activity.trackable

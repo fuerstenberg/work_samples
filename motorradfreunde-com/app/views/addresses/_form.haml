@@ -1,0 +1,22 @@
+- form.object.build_address unless form.object.address
+
+.form-group.row
+  = form.label 'Adresse', class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = form.fields_for :address do |field|
+      .form-group
+        = field.text_field :street, class: 'form-control', placeholder: true
+      .form-group
+        = field.text_field :zip, class: 'form-control', placeholder: true
+      .form-group
+        = field.text_field :city, class: 'form-control', placeholder: true
+      .form-group
+        = field.text_field :state, class: 'form-control', placeholder: true
+      .form-group
+        = field.text_field :region, class: 'form-control', placeholder: true
+      .form-group
+        = field.text_field :country, class: 'form-control', placeholder: true
+
+    .map
+      .map_canvas
+    - render_map highlight_item: form.object, display_current_user: false

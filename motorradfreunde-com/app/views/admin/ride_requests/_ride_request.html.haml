@@ -1,0 +1,33 @@
+- if ride_request_counter == 0
+  %tr
+    %th gelöscht
+    %th Fahrstil
+    %th= link_to "Start", url_for(order: :start_at, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+    %th User
+    %th Geschlecht
+    %th Alter
+    %th Geo
+    %th Kommentare
+    %th
+      = link_to "erstellt", url_for(order: :created_at, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+      \/
+      = link_to "geändert", url_for(order: :updated_at, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+
+
+%tr
+  %td= 'gelöscht' if ride_request.deleted?
+  %td=t "activerecord.attributes.user.#{ride_request.driving_style}"
+  %td= link_to l(ride_request.start_at.to_date, format: :longer), ride_request
+  %td= link_to_user ride_request.user
+  %td
+    - if ride_request.user.female?
+      Bikerin
+    - else
+      Biker
+  %td= ride_request.user.age
+  %td== #{ride_request.latitude}, #{ride_request.longitude}
+  %td= ride_request.comments.count
+  %td
+    = ride_request.created_at
+    %br
+    = ride_request.updated_at

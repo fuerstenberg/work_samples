@@ -1,0 +1,64 @@
+!!!
+%html{class: 'no-js', lang: 'de'}<>
+  %head
+    = render partial: 'layouts/head'
+
+  %body.layout{class: body_class}
+    = render partial: 'layouts/flash_message'
+    = render partial: 'layouts/main_navigation'
+    = render partial: 'layouts/login_animation_message'
+
+    - if content_for?(:map)
+      .map
+        .map__canvas
+
+    = render partial: 'layouts/title'
+
+    - if content_for?(:left)
+      .container.pt-4
+        .row
+          .col-md-3
+            = yield :left
+          .content.col-md-6
+            = yield
+          .col-md-3
+            = yield :right
+            = render 'pois/premium'
+
+    - elsif content_for?(:fullscreen_map)
+      .map.fullscreen-map
+        .map__canvas
+        .fullscreen-map__container= yield :fullscreen_map
+
+    - elsif content_for?(:chats)
+      .chats__container
+        .chats__conversations
+          = yield :chats
+        .chats__messages
+          - if content_for?(:form)
+            .chats__messages-form
+              = yield :form
+          .chats__messages-list
+            = yield
+        .chats__ads
+          = yield :right
+          = render 'pois/premium'
+
+    - elsif hide_all_sidebars?
+      .container.pt-4
+        .row
+          .content.col-md-12
+            = yield
+
+    - else
+      .container.pt-4
+        .row
+          .content.col-lg-9
+            = yield
+          .col-lg-3
+            = yield :right
+            = render 'pois/premium'
+
+    = render partial: 'layouts/footer'
+    = render partial: 'layouts/scripts'
+    = render partial: 'layouts/advertise'

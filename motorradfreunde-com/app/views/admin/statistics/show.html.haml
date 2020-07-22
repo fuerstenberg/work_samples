@@ -1,0 +1,182 @@
+= title "Statistik"
+
+- content_for :scripts do
+  = javascript_include_tag 'admin'
+
+  :javascript
+    $(function(){
+      // http://oesmith.github.com/morris.js/
+      Morris.Line({
+        element: 'statistics_for_users_per_day',
+        data: $('#statistics_for_users_per_day').data('users'),
+        parseTime: false,
+        xkey: 'day',
+        ykeys: ['users'],
+        labels: ['Neuanmeldungen']
+      });
+
+      Morris.Bar({
+        element: 'statistics_for_users_per_week',
+        data: $('#statistics_for_users_per_week').data('users'),
+        xkey: 'week',
+        parseTime: false,
+        ykeys: ['users'],
+        labels: ['Neuanmeldungen']
+      });
+
+      Morris.Bar({
+        element: 'statistics_for_users_per_month',
+        data: $('#statistics_for_users_per_month').data('users'),
+        xkey: 'month',
+        parseTime: false,
+        ykeys: ['users'],
+        labels: ['Neuanmeldungen']
+      });
+
+      Morris.Donut({
+        element: 'users_gender_chart',
+        data: $('#users_gender_chart').data('users')
+      });
+    });
+
+
+%table#statistic.table.table-striped
+  %tbody
+    - cache "admin/statistics/per_day", expires_in: 1.hour do
+      %tr
+        %th{:colspan => 3}
+          Neuanmeldungen pro Tag (letzte 90 Tage)
+      %tr
+        %td{:colspan => 3}
+          = content_tag :div, "", id: 'statistics_for_users_per_day', data: {users: User.statistics_for_users_per_day}
+
+    - cache "admin/statistics/per_week", expires_in: 1.day do
+      %tr
+        %th{:colspan => 3}
+          Neuanmeldungen pro Woche (letzte 12 Monate)
+      %tr
+        %td{:colspan => 3}
+          = content_tag :div, "", id: 'statistics_for_users_per_week', data: {users: User.statistics_for_users_per_week}
+
+    - cache "admin/statistics/per_month", expires_in: 1.day do
+      %tr
+        %th{:colspan => 3}
+          Neuanmeldungen pro Monat (letzte 48 Monate)
+      %tr
+        %td{:colspan => 3}
+          = content_tag :div, "", id: 'statistics_for_users_per_month', data: {users: User.statistics_for_users_per_month}
+
+    - cache "admin/statistics/per_gender", expires_in: 1.day do
+      %tr
+        %th{:colspan => 3}
+          Nach Geschlecht
+      %tr
+        %td{:colspan => 3}
+          = content_tag :div, "", id: 'users_gender_chart', data: {users: User.gender_statistics}
+
+    %tr
+      %th User
+      %td gesamt
+      %td.r= User.count
+
+    - cache "admin/statistics/counts", expires_in: 1.day do
+      %tr
+        %td
+        %td mit Bild
+        %td.r= User.where('images_count > 0').count
+      %tr
+        %td
+        %td Facebook
+        %td.r= User.facebooker.count
+      %tr
+        %td
+        %td mit Ort
+        %td.r= User.where("latitude IS NOT NULL").count
+      %tr
+        %th Admins
+        %td
+        %td.r=raw User.where(admin: true).to_a.map(&:to_s).join('<br>')
+      %tr
+        %th Termine
+        %td gesamt
+        %td.r= Event.count
+      %tr
+        %th Kommentare
+        %td gesamt
+        %td.r= Comment.count
+      %tr
+        %th Bilder
+        %td gesamt
+        %td.r= Photo.count
+      %tr
+        %th Nachrichten
+        %td gesamt
+        %td.r= Message.count
+      %tr
+        %th Benachrichtigungen
+        %td
+        %td.r= Notification.count
+      -# %tr
+      -#   %th Followships
+      -#   %td gesamt
+      -#   %td.r= Followship.count
+      %tr
+        %th POIs
+        %td gesamt
+        %td.r= Poi.count
+      %tr
+        %td
+        %td Termine erstellt
+        %td.r= Event.count
+      %tr
+        %th Motorrad fahren
+        %td Motorrad fahren
+        %td.r= RideRequest.count
+      %tr
+        %th TimelineEvents
+        %td
+        %td.r= TimelineEvent.count
+      %tr
+        %th Videos
+        %td gesamt
+        %td.r= Video.count
+      %tr
+        %td
+        %td aktiv
+        %td.r= Video.active.count
+      %tr
+        %td
+        %td aktiv (Stunden)
+        %td.r== #{Video.active.sum(:duration) / 60 / 60} h
+      %tr
+        %td
+        %td abgelehnt
+        %td.r= Video.inactive.count
+      %tr
+        %th FeedItems
+        %td
+        %td.r= FeedItem.count
+      %tr
+        %th Routen
+        %td
+        %td.r= Route.count
+      %tr
+        %th Bikes
+        %td
+        %td.r= Bike.count
+      %tr
+        %th Termine
+        %td kommende
+        %td.r= Event.upcoming.count
+      %tr
+        %th News
+        %td
+        %td.r= Article.count
+      %tr
+        %th Forum
+        %td Fragen
+        %td.r= Question.count
+      %tr
+        %th
+        %td Antworten
+        %td.r= Answer.count

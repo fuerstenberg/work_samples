@@ -1,0 +1,97 @@
+- meta "Der Bikertreff für Motorradfreunde"
+- slogan = "Motorradfreunde.com ist der Bikertreff im Internet, der dich mit Motorradfahrern in deiner Nähe zusammenbringt."
+- content_for :meta_title, slogan
+
+- content_for :cover do
+  %h1.cover-heading Der Bikertreff für Motorradfreunde.
+  %p.lead.hidden-xs= slogan
+  %p.lead Komm rein und werde Motorradfreund!
+  - unless user_signed_in?
+    - unless request.referrer.to_s.include?("facebook") or cookies[:facebook_user]
+      .col-xs-12.lead.text-center
+        = link_to "Benutzerkonto erstellen", new_user_registration_path, class: "btn btn-lg btn-success"
+      .col-xs-12.lead.text-center
+        oder
+    .col-xs-12.lead.text-center
+      = link_to "Facebook Login", user_facebook_omniauth_authorize_path, class: "btn btn-lg btn-primary"
+
+
+.row
+  - cache ["homepage/users/with_photo_and_most_impressions"], expires_in: 1.day do
+    / .masonry{data: {item_selector: '.small_user'}}
+    - User.with_photo_and_most_impressions(24).each_with_index do |user, index|
+      - css_classes = []
+      - css_classes << "hidden-xs" if index > 9
+      - css_classes << "hidden-sm" if index > 8
+      - css_classes << "hidden-md" if index > 11
+      .small_user.col-6.col-sm-4.col-md-2.mb-4{class: css_classes.join(" ")}
+        = link_to user, data: data_user_id(user) do
+          = image_tag user.avatar(:fill_200_200), alt: user, class: "img-thumbnail", style: 'width: 100%'
+
+.row
+  .col-sm-4
+    %h2 Was ist Motorradfreunde.com?
+    %p
+      Es ist ein soziales Netzwerk für Motorradfahrer.
+      Wenn dein Fahrzeug einen Motor und zwei Räder hat (oder auch drei Räder),
+      %br
+      %strong dann möchten wir dich kennenlernen.
+
+  .col-sm-4
+    %h2 Für wen?
+    %p
+      Alle Funktionen von Motorradfreunde.com wurden
+      für die Bedürfnisse von Motorradfahrern gebaut
+      %br
+      %strong also nicht für normale Menschen.
+
+  .col-sm-4
+    %h2 Für was?
+    %p
+      Benutze Motorradfreunde.com,
+      um Freunde zu finden,
+      Tour-Partner zu finden,
+      für Termine und Ausfahrten,
+      einfach
+      %strong für alles was mit dem Thema Motorrad zu tun hat.
+      Die Liste der Funktionen wächst täglich.
+
+%hr
+.row
+  .col-sm-4
+    %h2 Welche Funktionen gibt es?
+    %p
+      Du wirst hier die Standardfunktionen von sozialen Netzwerken finden,
+      wie Freunde werden, Pinnwandeinträge,
+      private Nachrichten senden und einige speziell für die Bedürfnisse von Bikern gebaute Funktionen.
+
+  .col-sm-4
+    %h2 Was ist es nicht?
+    %p
+      Motorradfreunde.com ist kein "out of the box"-Forum.
+      %strong Diese Webseite wurde nur für Motorradfahrer, Biker und Motorradfreunde gebaut.
+
+  .col-sm-4
+    %h2 Was kostet das?
+    %p
+      %strong Motorradfreunde.com ist kostenlos
+      für alle Biker und Motorradfreunde.
+    %p
+      Es sei denn, du bist Gewerbetreibender und möchtest hier Werbung schalten.
+
+%hr
+.row
+  .col-sm-12
+    %h2 Fertig?
+    %p Motorradfreunde.com ist noch nicht perfekt, aber wir freuen uns immer über Ideen, Anregungen und konstruktive Kritik.
+
+%hr
+.row
+  .col-sm-12.text-center
+    - unless user_signed_in?
+      %p.lead
+        - unless request.referrer.to_s.include?("facebook") or cookies[:facebook_user]
+          = link_to "Benutzerkonto erstellen", new_user_registration_path, class: "btn btn-lg btn-success"
+          oder
+        = link_to "Facebook Login", user_facebook_omniauth_authorize_path, class: "btn btn-lg btn-primary"
+    %p.lead Komm rein und werde Motorradfreund!

@@ -1,0 +1,16 @@
+- if user_signed_in?
+  %a.btn.btn-xs.btn-default.btn-display-comment.pull-right{href: '#'} Kommentieren
+  .clearfix
+
+  .comment{data: data_user_id(current_user)}
+    = image_tag current_user.avatar(:fill_200_200), alt: current_user, class: 'comment__avatar'
+    .comment__content
+      .media-body
+        = form_for [form.commentable, form] do |f|
+          .input-group
+            = f.text_field :body, placeholder: 'Schreibe einen Kommentar...', class: 'form-control', autocomplete: 'off'
+            .input-group-btn
+              - if defined?(btn_text)
+                = f.submit btn_text, class: "btn btn-secondary"
+              - else
+                = f.submit 'Kommentieren', class: "btn btn-secondary"

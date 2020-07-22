@@ -1,0 +1,4 @@
+= render layout: "layouts/activity", object: activity, locals: { activity_title: "hat etwas kommentiert" } do
+  %p
+    = link_to activity.parent, activity.parent
+  -# %p.text-muted=truncate activity.trackable.body

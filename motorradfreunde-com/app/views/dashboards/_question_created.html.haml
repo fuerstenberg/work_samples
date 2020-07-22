@@ -1,0 +1,15 @@
+- timeline_event = question_created
+
+.main_item.question_created[timeline_event]
+  = preview timeline_event.actor, link: timeline_event.subject
+  .content_box
+    .head
+      = link_to timeline_event.actor, timeline_event.actor
+      hat die Frage
+      = link_to timeline_event.subject, timeline_event.subject
+      gestellt.
+    .content
+      = truncate timeline_event.subject.body, :length => 250
+      = link_to "Beantworte hier die Frage", timeline_event.subject
+    .foot
+      == vor #{time_ago_in_words timeline_event.created_at}

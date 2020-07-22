@@ -1,0 +1,21 @@
+%h2= link_to @article.title, article_url(@article)
+
+%table
+  %tr
+    %th active
+    %td= @article.active
+  %tr
+    %th user
+    %td= link_to @article.user, user_url(@article.user)
+  %tr
+    %th body_html
+    %td= @article.body_html
+  %tr
+    %th images_count
+    %td= @article.images_count
+  %tr
+    %th created_at
+    %td= @article.created_at
+  %tr
+    %th updated_at
+    %td= @article.updated_at

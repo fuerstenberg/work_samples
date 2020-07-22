@@ -1,0 +1,16 @@
+- cache ["questions/question", question], expires_in: 60.minutes do
+  %li[question, :media]{data: data_user_id(question.user)}
+    .pull-right.involved_people
+      - question.involved_people[0..5].each do |user|
+        = image_tag user.avatar(:fill_200_200), class: "img-circle", alt: user
+    %h2= link_to question, [:forum, question]
+
+    .question-stats.text-muted
+      = image_tag question.user.avatar(:fill_200_200), class: "img-circle", alt: question.user
+      %strong= question.user
+      -# - if answers_count = question.answers.count and answers_count > 1
+      -#   &bull;
+      -#   = pluralize answers_count, "Antwort", "Antworten"
+      -# - if comments_count = question.comments.count and comments_count > 1
+      -#   &bull;
+      -#   = pluralize comments_count, "Kommentar", "Kommentare"

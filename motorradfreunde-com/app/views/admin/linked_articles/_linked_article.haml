@@ -1,0 +1,43 @@
+- if linked_article_counter == 0
+  %tr
+    %th Bild
+    %th Content
+
+%tr[linked_article]
+  %th
+    - if linked_article.image_url.present?
+      = image_tag linked_article.image_url, width: "150px"
+  %td
+    %h2= linked_article.title
+    %span
+      Author:
+      = linked_article.author
+    %br
+    %span
+      Categories:
+      = linked_article.categories
+    %br
+    %span
+      Description:
+      = linked_article.description rescue nil
+    %br
+    %span
+      Content:
+      = linked_article.content rescue nil
+    %br
+    %span
+      Published:
+      = linked_article.published_at
+    %br
+    %span
+      Url:
+      = link_to linked_article.url, linked_article.url, target: :blank
+    %br
+    %span
+      Image url:
+      = linked_article.image_url
+    %br
+    %span
+      Guid:
+      = linked_article.guid
+    %br

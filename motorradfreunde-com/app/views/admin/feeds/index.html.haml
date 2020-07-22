@@ -1,0 +1,7 @@
+- title "Feeds"
+- hide_all_sidebars
+
+- content_for :actions do
+  = link_to 'Anlegen', [:new, :admin, :feed], class: "btn btn-primary"
+
+%table.table= render @feeds

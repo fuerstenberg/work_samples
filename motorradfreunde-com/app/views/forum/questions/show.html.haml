@@ -1,0 +1,32 @@
+- title @question
+- meta @question
+
+.media[@question, :media]{data: data_user_id(@question.user)}
+  = link_to @question.user, class: "media-left", data: data_user_id(@question.user) do
+    = image_tag @question.user.avatar(:fill_200_200), class: "img-circle", alt: @question.user
+  .media-body
+    .media-heading
+      = link_to @question.user, @question.user
+      .stats
+        = pluralize @question.answers.count, "Antwort", "Antworten"
+        &bull;
+        = pluralize @question.comments.count, "Kommentar", "Kommentare"
+        &bull;
+        - time_to_words @question.created_at
+      %p
+        %strong= @question
+
+    = @question.body_html
+
+    = link_to "Antworten", "#new_answer", class: "btn btn-success btn-sm pull-right"
+    .clearfix
+    = render partial: "forum/answers/answer", collection: @question.answers
+    = render partial: "forum/answers/form", object: (@answer || @question.answers.build)
+
+- content_for :main_action do
+  = link_to "Antworten", "#new_answer", class: "btn btn-success btn-large"
+
+- content_for :filter do
+  .btn-toolbar.pull-right
+    = link_to 'Antworten in Reihenfolge', [:forum, @question], class: "label #{params[:order].blank? ? 'label-danger' : 'label-default'}"
+    = link_to 'Neueste Antworten zuerst', url_for(order: 'answers_desc'), class: "label #{params[:order] == 'answers_desc' ? 'label-danger' : 'label-default'}"

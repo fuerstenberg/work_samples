@@ -1,0 +1,32 @@
+- if admin?
+  %li.dropdown-divider
+  %li.dropdown-header Admin - Allgemein
+  %li.dropdown-item= link_to "Übersicht", [:admin, :root]
+  %li.dropdown-item= link_to "Crawler Orte", [:crawler, :pois], target: "crawler_pois"
+  %li.dropdown-divider
+  %li.dropdown-header Admin - Forum
+  %li.dropdown-item= link_to "Fragen", [:admin, :questions]
+  %li.dropdown-item= link_to "Antworten", [:admin, :answers]
+  %li.dropdown-item= link_to "Foren", [:admin, :forums]
+  %li.dropdown-header Admin - Inhalte
+  %li.dropdown-item= link_to "Artikel", [:admin, :articles]
+  %li.dropdown-item= link_to "Biker", [:admin, :users]
+  %li.dropdown-item= link_to "Feeds", [:admin, :feeds]
+  %li.dropdown-item= link_to "Kunden", [:admin, :customers]
+  %li.dropdown-item= link_to "POIs", [:admin, :pois]
+  %li.dropdown-item= link_to "Termine", [:admin, :events]
+  %li.dropdown-item= link_to "Werbeanzeigen", [:admin, :ads]
+  %li.dropdown-divider
+  %li.dropdown-header Admin - Google
+  %li.dropdown-item= link_to "Analytics", "https://www.google.com/analytics/web/?pli=1#report/visitors-overview/a3996828w7678168p7982669/", target: "google_analytics"
+  %li.dropdown-item= link_to "Adsense", "https://www.google.com/adsense", target: "google_adsense"
+  %li.dropdown-item= link_to "Adwords", "https://www.google.com/adwords", target: "google_adwords"
+  %li.dropdown-divider
+  %li.dropdown-header Admin - Technik
+  %li.dropdown-item= link_to "Redis - Sidekiq", '/admin/sidekiq', target: "sidekiq"
+  %li.dropdown-item= link_to "Jobs (#{DelayedJobItem.count})", [:admin, :delayed_job_items]
+  %li.dropdown-item= link_to "Monit", "http://motorradfreunde.com:2812", target: "monit"
+  %li.dropdown-divider
+  %li.dropdown-header Admin - Statistik
+  %li.dropdown-item= link_to "Facebook", "https://www.facebook.com/insights/?sk=ao_120761627935166", target: "facebook"
+  %li.dropdown-item= link_to "Statistik", admin_statistic_path(id: "show")

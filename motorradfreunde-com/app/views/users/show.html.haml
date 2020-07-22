@@ -1,0 +1,13 @@
+- meta_title @user, "Profil"
+- subtitle @user
+- map highlight_item: @user
+
+= render partial: 'users/sub_navigation', object: @user
+= render partial: "users/info",           object: @user
+= render partial: "images/images",        object: @user
+= render partial: "bikes/bikes",          object: @user
+= render partial: "routes/routes",        object: @user
+= render partial: "users/friends",        object: @user
+
+- content_for :left do
+  = render partial: 'users/user_card_profile', object: @user

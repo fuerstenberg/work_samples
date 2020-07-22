@@ -1,0 +1,14 @@
+%tr
+  %td
+    = truncate comment.body
+    %small
+      Created at:
+      =l comment.created_at
+    &mdash;
+    %small
+      Updated at:
+      =l comment.updated_at
+    = link_to comment.user, [:admin, comment.user]
+    
+  %td= comment.commentable
+  %td= link_to "Löschen", [:admin, comment], method: :delete, data: { confirm: "Wirklich?" }, class: "btn btn-danger btn-xs"

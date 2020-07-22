@@ -1,0 +1,23 @@
+!!!
+%html{class: 'no-js', lang: 'de'}<>
+  %head
+    = render partial: 'layouts/head'
+
+  %body.fullscreen-formular{class: body_class}
+    = render partial: 'layouts/flash_message'
+
+    .fullscreen-formular.fullscreen-formular--fill_height
+      .fullscreen-formular.fullscreen-formular--content_middle
+        .fullscreen-formular.fullscreen-formular--content_center
+          .fullscreen-formular.fullscreen-formular__card
+            .fullscreen-formular.fullscreen-formular__brand
+              = link_to root_url, class: "" do
+                = image_tag 'logo_red', title: 'Motorradfreunde.com - Deine Motorrad-Community'
+                %span.sr-only Motorradfreunde.com - Deine Motorrad-Community
+            .fullscreen-formular.fullscreen-formular__title
+              %h1= yield :title
+            = yield
+
+        .fullscreen-formular.fullscreen-formular__footer= yield :footer
+
+    = render partial: 'layouts/scripts'

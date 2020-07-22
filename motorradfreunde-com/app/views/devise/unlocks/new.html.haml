@@ -1,0 +1,18 @@
+- title "Entsperrungs-eMail senden"
+- hide_social_media_buttons
+
+= form_for resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f|
+  .form-group.row
+    = f.label :email, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :email, required: true, placeholder: true, class: 'form-control', autofocus: true
+      %p.form-text.text-muted
+        Sollte dein Benutzerkonto gesperrt sein, dann kannst du hier eine eMail anfordern, mit der du dein Benutzerkonto wieder entsperren kannst.
+        %br
+        Ein Benutzerkonto wird gesperrt, wenn zu oft versucht wurde das falsche Passwort einzugeben.
+
+
+  .actions
+    = f.submit 'Entsperrungs-eMail senden', class: 'btn btn-primary'
+
+= render 'links'

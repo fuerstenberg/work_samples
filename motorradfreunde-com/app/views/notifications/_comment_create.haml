@@ -1,0 +1,8 @@
+%li.media.mb-2.px-3.py-2
+  = image_tag notification.subject.avatar(:fill_100_100), alt: current_user, class: 'media-object d-flex align-self-start mr-3'
+  .media-body
+    = t("notifications.#{notification.notification_type}", user: link_to(notification.subject, notification.subject)).html_safe
+    .media-body-actions.text-right
+      = link_to notification.parent, class: 'btn btn-outline-secondary btn-sm' do
+        = icon 'user-o'
+        Anzeigen

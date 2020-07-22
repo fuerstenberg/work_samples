@@ -1,0 +1,90 @@
+%nav.main-navigation.navbar.navbar-toggleable-sm.fixed-top.navbar-inverse.bg-primary.app-navbar
+  %button.navbar-toggler.navbar-toggler-right.hidden-md-up{"aria-controls" => "navbarResponsive", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarResponsive", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  = link_to root_url, class: "main-navigation__brand navbar-brand" do
+    = image_tag 'logo_white_hard_shadow', title: 'Motorradfreunde.com - Deine Motorrad-Community'
+    %span.navbar-brand-text.sr-only Motorradfreunde.com - Deine Motorrad-Community
+
+  #navbarResponsive.collapse.navbar-collapse
+    %ul.navbar-nav.mr-auto
+      - if user_signed_in?
+        %li.nav-item{class: (current_user and request.path.include?('account') ? 'active' : 'inactive')}<>
+          = link_to [:dashboard, current_user], class: 'nav-link', title: "Deine Pinnwand, Dein Profil" do
+            Startseite
+
+        -# %li.nav-item.dropdown.ride-request-panel#ride-request-panel{class: (controller_name == 'ride_requests' ? 'active' : 'inactive')}<>
+
+      %li.nav-item{class: (request.path.starts_with?('/biker') ? 'active' : 'inactive')}<>
+        = link_to "Biker", [:users], class: 'nav-link', title: "Biker, Motorradfahrer, Motorradfahrerinnen, Motorradfreunde, Sozias"
+
+      %li.nav-item.dropdown{class: (controller_name == 'pois' ? 'active' : 'inactive')}<>
+        %a.nav-link.dropdown-toggle{ id: 'dropdown-pois', href: '#', data: {toggle: "dropdown"}, aria: { haspopup: true, expanded: false }, title: "Point of Interest, Bikerorte, Ausflugsziele, Motorradwerkstätten, Motorradhotels" }
+          Orte
+          %span.caret
+        %ul.dropdown-menu{"aria-labelledby" => "dropdown-pois"}
+          %li= link_to "Alle", '/orte'
+          %li.divider
+          -# TODO: POI categories
+          -# - Tag.where(poi_category: true).order(:name).to_a.each do |tag|
+          -#   %li= link_to tag.name_plural, pois_tag_path(tag)
+
+      %li.nav-item{class: ((controller_name == 'bikes' and !request.path.starts_with?('/biker')) ? 'active' : 'inactive')}<>
+        = link_to "Bikes", :vendor_bikes, class: 'nav-link', title: "Motorräder, Bikes, Motorradhersteller"
+
+      %li.nav-item{class: (controller_name == 'events' ? 'active' : 'inactive')}<>
+        = link_to "Termine", [:events], class: 'nav-link', title: "Motorradtreffen, Bikertreffen, Motorradausfahrten, Bikergottesdienste, ..."
+
+      %li.nav-item{class: (controller_name == 'routes' ? 'active' : 'inactive')}<>
+        = link_to "Routen", [:routes], class: 'nav-link', title: "Motorradtouren, Motorradrouten, Motorradstrecken"
+
+      %li.nav-item{class: (controller_name == 'videos' ? 'active' : 'inactive')}<>
+        = link_to "Videos", [:videos], class: 'nav-link', title: "Motorradvideos, Motorradcrashs, Motorradstreckenvideos"
+
+    = form_for :search, url: searches_url, html: { class: 'navbar-form navbar-left search hidden-sm-down' } do |f|
+      = f.text_field :query, class: 'form-control', placeholder: 'Suche'
+
+    -# %ul.nav.navbar-nav.float-right.mr-0.hidden-sm-down{:id => "#js-popoverContent"}
+    -#   %li.nav-item
+    -#     %a.app-notifications.nav-link{:href => "notifications/index.html"}
+    -#       %span.icon.icon-bell
+    -#   %li.nav-item.ml-2
+    -#     %button.btn.btn-default.navbar-btn.navbar-btn-avatar{"data-original-title" => "", "data-toggle" => "popover", :title => ""}
+    -#       = image_tag current_user.avatar(:fill_200_200), alt: current_user, class: "rounded-circle"
+
+    - if user_signed_in?
+      %ul.navbar-nav.float-right
+        %li.nav-item.dropdown
+          = link_to :conversations, class: 'nav-link' do
+            -# - if notifications > 0
+            -#   %span.badge.badge-pill.badge-success= notifications
+            = icon 'comments'
+
+          %ul.notifications__list
+            - current_user.notifications.limit(5).all.each do |notification|
+              - partial = 'notifications/' + notification.notification_type.gsub('.', '_')
+              = render partial: partial, locals: { notification: notification }
+
+        = render partial: 'notifications/mainmenu'
+
+        %li.nav-item.dropdown{class: (%w(account messages notifications ride_requests).include?(controller_name) ? 'active' : 'inactive')}<>
+          %a.main-navigation__current-user.nav-link.dropdown-toggle.current_user{href: '#', data: data_user_id(current_user, {toggle: "dropdown"}), title: current_user}
+            = image_tag current_user.avatar(:fill_100_100), alt: current_user, class: "main-navigation__avatar"
+            %span.sr-only.current_user_name= current_user
+
+          %ul.dropdown-menu.dropdown-menu-right
+            %li.dropdown-header{role: "presentation"}= current_user
+            %li.dropdown-item= link_to "Dein Profil", current_user
+            %li.dropdown-item{class: (controller_name == 'dashboards' ? 'active' : 'inactive')}<>
+              = link_to "Deine Pinnwand", [:dashboard, current_user]
+            %li.dropdown-item= link_to "Deine Nachrichten", :conversations
+            %li.dropdown-divider
+            %li.dropdown-item= link_to "Deine Einstellungen", [:edit, current_user]
+            %li.dropdown-item= link_to "Passwort ändern", password_edit_users_path
+            %li.dropdown-divider
+            %li.dropdown-item= link_to "Abmelden", destroy_user_session_path, method: :delete, id: "btn-logout"
+            = render "layouts/admin_menu"
+
+    - else
+      .navbar-right.pl-3
+        = link_to "Anmelden", new_user_session_path, class: "btn btn-danger navbar-btn"
+        = link_to "Facebook Login", user_facebook_omniauth_authorize_path, class: "btn btn-danger navbar-btn"

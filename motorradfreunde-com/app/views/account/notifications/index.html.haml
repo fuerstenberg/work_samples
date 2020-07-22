@@ -1,0 +1,21 @@
+- meta "Deine Benachrichtigungen"
+- title "Deine Benachrichtigungen"
+
+
+- if @notifications.blank?
+  .alert
+    Du hast im Moment keine Benachrichtigungen.
+
+%ul.notifications.list-unstyled.col-md-12
+  - day = false
+  - @notifications.each_with_index do |notification, index|
+
+    - created_at = notification.created_at.to_date
+    - if day != created_at
+      %li.dropdown-header=l created_at, format: :long
+    - day = notification.created_at.to_date
+
+    = render notification
+
+
+= paginate @notifications

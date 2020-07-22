@@ -1,0 +1,128 @@
+- user = info
+
+.user-info.mb-4
+  .card
+    .card-header
+      - if can? :update, user
+        = link_to 'Profil bearbeiten', [:edit, user], class: 'btn btn-outline-primary float-right'
+      %h2 Info
+    .card-block
+      %dl.row
+        - if user.formatted_zip_city.present?
+          %dt.col-md-12.col-lg-6.text-truncate Ort
+          %dd.col-md-12.col-lg-6
+            = user.formatted_zip_city
+            - if user == current_user
+              %br
+              %small.text-danger Bewege den blauen Marker auf der Karte, um deinen Ort zu ändern.
+
+        - if user.formatted_state.present?
+          %dt.col-md-12.col-lg-6.text-truncate Region
+          %dd.col-md-12.col-lg-6= user.formatted_state
+
+        - if user.formatted_country.present?
+          %dt.col-md-12.col-lg-6.text-truncate Land
+          %dd.col-md-12.col-lg-6= user.formatted_country
+
+        - if user.gender_male? or user.gender_female?
+          %dt.col-md-12.col-lg-6.text-truncate Geschlecht
+          %dd.col-md-12.col-lg-6= user.gender_text
+          -# = "Biker"   if user.gender_male?
+          -# = "Bikerin" if user.gender_female?
+
+        - if user.status_for_relationship.present? and user.status_for_relationship.include?('single')
+          %dt.col-md-12.col-lg-6.text-truncate Beziehung
+          %dd.col-md-12.col-lg-6 Single
+
+        - if user.status_for_backseat.present? and user.status_for_backseat.include?('looking_for_someone')
+          %dt.col-md-12.col-lg-6.text-truncate Mitfahrer
+          %dd.col-md-12.col-lg-6 Rücksitz frei
+
+        - if user.status_for_backseat.present? and user.status_for_backseat.include?('looking_for_a_backseat')
+          %dt.col-md-12.col-lg-6.text-truncate Sozia / Sozius
+          %dd.col-md-12.col-lg-6 Suche Rücksitz
+
+        - if user.geocoded?
+          %dt.col-md-12.col-lg-6.text-truncate Entfernung
+          %dd.col-md-12.col-lg-6
+            - distance_from_me_to user
+
+        - if user.status_for_relationship.present?
+          %dt.col-md-12.col-lg-6.text-truncate Beziehungsstatus
+          %dd.col-md-12.col-lg-6= user.status_for_relationship_text
+
+        - if user.status_for_backseat.present?
+          %dt.col-md-12.col-lg-6.text-truncate Rücksitzstatus
+          %dd.col-md-12.col-lg-6= user.status_for_backseat_text
+
+        - if user.age.present?
+          %dt.col-md-12.col-lg-6.text-truncate Alter
+          %dd.col-md-12.col-lg-6= user.age
+
+        - if user.interested_in_gender.present?
+          %dt.col-md-12.col-lg-6.text-truncate Ich bin interessiert an
+          %dd.col-md-12.col-lg-6= user.interested_in_gender.texts.to_sentence
+
+        - if user.status_as_biker.present?
+          %dt.col-md-12.col-lg-6.text-truncate Ich fahre selbst Motorrad
+          %dd.col-md-12.col-lg-6= user.status_as_biker.texts.to_sentence
+
+        - if user.has_own_motorcycle.present?
+          %dt.col-md-12.col-lg-6.text-truncate Ich habe ein Motorrad
+          %dd.col-md-12.col-lg-6= user.has_own_motorcycle_text
+
+        - if user.status_of_social_behavior.present?
+          %dt.col-md-12.col-lg-6.text-truncate Ich fahre mit anderen Motorradfahrern
+          %dd.col-md-12.col-lg-6= user.status_of_social_behavior.texts.to_sentence
+
+        - if user.description.present?
+          %dt.col-md-12.col-lg-6.text-truncate Beschreibung
+          %dd.col-md-12.col-lg-6= user.description
+
+        - if user.driving_description.present?
+          %dt.col-md-12.col-lg-6.text-truncate Warum fährst Du Motorrad?
+          %dd.col-md-12.col-lg-6= user.driving_description
+
+        - if user.favourite_experience.present?
+          %dt.col-md-12.col-lg-6.text-truncate Schönste Motorraderfahrung
+          %dd.col-md-12.col-lg-6= user.favourite_experience
+
+        - if user.favourite_areas.present?
+          %dt.col-md-12.col-lg-6.text-truncate Lieblingsstrecken
+          %dd.col-md-12.col-lg-6= user.favourite_areas
+
+        - if user.licence_date.present?
+          %dt.col-md-12.col-lg-6.text-truncate Führerschein seit
+          %dd.col-md-12.col-lg-6= user.licence_date
+
+        - if user.distance_total.present?
+          %dt.col-md-12.col-lg-6.text-truncate Kilometer gesamt
+          %dd.col-md-12.col-lg-6== #{user.distance_total} km
+
+        - if user.distance_per_year.present?
+          %dt.col-md-12.col-lg-6.text-truncate Kilometer pro Jahr
+          %dd.col-md-12.col-lg-6== #{user.distance_per_year} km
+
+        - if user.favorite_vendor.present?
+          %dt.col-md-12.col-lg-6.text-truncate Lieblingshersteller
+          %dd.col-md-12.col-lg-6= user.favorite_vendor
+
+        - if user.favorite_engine_amount_of_cylinders.present?
+          %dt.col-md-12.col-lg-6.text-truncate Perfekte Anzahl Zylinder
+          %dd.col-md-12.col-lg-6= user.favorite_engine_amount_of_cylinders
+
+        - if user.favorite_driving_style.present?
+          %dt.col-md-12.col-lg-6.text-truncate Fahrstil
+          %dd.col-md-12.col-lg-6= user.favorite_driving_style.texts.to_sentence
+
+        - if user.favorite_drive_type.present?
+          %dt.col-md-12.col-lg-6.text-truncate Lieblingsantrieb
+          %dd.col-md-12.col-lg-6= user.favorite_drive_type.texts.to_sentence
+
+        - if user.favorite_clothing.present?
+          %dt.col-md-12.col-lg-6.text-truncate Lieblingsbekleidung
+          %dd.col-md-12.col-lg-6= user.favorite_clothing.texts.to_sentence
+
+        - if user.facebook_link.present?
+          %dt.col-md-12.col-lg-6.text-truncate Facebook-Profil
+          %dd.col-md-12.col-lg-6= link_to "Facebook", user.facebook_link, :target => :blank

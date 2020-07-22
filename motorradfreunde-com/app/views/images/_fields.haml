@@ -1,0 +1,18 @@
+- form = fields
+- 5.times{ form.object.images.build }
+
+- form.object.images.each_with_index do |image, index|
+  = form.fields_for :images, image do |image_field|
+    .form-group.row
+      = image_field.label :file, "Bild #{index + 1}", class: 'col-3 col-form-label'
+      - if image_field.object.new_record?
+        .col-9
+          = image_field.file_field :file, placeholder: 'Bild', step: 1, class: 'form-control'
+      - else
+        - if image = image_field.object
+          .col-3
+            = image_field.label :_destroy, class: 'card card-outline-secondary mb-3' do
+              = image_tag image.file.url(:fill_200_200), class: 'card-img-top img-fluid'
+              .card-block
+                = image_field.check_box :_destroy
+                löschen

@@ -1,0 +1,21 @@
+- meta @article
+- title @article
+
+.article-content!= @article.body_html
+
+%small.text-muted.pull-right
+  - if @article.user
+    Erstellt von
+    = link_to @article.user, @article.user
+  am
+  = l @article.created_at.to_date, format: :longer
+.clearfix
+
+= render partial: "images/images", object: @article
+
+= render partial: "comments/comments", object: @article
+
+- content_for :actions do
+  - if current_user and current_user.owns?(@article)
+    = link_to "Artikel bearbeiten", [:edit, @article], class: "btn btn-default btn-xs"
+    = link_to "Artikel löschen", @article, method: :delete, class: "btn btn-default btn-xs", data: {confirm: "Soll der Artikel wirklich gelöscht werden?"}

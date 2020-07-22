@@ -1,0 +1,12 @@
+- meta "Deine Fotos"
+- title "Deine Fotos"
+
+= render partial: "account/users/sub_navigation"
+
+- if current_user.images.empty?
+  .panel
+    .panel-body
+      .lead.hint
+        Du hast noch keine Bilder hochgeladen. Zeig uns deine Bilder von dir und deinen Motorraderlebnissen! Hier kannst du auch deinen Avatar anlegen.
+
+= render partial: "images", object: current_user

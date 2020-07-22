@@ -1,0 +1,24 @@
+= render 'social_buttons'
+
+= form_for resource, as: resource_name, url: session_path(resource_name), html: { role: "form" } do |f|
+  .form-group.row
+    = f.label :email, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :email, class: 'form-control', required: true, autofocus: true, placeholder: true
+
+  .form-group.row
+    = f.label :password, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.password_field :password, class: 'form-control', required: true, placeholder: true
+
+  - if devise_mapping.rememberable?
+    .form-group.row
+      .form-check.col-sm-9.offset-sm-3
+        = f.label :remember_me, class: 'form-check-label' do
+          = f.check_box :remember_me, class: 'form-check-input'
+          angemeldet bleiben
+
+  .actions
+    = f.submit "Anmelden", class: 'btn btn-primary'
+
+= render "links"

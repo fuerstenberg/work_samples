@@ -1,0 +1,22 @@
+- timeline_event = article_created
+
+%li.item.article_created[timeline_event]
+  = preview timeline_event.subject, link: timeline_event.subject
+  .content_box
+    .head
+      = link_to timeline_event.actor, timeline_event.actor
+      hat den Artikel
+      = link_to timeline_event.subject, timeline_event.subject
+      geschrieben.
+    .content
+      - if timeline_event.subject.youtube?
+        = timeline_event.subject.body_html
+      - else
+        = truncate timeline_event.subject.body, :length => 250
+        = link_to "mehr", timeline_event.subject
+    .foot
+      == vor #{time_ago_in_words timeline_event.created_at}
+
+  %ul.list.comments
+    = render :partial => "comments/comment", :collection => timeline_event.subject.comments
+    = render :partial => "comments/form",    :object     => timeline_event.subject.comments.build(:user => current_user)

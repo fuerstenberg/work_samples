@@ -1,0 +1,29 @@
+.messages
+  .message
+    @extend .media
+    @extend .mb-2
+
+    &__avatar
+      @extend .d-flex
+      @extend .mr-3
+      @extend .rounded
+
+      max-width: 4rem
+
+    &__content
+      @extend .media-body
+
+    &__head
+      @extend .d-flex
+      @extend .justify-content-start
+
+    &__created-at
+      @extend .ml-auto
+      @extend .text-muted
+      font-size: $font-size-sm
+
+    &__body
+
+    &__sender
+      @extend h6
+      @extend .mt-0

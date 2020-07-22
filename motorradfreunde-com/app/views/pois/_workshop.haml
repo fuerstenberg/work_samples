@@ -1,0 +1,57 @@
+- poi = workshop
+- if poi.is_workshop?
+  %dl.row
+    %dt.col-sm-3 Werkstatt
+    %dd.col-sm-9
+      %dl
+        - if poi.werkstatt_beschreibung.present?
+          %dt.werkstatt_beschreibung= t 'mongoid.attributes.poi.poi.werkstatt_beschreibung'
+          %dd.werkstatt_beschreibung= poi.werkstatt_beschreibung
+
+        - if poi.werkstatt_marken.present?
+          %dt.werkstatt_marken= t 'mongoid.attributes.poi.poi.werkstatt_marken'
+          %dd.werkstatt_marken= poi.werkstatt_marken
+
+        - if poi.werkstatt_ist_typenoffen.present?
+          %dt.werkstatt_ist_typenoffen= t 'mongoid.attributes.poi.poi.werkstatt_ist_typenoffen'
+          %dd.werkstatt_ist_typenoffen= poi.werkstatt_ist_typenoffen
+
+        - if poi.werkstatt_austauschmotorraeder.present?
+          %dt.werkstatt_austauschmotorraeder= t 'mongoid.attributes.poi.poi.werkstatt_austauschmotorraeder'
+          %dd.werkstatt_austauschmotorraeder= poi.werkstatt_austauschmotorraeder
+
+        - if poi.werkstatt_hol_bring.present?
+          %dt.werkstatt_hol_bring= t 'mongoid.attributes.poi.poi.werkstatt_hol_bring'
+          %dd.werkstatt_hol_bring= poi.werkstatt_hol_bring
+
+        - if poi.werkstatt_hu.present?
+          %dt.werkstatt_hu= t 'mongoid.attributes.poi.poi.werkstatt_hu'
+          %dd.werkstatt_hu= poi.werkstatt_hu
+
+        - if poi.werkstatt_inspektionen.present?
+          %dt.werkstatt_inspektionen= t 'mongoid.attributes.poi.poi.werkstatt_inspektionen'
+          %dd.werkstatt_inspektionen= poi.werkstatt_inspektionen
+
+        - if poi.werkstatt_pannenservice.present?
+          %dt.werkstatt_pannenservice= t 'mongoid.attributes.poi.poi.werkstatt_pannenservice'
+          %dd.werkstatt_pannenservice= poi.werkstatt_pannenservice
+
+        - if poi.werkstatt_reifen.present?
+          %dt.werkstatt_reifen= t 'mongoid.attributes.poi.poi.werkstatt_reifen'
+          %dd.werkstatt_reifen= poi.werkstatt_reifen
+
+        - if poi.werkstatt_reparatur.present?
+          %dt.werkstatt_reparatur= t 'mongoid.attributes.poi.poi.werkstatt_reparatur'
+          %dd.werkstatt_reparatur= poi.werkstatt_reparatur
+
+        - if poi.werkstatt_stellplaetze.present?
+          %dt.werkstatt_stellplaetze= t 'mongoid.attributes.poi.poi.werkstatt_stellplaetze'
+          %dd.werkstatt_stellplaetze= poi.werkstatt_stellplaetze
+
+        - if poi.werkstatt_tuev.present?
+          %dt.werkstatt_tuev= t 'mongoid.attributes.poi.poi.werkstatt_tuev'
+          %dd.werkstatt_tuev= poi.werkstatt_tuev
+
+        - if poi.werkstatt_umbauten.present?
+          %dt.werkstatt_umbauten= t 'mongoid.attributes.poi.poi.werkstatt_umbauten'
+          %dd.werkstatt_umbauten= poi.werkstatt_umbauten

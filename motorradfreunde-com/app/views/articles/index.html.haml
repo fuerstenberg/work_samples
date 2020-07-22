@@ -1,0 +1,12 @@
+- title "Motorrad – News"
+- subtitle "Berichte rund um das Thema Motorrad"
+
+-# .card-columns= render @articles
+- @articles.in_groups_of(3).each do |articles|
+  .card-deck.mb-4
+    = render articles
+
+= paginate @articles
+
+- content_for :main_action do
+  = link_to "Artikel schreiben", [:new, :article], class: "btn btn-success btn-large"

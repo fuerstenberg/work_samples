@@ -1,0 +1,10 @@
+- f = mountain_pass_form
+
+.is_mountain_pass_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Pass
+
+  .form-group.row
+    = f.label :pass_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :pass_beschreibung, class: 'form-control'

@@ -1,0 +1,2 @@
+echo 'syncing photos from motorradfreunde.com...'
+rsync -rv deploy@motorradfreunde.com:/var/www/motorradfreunde-com/shared/photos/  /Users/fuerstenberg/Sites/motorradfreunde-com/public/system/photos/

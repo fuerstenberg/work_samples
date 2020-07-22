@@ -1,0 +1,12 @@
+- if show_premium_pois?
+  - Poi.premium.ads(@poi || current_user).each do |poi|
+    .card.mb-4.hidden-sm-down
+      .card-block
+        = link_to poi do
+          = image_tag poi.avatar(:fill_600_600), class: 'media-object img-fluid'
+        %h6.mt-3= link_to poi, poi
+        = render partial: 'addresses/address_short', object: poi
+        %p= poi.description&.truncate 100
+        = link_to 'Mehr', poi, class: 'btn btn-outline-primary btn-sm'
+
+  = render partial: 'ads/google_sidebar_ads'

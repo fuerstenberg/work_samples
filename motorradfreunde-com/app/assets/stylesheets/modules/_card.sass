@@ -1,0 +1,22 @@
+a.card
+  color: inherit
+
+  h2
+    color: $link-color
+    font-size: 1.1rem
+
+  &:active,
+  &:focus,
+  &:hover
+    color: inherit
+    text-decoration: inherit
+
+    h2
+      color: $link-hover-color
+
+.card
+  .user-media--small
+    @extend .mb-2
+
+  .card-img-top
+    width: 100%

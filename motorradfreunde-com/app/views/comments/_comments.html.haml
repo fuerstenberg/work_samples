@@ -1,0 +1,16 @@
+.comments
+  .row
+    .col-12
+      %h2.mt-5
+        - if defined?(headline)
+          = headline
+        - else
+          Kommentare
+        %hr
+
+  = render partial: "comments/comment", collection: comments.comments
+
+  - if defined?(btn_text) and defined?(comment_text)
+    = render partial: "comments/form", object: comments.comments.build, locals: { placeholder: comment_text, btn_text: btn_text} if current_user
+  - else
+    = render partial: "comments/form", object: comments.comments.build if current_user

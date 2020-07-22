@@ -1,0 +1,17 @@
+- meta current_user
+- title "Deine Freunde"
+
+= render partial: "account/users/sub_navigation"
+
+- if current_user.friends.empty?
+  .panel
+    .panel-body
+      .lead.hint
+        Du hast noch keine Freunde. Folge
+        = link_to "Bikern in Deiner Nähe", users_path(near: 50)
+        oder sag deinen Motorradfreunden, dass sie sich hier anmelden sollen. So könnt ihr euch leichter zum Motorradfahren verabreden.
+        %br
+        Tipp: Biker grüßen sich, gehe auf ein Bikerprofil und klicke auf "Bikergruß senden".
+
+= render partial: "users/user", collection: current_user.friends
+.clearfix

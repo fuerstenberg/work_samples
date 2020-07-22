@@ -1,0 +1,24 @@
+- title "Motorradtreffen"
+- subtitle "Motorradtreffen, Bikertreffen, Motorradausfahrten, Bikergottesdienste, ..."
+- meta_title "Termine"
+
+- old_event = nil
+- @events.each do |event|
+  - if old_event.nil? or old_event.start_at.month != event.start_at.month
+    .row
+      .col-12.text-center.h4=l event.start_at, format: :only_month
+  = render event
+  - old_event = event
+
+= paginate @events
+
+- map collection: :events
+
+- content_for :filter do
+  = link_to 'Alle',           url_for(action: :index),                   class: "label #{(params[:near] or params[:next_week] or params[:order]) ? 'label-default' : 'label-danger'}"
+  = link_to 'In meiner Nähe', url_for(near: 150),                        class: "label #{params[:near].to_i == 150                   ? 'label-danger' : 'label-default'}"
+  = link_to 'Nächste Woche',  url_for(next_week: true),                  class: "label #{params[:next_week]                          ? 'label-danger' : 'label-default'}"
+  = link_to 'Beliebt',        url_for(order: 'impressions_count desc'),  class: "label #{params[:order]  == 'impressions_count desc' ? 'label-danger' : 'label-default'}"
+
+- content_for :main_action do
+  = link_to "Termin anlegen", [:new, :event], :class => "btn btn-success btn-large"

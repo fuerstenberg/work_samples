@@ -1,0 +1,16 @@
+- title "Kunden", "Admin"
+
+- content_for :action do
+  = link_to "Kunde anlegen", [:new, :admin, :customer], class: "btn btn-success"
+
+= form_for [:admin, Customer.new], html: {class: "form-inline"} do |f|
+  .input-append
+    = f.url_field :url, placeholder: "http://www.motorradfreunde.com", class: :span5
+    = f.submit "Anlegen", class: "btn"
+
+%hr
+
+%table.table.table-striped= render @customers
+
+= paginate @customers
+

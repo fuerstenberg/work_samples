@@ -1,0 +1,27 @@
+
+
+= simple_form_for [:admin, @customer] do |f|
+  = body do
+    = fieldset "URL (wichtig)" do
+      = f.input :url, placeholder: true, hint: true
+
+    = fieldset "Name (wird nicht öffentlich angezeigt)" do
+      = f.input :name, placeholder: true, hint: true
+      = f.input :contact, placeholder: true
+      = f.input :email, placeholder: true
+
+    = fieldset "Adresse (wird nicht öffentlich angezeigt)" do
+      = f.input :street,  placeholder: true
+      = f.input :zip,     placeholder: true
+      = f.input :city,    placeholder: true
+      = f.input :country, placeholder: true, collection: I18n.t(:countries).invert.select{|k,v| %w(DE AT CH IT).include?(v.to_s)}, as: :select
+
+    = fieldset "Telefonnummern (wird nicht öffentlich angezeigt)" do
+      = f.input :phone, placeholder: true
+      = f.input :fax,   placeholder: true
+
+    = fieldset "Anmerkungen (wird nicht öffentlich angezeigt)" do
+      = f.input :description, placeholder: true, input_html: { rows: 4 }
+
+  = actions do
+    = f.button :submit, label: (session[:plan] ? "Weiter zu Schritt 2" : "Speichern"), as: :button, button_html: { class: "btn btn-success" }

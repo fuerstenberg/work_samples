@@ -1,0 +1,13 @@
+%script#info_window{:type => "text/x-jquery-tmpl"}
+  .info_marker
+    %ul.thumbnails
+      %li
+        %a.thumbnail{:href => "/users/${id}"}
+          %img{:src => "${avatar}", :alt => "${name}", :width => "50px"}
+    .info_marker_content
+      %p
+        %a{:href => "/users/${id}"}
+          %strong ${name}
+      %a.btn.btn-success{:href => "/users/${id}"}
+        %i.icon-user.icon-white
+        Details

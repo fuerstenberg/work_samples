@@ -1,0 +1,21 @@
+- title "POIs"
+
+%p
+  = link_to "Alle", url_for
+  - Poi.tag_counts_on(:types).order(name: :asc).each do |tag|
+    - if tag.count > 0
+      = link_to tag, url_for(tag: tag.becomes(Tag))
+
+%p
+  = link_to "Alle", url_for
+  - Poi.tag_counts_on(:properties).order(name: :asc).each do |tag|
+    - if tag.count > 0
+      = link_to tag, url_for(tag: tag.becomes(Tag))
+
+%p
+  = link_to 'Name',    url_for(params.merge(order: 'name asc')       ), class: "badge #{'badge-success' if (params[:order] || '').include?('name')}"
+  = link_to 'älteste', url_for(params.merge(order: 'updated_at asc') ), class: "badge #{'badge-success' if (params[:order] || '').include?('updated_at')}"
+
+%table.table.table-striped= render @pois
+
+= paginate @pois

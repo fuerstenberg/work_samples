@@ -1,0 +1,17 @@
+- location = general
+%h6.text-muted
+  - if location.has_address?
+    = location.address.country
+    &raquo;
+    = location.address.state
+    &raquo;
+    = location.address.city
+    - if location.address.region.present?
+      &raquo;
+      = location.address.region
+
+%h3.name= general.name
+
+-# .btn-toolbar.mb-4
+-#   - location.tags_array.each do |tag|
+-#     = link_to tag, '#', class: 'btn btn-sm btn-outline-success'

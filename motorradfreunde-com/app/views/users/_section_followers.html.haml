@@ -1,0 +1,6 @@
+- user = section_followers
+
+- if friends = user.friends.sort_by(&:name) and friends.present?
+  .page-header
+    %h2 Verfolger
+  = render partial: "users/user", collection: friends, locals: {wrapper_class: "col-xs-4 col-md-3", disable_ads: true}

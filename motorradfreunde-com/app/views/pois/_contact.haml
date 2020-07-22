@@ -1,0 +1,20 @@
+%dl.row
+  - if contact.contact.present?
+    %dt.col-sm-3 Kontakt
+    %dd.col-sm-9= contact.contact
+
+  - if contact.phone.present?
+    %dt.col-sm-3 Telefon
+    %dd.col-sm-9= contact.phone
+
+  - if contact.mobile.present?
+    %dt.col-sm-3 Mobil
+    %dd.col-sm-9= contact.mobile
+
+  - if contact.fax.present?
+    %dt.col-sm-3 Fax
+    %dd.col-sm-9= contact.fax
+
+  - if contact.website.present?
+    %dt.col-sm-3 Website
+    %dd.col-sm-9= link_to contact.website, contact.website, target: :_blank

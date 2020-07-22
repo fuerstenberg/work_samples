@@ -1,0 +1,25 @@
+%a.nav-link.dropdown-toggle#ride-request-panel-dropdown-toggle{href: '#'}
+  %strong Ich will Motorrad fahren
+  %i.glyphicon.glyphicon-fire
+  %span.caret
+%ul.dropdown-menu#ride-request-panel-dropdown-menu
+  %li.dropdown-header Willst du Motorrad fahren?
+  %li.divider
+  %li.ride-request-form
+    .form-group.form-group-driving-style
+      %select#driving_style{name: "driving_style"}
+        %option{value: ""} Fahrstil -
+        - for value, name of window.gon.drivingStyles
+          %option{value: value}
+            = name
+
+    .form-group.form-group-btn-group.hidden
+      .btn-group
+        - for day, index in gon.rideRequestDays
+          %button.day-btn.btn.btn-default.btn-xs{data: {start_at: day}}
+            = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"][(new Date(day)).getDay()]
+            - if index == 0
+              (heute)
+
+  %li.ride-requests
+    %ul#itemViewContainer

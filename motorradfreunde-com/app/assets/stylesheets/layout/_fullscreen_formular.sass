@@ -1,0 +1,61 @@
+body.fullscreen-formular
+  padding-top: 0
+
+.fullscreen-formular
+
+  form
+    // .col-form-check-label custom workaround, because original .col-form-label has a padding-top
+    .col-form-check-label,
+    .col-form-label
+      font-weight: 400
+      // text-align left only in smallest version
+      @extend .text-sm-right
+
+    .actions
+      @extend .d-flex
+      a,
+      button,
+      input[type=submit]
+        @extend .ml-2
+      // @extend .justify-content-between
+      @extend .justify-content-end
+
+  fieldset
+
+  legend
+    font-size: 1.2rem
+
+  &__block
+    @extend .card-block
+
+  &__brand
+    @extend .card-block
+    @extend .text-center
+    img
+      width: 100%
+
+  &__card
+    // @extend .card
+    @extend .col-sm-12
+    @extend .col-md-10
+    @extend .col-lg-6
+    @extend .m-4
+    @extend .text-left
+
+  &--content_center
+    @extend .d-flex
+    @extend .justify-content-center
+
+  &--content_middle
+    @extend .container-content-middle
+
+  &--fill_height
+    @extend .container-fill-height
+
+  &__footer
+    @extend .text-center
+
+  &__title
+    @extend .text-center
+    h1
+      font-size: 1.3rem

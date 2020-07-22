@@ -1,0 +1,19 @@
+- timeline_event = followship_created
+
+- if timeline_event.secondary_subject
+
+  %li.item.followship_created[timeline_event]
+    = preview timeline_event.actor, link: timeline_event.actor
+    .follows
+      %span
+    = preview timeline_event.secondary_subject, link: timeline_event.secondary_subject
+    .content_box
+      .head
+        = link_to timeline_event.actor, timeline_event.actor
+        folgt jetzt den Aktivitäten von
+        = link_to timeline_event.secondary_subject, timeline_event.secondary_subject
+      .content
+        = link_to_follow current_user, timeline_event.secondary_subject
+      .foot
+        == vor #{time_ago_in_words timeline_event.created_at}
+

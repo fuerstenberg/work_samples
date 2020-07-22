@@ -1,0 +1,37 @@
+- if delayed_job_item_counter == 0
+  %tr
+    %th ID
+    %th Queue
+    %th Priority
+    %th Attempts
+    %th Failed at
+    %th Run at
+    %th Created at
+    %th
+    %th
+
+%tr
+  %td
+    = delayed_job_item.id
+  %td
+    %span.label.label-success= delayed_job_item.queue
+  %td
+    %span.badge.badge-warning= delayed_job_item.priority
+  %td
+    - if delayed_job_item.attempts and delayed_job_item.attempts == 0
+      %span.badge= delayed_job_item.attempts
+    - elsif delayed_job_item.attempts and delayed_job_item.attempts < 3
+      %span.badge.badge-warning= delayed_job_item.attempts
+    - else
+      %span.badge.badge-error= delayed_job_item.attempts
+  %td
+    - if delayed_job_item.failed_at.present?
+      %span.label.label-warning== vor #{distance_of_time_in_words_to_now delayed_job_item.failed_at rescue nil}
+  %td
+    =l delayed_job_item.run_at
+  %td
+    =l delayed_job_item.created_at
+  %td
+    = link_to "Details", [:admin, delayed_job_item]
+  %td
+    = link_to "löschen", [:admin, delayed_job_item], :method => :delete, :data => {:confirm => "Wirklich löschen?"}

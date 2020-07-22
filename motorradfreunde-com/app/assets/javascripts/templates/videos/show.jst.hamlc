@@ -1,0 +1,35 @@
+%a.close.pull-right{href: '#'} &times;
+
+.video_canvas
+  %iframe{style: "width: 100%; height: 100%;", width: "100%", height: "100%", src: "//www.youtube.com/embed/#{@unique_id}", frameborder: "0", allowfullscreen: true}
+
+.progress
+  .progress-bar-loading.progress-bar{style: "width: 20%"}
+  .progress-bar-playing.progress-bar{style: "width: 10%"}
+
+%nav.video_navigation.navbar.navbar-inverse.navbar-fixed-bottom{role: "navigation"}
+  %ul.controls.nav.navbar-nav.navbar-left
+    %li
+      %a.glyphicon.glyphicon-play{href: '#'}
+    %li
+      %a.glyphicon.glyphicon-pause{href: '#'}
+    %li
+      %a.glyphicon.glyphicon-fast-forward{href: '#'}
+
+    %li.divider
+
+    %li
+      %a.volume-off.glyphicon.glyphicon-volume-off{href: '#'}
+    %li
+      %a.glyphicon.glyphicon-pause{href: '#'}
+    %li
+      %a.glyphicon.glyphicon-fast-forward{href: '#'}
+
+    %li.divider
+
+    %li.played_time
+      .navbar-text 0:00:00
+    %li.time-divider
+      .navbar-text.divider /
+    %li.duration_time
+      .navbar-text 0:00:00

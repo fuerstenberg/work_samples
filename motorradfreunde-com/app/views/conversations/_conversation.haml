@@ -1,0 +1,13 @@
+= link_to [conversation, :messages], class: "chats__conversation #{'active' if conversation == active_conversation} #{conversation.read_by?(current_user) ? 'read' : 'unread'}" do
+  .media
+    %ul.avatar-list.media-object.d-flex.align-self-start.mr-3
+      - conversation.members_without(current_user).each do |user|
+        %li.avatar-list-item.mr-2
+          = image_tag user.avatar(:fill_200_200), class: 'rounded-circle'
+    .media-body
+      %strong
+        = conversation.members_without(current_user).map(&:to_s).join ' '
+      -# and
+      -# %strong 1 other
+      .media-body-secondary
+        %small=l conversation.updated_at, format: :long

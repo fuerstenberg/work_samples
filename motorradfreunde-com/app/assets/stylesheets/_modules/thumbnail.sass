@@ -1,0 +1,164 @@
+.thumbnail
+  border-bottom-width: 2px
+  border-bottom-color: #CCC
+
+  &:hover
+    text-decoration: none
+
+    h2
+      color: $link_color_hover
+
+  h2
+    margin-top: 0
+    margin-bottom: 6px
+
+    color: $link_color
+    font-size: 1.1em
+    font-weight: normal
+
+  dl
+    margin: 6px 0
+    dt,
+    dd
+      font-size: 0.9em
+
+    dt
+      width: 35%
+
+      color: #999
+      font-weight: normal
+      text-align: left
+
+    dd
+      color: #666
+      margin-left: 30%
+
+  dt,
+  dd
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+
+
+.thumbnail_article,
+.thumbnail_answer,
+.thumbnail_bike,
+.thumbnail_event,
+.thumbnail_followship,
+.thumbnail_photo,
+.thumbnail_poi,
+.thumbnail_question,
+.thumbnail_ride_request,
+.thumbnail_route,
+.thumbnail_user,
+.thumbnail_video
+  margin-bottom: 20px
+  .thumbnail
+    padding: 0
+    position: relative
+    overflow: hidden
+
+    .distance,
+    .impressions_count,
+    .images_count,
+    .new
+      +border-radius(3px)
+      padding: 1px 5px
+      position: absolute
+      background-color: rgba(0,0,0,0.4)
+      color: #fff
+      font-size: 0.8em
+
+    .impressions_count
+      right: 9px
+      top: 10px
+    .distance,
+    .images_count
+      right: 9px
+      top: 30px
+    .new
+      right: 9px
+      top: 10px
+
+      background-color: #5BC0DE
+      text-transform: uppercase
+      &.female
+        background-color: #D9534F
+
+    .caption
+      // padding-top: 0
+      // .avatar-with-label
+      //   padding-bottom: 16px
+
+
+  &.no_photo
+
+
+.thumbnail_event
+  .thumbnail
+    padding: 0
+    overflow: hidden
+
+    .wday
+      background-color: #DB1115
+      color: #fff
+      padding: 20px
+      text-align: center
+      font-size: 1.4em
+
+    .day
+      color: #333
+      font-size: 7em
+      font-weight: bold
+      text-align: center
+      padding-top: 15px
+
+    .month
+      border-bottom: 1px dashed #ccc
+      text-align: center
+      color: #999
+      font-weight: 500
+      font-size: 2em
+      padding: 0 0 20px 0
+
+    .caption
+      background-color: #FAFAFA
+      h2
+      p
+        span
+
+
+.thumbnail_user .thumbnail
+  .btn-greet
+    display: none
+    position: absolute
+    left: 9px
+    top: 10px
+
+  &:hover .btn-greet
+    display: block
+
+
+
+
+
+a, span, div
+  &.avatar-with-label
+    display: block
+    overflow: hidden
+    padding: 8px 0
+
+    color: #3A3D42
+    text-decoration: none
+
+    .label
+      color: #444
+      display: block
+      float: left
+      margin: 6px 0 0 35px
+      margin: 8px 0 0 6px
+      padding: 0
+
+      font-size: 0.9em
+

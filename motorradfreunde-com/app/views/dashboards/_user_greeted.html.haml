@@ -1,0 +1,11 @@
+- timeline_event = user_greeted
+
+- if timeline_event.actor.is_a?(User) and timeline_event.subject.is_a?(User)
+  %li.item.user_greeted[timeline_event]{:class => (hidden ? :hide : :display), :style => ("display: none;" if hidden)}
+    = preview timeline_event.actor, link: timeline_event.actor
+    .content_box
+      .head
+        == #{link_to timeline_event.actor, timeline_event.actor} hat #{link_to timeline_event.subject, [timeline_event.subject]} mit der linken Hand gegr&uuml;ßt.
+      .foot
+        == vor #{time_ago_in_words timeline_event.created_at}
+

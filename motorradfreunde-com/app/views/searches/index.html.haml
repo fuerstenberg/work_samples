@@ -1,0 +1,6 @@
+- title "Suche nach \"#{@query}\""
+
+- @search_results.each do |klass, results|
+  %ul= render partial: 'result', collection: results
+
+=# paginate @search rescue nil

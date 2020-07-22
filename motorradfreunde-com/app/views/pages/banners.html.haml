@@ -1,0 +1,28 @@
+- meta "Motorradfreunde.com - Werbebanner"
+- title "Motorradfreunde.com - Werbebanner"
+
+.container
+  %p
+    Alle die Motorradfreunde.com unterstützen wollen, sind herzlichst eingeladen, einen Banner auf Ihre Homepage zu laden und diesen mit www.motorradfreunde.com zu verlinken.
+  %p
+    Falls hier kein passender Banner für die eigene Homepage dabei ist oder ihr andere Ideen habt, Motorradfreunde.com zu unterstützen, dann schreibt einfach an
+    info@motorradfreunde.com
+    :javascript
+      var ocoiwlf = ['d','n','@','r','c','e','l','o','c','o','u','r','o','o','f','i','"','f','l','o','e','.','n','f','f','<',' ','o','r','e','a','h','s','/','d','<','m','u','c','"','t','o','a','r','a','o','.','m','=','d','e','a','a','m','n','t','e','e','d','m','>','s','i','"','m',' ','t','o','r','f','=','a','i','i',':','>','l','a','"','@','r','r','n','m'];var bnbsrbv = [34,33,20,26,42,71,12,14,37,62,72,25,64,24,6,52,48,29,43,78,75,76,17,58,18,0,41,59,70,31,27,3,45,81,74,80,21,32,77,40,13,22,10,65,1,38,36,79,47,68,49,44,82,39,57,23,5,35,28,50,83,46,56,54,9,2,63,19,30,69,7,51,16,11,15,55,53,67,8,60,4,66,73,61];var lwmhnbp= new Array();for(var i=0;i<bnbsrbv.length;i++){lwmhnbp[bnbsrbv[i]] = ocoiwlf[i]; }for(var i=0;i<lwmhnbp.length;i++){document.write(lwmhnbp[i]);}
+    %noscript Bitte aktiviere Javascript, um die eMail-Adresse zu sehen.
+
+  %table.table
+    - @banners.each do |banner|
+      %tr
+        %th
+          = banner.match('_com_(.*)_(.*)\.')[1]
+          x
+          = banner.match('_com_(.*)_(.*)\.')[2]
+          Pixel
+        %td
+          = image_tag banner
+          %br
+          %br
+          %textarea{style: "width: 90%; font-size: 0.9em;"}= "http://www.motorradfreunde.com/assets/#{banner}"
+          %br
+          %textarea{style: "width: 90%; font-size: 0.9em;", rows: 3}= "<a href=\"http://www.motorradfreunde.com\">\n<img src=\"http://www.motorradfreunde.com/assets/#{banner}\" border=\"0\" />\n</a>"

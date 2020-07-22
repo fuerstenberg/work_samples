@@ -1,0 +1,136 @@
+- meta 'Partner werden'
+- title 'Partner werden'
+
+.container
+  .wrapper
+    .headline
+      %h1 Werden auch Sie Partner von Motorradfreunde.com
+
+    %table.table.table-striped.table-bordered
+      %tr
+        %th{style: "width: 20%;"}
+        %th.c{style: "width: 40%;"}
+          %h2 Points of Interest
+        %th.c{style: "width: 40%;"}
+          %h2 Werbeanzeigen
+      %tr
+        %th
+        %td
+          Machen Sie Ihr Unternehmen zu einem Point of Interest!
+          %br
+          %strong== Wie bereits #{number_with_delimiter Poi.count} andere Unternehmen.
+        %td
+          Werben Sie bei Ihrer Zielgruppe!
+          %br
+          %strong== Bei #{number_with_delimiter User.count} registrierten Motorradfahrern.
+      %tr
+        %th Kurzbeschreibung
+        %td Ihr Unternehmenseintrag auf der Karte und im Menü POIs, Persönliche Unternehmensseite mit Bildern und Link
+        %td Ihre Werbeanzeige auf allen Werbeplätzen von Motorradfreunde.com verlinkt zu ihrer Webseite
+
+      %tr
+        %th Beschreibung
+        %td
+          %p
+            Mit den Points of Interest sichern sie sich ihren Platz auf unserer Karte.
+            Alle Besucher sehen ihren Unternehmenseintrag auf der Seite POIs und in der Kartenansicht.
+            Wir zeigen auf unserer Karte nur Punkte an, die für Motorradfahrer interessant sind.
+          %p
+            Ideal für:
+            %strong Motorradhändler, Werkstätten, Hotels, Bikertreffs, Shops, usw.
+        %td
+          %p
+            Mit den Werbeanzeigen steigern Sie die Sichtbarkeit Ihres Unternehmens und erhalten Klicks von unseren Besuchern.
+            Sie werben bei einer stark abgegrenzten Zielgruppe - Motorradfahrer.
+          %p
+            Ideal für:
+            %strong Shops, Reiseanbieter, Hotels, usw.
+
+      %tr
+        %th Leistung
+        %td
+          %ul
+            %li
+              POI auf der
+              %strong Karte
+            %li
+              Eintrag im
+              %strong Menü POIs
+            %li
+              %strong Unternehmenseintrag mit Link
+              zu Ihrer Webseite
+            %li
+              bis zu
+              %strong 10 Bilder + Logo
+            %li Beschreibung + Öffnungszeiten
+        %td
+          %ul
+            %li
+              %strong Klicks
+              von unseren Besuchern
+            %li
+              Erhöhung der
+              %strong Markensichtbarkeit
+            %li
+              Werbeanzeige rotiert durch alle
+              %strong Werbepl&auml;tze von Motorradfreunde.com
+
+      %tr
+        %th Preise
+        %td.c
+          %strong nur &euro; 240,- pro Jahr *
+        %td.c
+          %strong nur &euro; 15,- pro TKP *
+
+      %tr
+        %th Bestellung (per Telefon)
+        %td.c 030 49852531
+        %td.c 030 49852531
+
+      %tr
+        %th Bestellung (per eMail)
+        %td.c= mail_to 'info@motorradfreunde.com', 'Anfrage stellen', class: "btn btn-success", encode: "javascript", subject: "Anfrage POI: "
+        %td.c= mail_to 'info@motorradfreunde.com', 'Anfrage stellen', class: "btn btn-success", encode: "javascript", subject: "Anfrage Werbeanzeige: "
+
+      %tr
+        %th
+        %td.muted * zzgl. 19% Mehrwertsteuer
+        %td.muted
+          * zzgl. 19% Mehrwertsteuer
+          %br
+          TKP - Tausender-Kontakt-Preis: Preis gilt für 1.000 Einblendungen Ihrer Werbeanzeige
+          %br
+          Mindestbestellmenge 10 TKPs - entspricht 10.000 Einblendungen Ihrer Werbeanzeige
+
+    %table.table.table-striped.table-bordered
+      %tr
+        %th Mediadaten
+        %th{colspan: 2}== So verhalten sich unsere #{number_with_delimiter User.count} registrierten Motorradfahrer.
+      %tr
+        %th{style: "width: 20%;"}
+        %th{style: "width: 40%;"} Besuche
+        %td{style: "width: 40%;"} ca. 18.000 pro Monat
+      %tr
+        %th
+        %th Eindeutige Besucher
+        %td ca. 9.000 pro Monat
+      %tr
+        %th
+        %th Seitenaufrufe
+        %td ca. 126.000 pro Monat
+      %tr
+        %th
+        %th Seitenaufrufe pro Besucher
+        %td mehr als 7 Seitenaufrufe
+      %tr
+        %th
+        %th Besuchsdauer
+        %td mehr als 5 Minuten pro Besuch
+      %tr
+        %th
+        %th Neue Besuche
+        %td ca. 44%
+      %tr
+        %th
+        %th Facebook-Likes
+        %td mehr als 14.000

@@ -1,0 +1,20 @@
+- title "Werbeanzeigen"
+
+- target = nil
+%table.table.table-striped
+  - @ads.each do |ad|
+    - if ad.target != target
+      %tr
+        %th{colspan: 6}
+          %h2= ad.target.capitalize
+      %tr
+        %th Active
+        %th Position
+        %th Customer
+        %th Title
+        %th Impressions
+        %th
+        %th
+
+    = render ad
+    - target = ad.target

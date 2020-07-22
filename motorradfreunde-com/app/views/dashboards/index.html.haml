@@ -1,0 +1,7 @@
+- title @user, "Pinnwand"
+- subtitle @user
+
+= render partial: "users/sub_navigation", object: @user
+
+= render_activities @activities.to_a
+= paginate @activities

@@ -1,0 +1,42 @@
+
+= form_for form, html: { autocomplete: "off" } do |f|
+  .form-group.row
+    %p.form-text.text-muted.col-sm-9.offset-sm-3
+      Hier kannst Du einen Motorradtermin anlegen.
+      / Alle Deine Verfolger werden darüber auf der Pinnwand benachrichtigt.
+      / %br
+      / Außerdem erhalten alle Biker in der Nähe des Treffpunktes eine eMail.
+
+  .form-group.row
+    = f.label :title, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :title, autofocus: true, placeholder: true, class: 'form-control', required: true
+  .form-group.row
+    = f.label :start_at, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.date_field :start_at, min: Date.today, placeholder: true, class: 'form-control', required: true
+  .form-group.row
+    = f.label :end_at, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.date_field :end_at, min: Date.today, placeholder: true, class: 'form-control', required: true
+  / .form-group.row
+  /   = f.label :hide_time, class: 'col-sm-3 col-form-label'
+  /   .col-sm-9
+  /     = f.check_box :hide_time, placeholder: true, class: 'form-control'
+  .form-group.row
+    = f.label :url, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.url_field :url, placeholder: true, required: true, class: 'form-control'
+  .form-group.row
+    = f.label :description, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :description, rows: 8, placeholder: true, class: 'form-control', required: true
+
+  = render partial: 'addresses/form', object: f
+
+  .actions
+    - if f.object.new_record?
+      = link_to 'Abbrechen', [:events], class: 'btn btn-secondary'
+    - else
+      = link_to 'Abbrechen', [f.object], class: 'btn btn-secondary'
+    = f.submit class: 'btn btn-primary'

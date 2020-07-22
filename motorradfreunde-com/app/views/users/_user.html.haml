@@ -1,0 +1,46 @@
+- cache ["users/user", user], expires_in: 60.minutes do
+  .col-12.col-sm-6.col-md-4.mb-4
+    = link_to user, title: user, class: "card user-card", id: dom_id(user, :card), data: data_user_id(user) do
+      = image_tag user.avatar(:fill_600_600), class: "card-img-top img-fluid", alt: user
+      .card-block.user-card__block
+        - if (user.created_at + 7.days) > Date.today
+          %span.label.label-transparent{class: user.gender}
+            %i.glyphicon.glyphicon-asterisk
+            neu
+
+        %h2.card-title= user
+
+        - if user.formatted_address.present?
+          = user.formatted_address.join(', ')
+        %dl
+          - if user.gender_male? or user.gender_female?
+            %dt Geschlecht
+            %dd
+              = "Biker"   if user.gender_male?
+              = "Bikerin" if user.gender_female?
+          - if user.status_for_relationship.present? and user.status_for_relationship.include?('single')
+            %dt Beziehung
+            %dd Single
+          - if user.status_for_backseat.present? and user.status_for_backseat.include?('looking_for_someone')
+            %dt Mitfahrer
+            %dd Rücksitz frei
+          - if user.status_for_backseat.present? and user.status_for_backseat.include?('looking_for_a_backseat')
+            %dt Sozia / Sozius
+            %dd Suche Rücksitz
+          - if user.geocoded?
+            %dt Entfernung
+            %dd
+              - distance_from_me_to user
+
+      .card-footer
+        = button_to "Bikergruß senden", [user, :greetings], method: :post, class: "btn btn-xs btn-success btn-greet float-right", :rel => "nofollow"
+
+        - if size = user.bikes.size and size > 0
+          %span.badge.badge-default
+            = icon 'motorcycle'
+            = size
+
+        - if size = user.images.size and size > 1
+          %span.badge.badge-default
+            = icon 'picture-o'
+            = size

@@ -1,0 +1,2 @@
+= render :layout => "layouts/mailer_layout" do
+  =raw I18n.t "notifications.#{@notification.notification_type}.message", @objects

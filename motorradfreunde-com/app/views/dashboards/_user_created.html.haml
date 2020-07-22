@@ -1,0 +1,17 @@
+- timeline_event = user_created
+
+.main_item.user_created[timeline_event]
+  = preview timeline_event.actor, link: timeline_event.actor
+  .content_box
+    .head
+      == #{link_to timeline_event.actor, timeline_event.actor} hat sich bei Motorradfreunde.com angemeldet.
+    .content
+      Sei ein freundlicher Biker, sende einen Gruß oder verfolge die Aktivitäten des Bikers.
+      %br
+      - if timeline_event.actor != current_user
+        = link_to "Bikergruß senden", user_greetings_path(timeline_event.actor, :timeline_event_id => timeline_event), :class => 'btn btn-small btn-greet', :rel => "nofollow"
+
+      - if timeline_event.actor != current_user and !current_user.follows?(timeline_event.actor)
+        = link_to "Diesem Biker folgen", user_follower_path(timeline_event.actor, :current_user), :class => 'btn btn-small btn-follow', :rel => "nofollow"
+    .foot
+      == vor #{time_ago_in_words timeline_event.created_at}

@@ -1,0 +1,10 @@
+- f = bike_builder_form
+
+.is_bike_builder_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Motorradbauer
+
+  .form-group.row
+    = f.label :motorradbauer_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :motorradbauer_beschreibung, class: 'form-control'

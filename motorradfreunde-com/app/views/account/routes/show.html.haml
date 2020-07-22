@@ -1,0 +1,44 @@
+- meta @route
+- title @route
+- map
+
+= render partial: "account/users/sub_navigation"
+
+%table.table
+  - if @route.start_address.present?
+    %tr
+      %th Start
+      %td= @route.start_address
+
+  - if @route.end_address.present?
+    %tr
+      %th Ziel
+      %td= @route.end_address
+
+  %tr
+    %th Name der Route
+    %td= @route
+
+  %tr
+    %th Beschreibung
+    %td= @route.description
+
+  %tr
+    %th Länge
+    %td== #{@route.distance_in_km} km
+
+  %tr
+    %th Biker
+    %td= link_to_user @route.user
+
+  %tr
+    %th erstellt
+    %td== vor #{time_ago_in_words @route.created_at} erstellt
+
+
+- content_for :actions do
+  - if can? :destroy, @route
+    = link_to [current_user, @route], method: :delete, data: { confirm: "Wirklich?" }, class: "btn btn-default btn-xs" do
+      Löschen
+
+= render partial: "comments/comments", object: @route

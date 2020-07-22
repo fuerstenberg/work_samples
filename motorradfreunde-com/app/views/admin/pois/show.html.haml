@@ -1,0 +1,27 @@
+- title @poi
+
+= link_to "Bearbeiten", [:edit, :admin, @poi], class: :btn
+= link_to "Route anlegen", [:new, :admin, @poi, :route], class: :btn
+
+= link_to "Löschen", [:admin, @poi], method: :delete, class: :btn, data: {confirm: "Wirklich?"} if @poi.bikes.count < 1
+
+%table.table
+  - @poi.attributes.each do |key, value|
+    %tr
+      %th
+        = key
+      %td{style: "background-color: #73CC21;"}= value
+
+      - (@poi.versions[-5..-1] || []).each do |version|
+        %td
+          - if key == "id"
+            = link_to "Aktivieren", admin_poi_path(id: @poi.id, version_id: version.id), method: :put
+            %br
+          = version.reify.attributes[key]
+
+
+= render partial: "admin/photos/form", object: @poi.photos.build(user: current_user)
+%ul#photos.photos= render partial: "photos/photo", collection: @poi.photos
+
+
+%table.routes= render @poi.routes

@@ -1,0 +1,53 @@
+- if user_counter == 0
+  %tr
+    %th Vorschau
+    %th
+      = link_to "Name", url_for(order: :name, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+      \/
+      = link_to "eMail", url_for(order: :email, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+    %th Ort
+    %th= link_to "Logins", url_for(order: :sign_in_count, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+    %th
+      = link_to "Current", url_for(order: :current_sign_in_at, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+      \/
+      = link_to "Last", url_for(order: :last_sign_in_at, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+    %th
+      = link_to "erstellt", url_for(order: :created_at, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+      \/
+      = link_to "geändert", url_for(order: :updated_at, direction: (params[:direction] == "DESC" ? "ASC" : "DESC"))
+    %th
+    %th
+
+%tr{:class => cycle(:odd, :even)}
+  %td= preview user
+  %td
+    = link_to user, user, target: :blank
+    (
+    = "Mann" if user.male?
+    = "Frau" if user.female?
+    )
+    %br
+    = user.email
+    %br
+    - if user.facebooker?
+      = link_to "FB #{user.uid}", "http://www.facebook.com/#{user.uid}", :target => :blank
+  %td
+    = user.address
+    %br
+    == #{user.latitude}, #{user.longitude}
+  %td= user.sign_in_count
+  %td
+    =l user.current_sign_in_at rescue "-"
+    %br
+    =user.current_sign_in_ip
+    %br
+    =l user.last_sign_in_at rescue "-"
+    %br
+    =user.last_sign_in_ip
+
+  %td
+    = user.created_at
+    %br
+    = user.updated_at
+  %td= link_to "bearbeiten", [:edit, :admin, user]
+  %td= link_to "löschen", [:admin, user], method: :delete, data: {confirm: "Wirklich?"}

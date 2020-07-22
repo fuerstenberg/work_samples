@@ -1,0 +1,15 @@
+- title "Benutzerkonto löschen"
+
+
+.panel-body
+  .lead
+    Willst du wirklich dein Benutzerkonto löschen?
+    %br
+    %strong Gib uns noch eine Chance.
+    %br
+    Schreib uns doch ein kurze Nachricht was dir an Motorradfreunde.com nicht gefällt.
+    Auf diese Weise haben wir die Möglichkeit uns zu verbessern.
+
+.panel-footer
+  = link_to "Benutzerkonto löschen", user_registration_path, :method => :delete, :data => {:confirm => "Willst Du wirklich Dein Benutzerkonto unwiderruflich löschen?"}, :class => "btn btn-danger"
+  = link_to "Abbrechen", current_user, class: "btn btn-success"

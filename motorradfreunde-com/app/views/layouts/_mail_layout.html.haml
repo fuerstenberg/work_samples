@@ -1,0 +1,132 @@
+%html
+  %head
+    %style{type: "text/css"}
+      \ body,.container{
+      \   background-color:#ffffff;
+      \ }
+      \ .container{
+      \   max-width:600px;
+      \ }
+      \ .headerContainer{
+      \   padding:20px;
+      \   max-width:600px;
+      \   width:100%;
+      \ }
+      \ .mainContainer{
+      \   padding:0 20px;
+      \   background-color:#ffffff;
+      \ }
+      \ .mainText{
+      \   text-align:left;
+      \   font-size:14px;
+      \   font-family:Helvetica, "Helvetica Neue", Arial, Tahoma;
+      \   line-height:200%;
+      \   font-weight:normal;
+      \ }
+      \ .mainText .title{
+      \   font-size:14px;
+      \   font-weight:normal;
+      \   color:#333333;
+      \   font-family:Helvetica, "Helvetica Neue", Arial, Tahoma;
+      \   line-height:110%;
+      \ }
+      \ .mainText .subTitle{
+      \   font-size:16px;
+      \   font-weight:normal;
+      \   color:#444444;
+      \   font-family:Helvetica, "Helvetica Neue", Arial, Tahoma;
+      \   font-style:italic;
+      \ }
+      \ .footerContainer{
+      \   padding:20px;
+      \   background-color:#ffffff;
+      \   border-top:0px none #bfbfbf;
+      \ }
+      \ .footerText{
+      \   font-size:11px;
+      \   font-family:Helvetica, "Helvetica Neue", Arial, Tahoma;
+      \   line-height:100%;
+      \   text-align:left;
+      \   font-weight:normal;
+      \ }
+      \ a,a:link,a:visited{
+      \   color:#D41927;
+      \   text-decoration:underline;
+      \   font-weight:normal;
+      \ }
+      \ .headerText a.logo{
+      \   color:#D41927;
+      \   font-size:14px;
+      \   font-weight:bold;
+      \   text-decoration:none;
+      \ }
+      \ .footerText a{
+      \   color:#D41927;
+      \   text-decoration:underline;
+      \   font-weight:normal;
+      \ }
+      \ #templateHeader{
+      \   background-color:#ffffff;
+      \ }
+      \ .headerContent{
+      \   font-family:Arial;
+      \ }
+      \ .headerContent a{
+      \   color:#D41927;
+      \   text-decoration:none;
+      \ }
+      \ blockquote{
+      \   color:#6f6f6f;
+      \   font-style:italic;
+      \   font-size:13px;
+      \   margin:20px;
+      \ }
+      \ .bqstart{
+      \   font-size:400%;
+      \   color:#afafaf;
+      \   padding-right:10px;
+      \   margin-top:8px;
+      \   margin-left:-5px;
+      \   padding-top:0px;
+      \   padding-bottom:0px;
+      \   font-family:Georgia;
+      \   display:inline-block;
+      \   height:1px;
+      \   float:left;
+      \ }
+      \ .quotename{
+      \   color:#2f2f2f;
+      \   font-style:normal;
+      \   display:block;
+      \   text-align:left;
+      \   font-size:14px;
+      \ }
+      \ .re{
+      \   color:#4f4f4f;
+      \   font-style:normal;
+      \   font-weight:bold;
+      \   font-size:14px;
+      \ }
+
+      \ ul{
+      \   margin:0;
+      \ }
+
+
+  %body{leftmargin: 0, marginwidth: 0, topmargin: 0, marginheight: 0, offset: 0, id: :richtext, style: "background-color: #ffffff;"}
+    .container{style: "background-color: #ffffff; max-width: 600px;"}
+      .headerContainer{style: "padding: 20px; background-color: #ffffff; max-width: 600px;"}
+        .headerText{style: "text-align: left; font-size: 14px; font-family: Helvetica, 'Helvetica Neue', Arial, Tahoma; line-height: 200%; font-weight: normal;"}
+          %a.logo{href: "https://www.motorradfreunde.com?utm_source=UserMailer&utm_medium=E-Mail&utm_campaign=Logo)", style: "color:#D41927; font-style:italic; font-weight: bold;"} Motorradfreunde.com
+
+      .mainContainer{style: "padding: 0 20px; background-color: #ffffff; max-width: 600px;"}
+        .mainText{style: "text-align: left; font-size: 14px; font-family: Helvetica, 'Helvetica Neue', Arial, Tahoma; line-height: 200%; font-weight: normal;"}
+          = yield
+
+      .footerContainer{style: "padding: 20px; background-color: #ffffff; max-width: 600px;"}
+        Du bekommst diese eMail, weil du dich bei Motorradfreunde.com angemeldet hast. Danke!
+        %br
+        %br
+        = link_to "Abmelden", cancel_account_users_url(utm_source: "UserMailer", utm_medium: "E-Mail", utm_campaign: "Abmelden")
+        \|
+        = link_to "Profil bearbeiten", edit_account_users_url(utm_source: "UserMailer", utm_medium: "E-Mail", utm_campaign: "Profil bearbeiten")

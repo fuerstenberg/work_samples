@@ -1,0 +1,14 @@
+- if !comment.new_record? and !comment.commentable.is_a?(User)
+  - cache ["comments/comment", comment] do
+    %div[comment]{data: data_user_id(comment.user)}
+      = image_tag comment.user&.avatar(:fill_200_200), alt: comment.user, class: 'comment__avatar'
+      .comment__content
+        .comment__head
+          .comment__user
+            - if comment.user.present?
+              = link_to comment.user, comment.user
+          .comment__created-at
+            - time_to_words comment.updated_at
+
+        .comment__body
+          != comment.body_html

@@ -1,0 +1,119 @@
+.chats
+  display: flex
+  flex-direction: column
+
+  &__container
+    display: flex
+    flex: 1
+
+    @extend .flex-row
+    @extend .align-items-stretch
+
+    overflow: hidden
+
+  &__ads,
+  &__contacts,
+  &__messages
+    @extend .align-self-stretch
+
+  &__ads
+    max-width: 300px
+    background-color: #EFEFEF
+    padding: 1rem
+
+  &__conversations
+    min-width: 300px
+    overflow: hidden
+    overflow-y: scroll
+
+  &__conversations-list
+    @extend .media-list
+    @extend .media-list-users
+    @extend .list-group
+
+  &__conversation
+    @extend .list-group-item
+    @extend .list-group-item-action
+
+    &.unread
+      border-right-color: $brand-primary
+      border-right-width: 4px
+
+    &:first-child
+      border-radius: 0
+      border-top: 0
+
+
+  &__messages
+    display: flex
+    flex: 1
+    flex-direction: column
+
+  &__messages-messages
+    flex: 1
+
+    @extend .d-flex
+    @extend .flex-column-reverse
+    @extend .align-items-center
+
+    > div:first-child
+      @extend .mt-auto
+
+    .message
+      width: 100%
+
+  &__messages-form
+    @extend .p-3
+
+  &__messages-list
+    overflow: hidden
+    overflow-y: scroll
+
+  &__messages-list li
+    @extend .m-3
+
+  &__message
+    @extend .media
+    @extend .mb-4
+
+    .media-body
+      margin-right: 20%
+
+    .media-body-text
+      background-color: #EFEFEF
+
+    &.is-online
+      .chats__message-avatar
+        border: 1px solid #3a3
+        padding: 1px
+
+  &__message--from-me
+    @extend .media-current-user
+
+    .media-body
+      margin-right: 0
+      margin-left: 20%
+
+    .chats__message-avatar
+      @extend .m-0
+      @extend .ml-3
+
+  &__message.chats__message--from-me .media-body-text
+    background-color: #E3E3E3
+    color: inherit
+
+  &__message.chats__message--from-me .media-body-text:first-child::before
+    border-left-color: #E3E3E3
+
+
+  &__message-avatar
+    @extend .rounded-circle
+    @extend .media-object
+    @extend .d-flex
+    @extend .align-self-start
+    @extend .mr-3
+
+
+
+// .modal-body-scroller
+//   max-height: 100%

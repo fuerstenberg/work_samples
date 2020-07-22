@@ -1,0 +1,8 @@
+%a{href: @ride_request.url}
+  - d = new Date(@ride_request.start_at)
+  - day = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"][d.getDay()]
+  - date = d.getDate()
+  - month = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"][d.getMonth()]
+  - year = d.getFullYear()
+  = "#{day}, #{date}. #{month} #{year}"
+  %small= window.gon.drivingStyles[@ride_request.driving_style]

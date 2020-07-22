@@ -1,0 +1,9 @@
+- cache ["addresses/address_short", address_short] do
+  - if address_short.geocoded?
+    %address.address--short
+      - if address_short.formatted_zip_city.present?
+        .text-truncate= address_short.formatted_zip_city
+      - if address_short.formatted_state.present?
+        .text-truncate= address_short.formatted_state
+      - if address_short.formatted_country.present?
+        .text-truncate= address_short.formatted_country

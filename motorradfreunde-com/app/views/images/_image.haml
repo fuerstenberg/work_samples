@@ -1,0 +1,13 @@
+- unless image.new_record?
+  .image.col-3
+    = link_to image.url(:limit_1000_1000), class: "lightbox", rel: :group, alt: "#{image.imageable}" do
+      = image_tag image.url(:fill_200_200), id: dom_id(image), class: 'rounded img-fluid'
+
+    - if image.is_uploadable_by?(current_user) and image.imageable.is_a?(User)
+      = link_to [:avatar, image.imageable, image], method: :put, class: "btn btn-secondary btn-sm image__btn-avatar", data: {toggle: "tooltip", placement: "bottom"}, title: "Als Profilbild festlegen" do
+        = icon 'user-circle-o'
+        .sr-only Als Avatar festlegen
+
+    - if image.is_deletable_by?(current_user)
+      = link_to [image.imageable, image], class: "btn btn-secondary btn-sm image__btn-delete", method: :delete, data: {toggle: "tooltip", placement: "bottom", confirm: "Soll das Bild wirklich gelöscht werden?"}, title: "Bild löschen" do
+        = icon 'trash-o'

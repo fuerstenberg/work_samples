@@ -1,0 +1,14 @@
+- user = routes
+
+.routes.my-5
+  .row
+    .col-12
+      %h2 Routen
+      %hr
+  .row
+    = render user.routes
+
+  - if user == current_user
+    .row
+      .col-12
+        = link_to 'Route anlegen', [:new, :route], class: 'btn btn-outline-primary'

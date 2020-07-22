@@ -1,0 +1,86 @@
+- f = hotel_form
+
+.is_hotel_form.hidden-xs-up
+  %fieldset.form-group
+    %legend Hotel
+
+  .form-group.row
+    = f.label :hotel_typ, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.text_field :hotel_typ, class: 'form-control'
+
+  .form-group.row
+    = f.label :hotel_lage, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.text_area :hotel_lage, class: 'form-control', rows: 3
+
+  .form-group.row
+    = f.label :hotel_anzahl_sterne, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.number_field :hotel_anzahl_sterne, class: 'form-control'
+
+  .form-group.row
+    = f.label :hotel_anzahl_appartments, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.number_field :hotel_anzahl_appartments, class: 'form-control'
+
+  .form-group.row
+    = f.label :hotel_anzahl_betten, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.number_field :hotel_anzahl_betten, class: 'form-control'
+
+  .form-group.row
+    = f.label :hotel_anzahl_doppelzimmer, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.number_field :hotel_anzahl_doppelzimmer, class: 'form-control'
+
+  .form-group.row
+    = f.label :hotel_anzahl_einzelzimmer, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.number_field :hotel_anzahl_einzelzimmer, class: 'form-control'
+
+  .form-group.row
+    = f.label :hotel_anzahl_mehrbettzimmer, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.number_field :hotel_anzahl_mehrbettzimmer, class: 'form-control'
+
+  .form-group.row
+    = f.label :hotel_anzahl_zimmer, class: 'col-3 col-form-label'
+    .col-sm-9
+      = f.number_field :hotel_anzahl_zimmer, class: 'form-control'
+
+  .form-group.row.hotel_zimmer
+    = f.label 'Zimmer', class: 'col-sm-3 col-form-check-label'
+    .col-sm-9
+      - Poi.hotel_zimmer_attribute_names.each_with_index do |attribute, index|
+        .form-check
+          = f.label attribute, class: 'form-check-label' do
+            = f.check_box attribute, class: 'form-check-input'
+            =t "mongoid.attributes.poi.#{attribute}"
+
+  .form-group.row.hotel_ausstattung
+    = f.label 'Ausstattung', class: 'col-sm-3 col-form-check-label'
+    .col-sm-9
+      - Poi.hotel_ausstattung_attribute_names.each_with_index do |attribute, index|
+        .form-check
+          = f.label attribute, class: 'form-check-label' do
+            = f.check_box attribute, class: 'form-check-input'
+            =t "mongoid.attributes.poi.#{attribute}"
+
+  .form-group.row.hotel_essen
+    = f.label 'Essen', class: 'col-sm-3 col-form-check-label'
+    .col-sm-9
+      - Poi.hotel_essen_attribute_names.each_with_index do |attribute, index|
+        .form-check
+          = f.label attribute, class: 'form-check-label' do
+            = f.check_box attribute, class: 'form-check-input'
+            =t "mongoid.attributes.poi.#{attribute}"
+
+  .form-group.row.hotel_service
+    = f.label 'Service', class: 'col-sm-3 col-form-check-label'
+    .col-sm-9
+      - Poi.hotel_service_attribute_names.each_with_index do |attribute, index|
+        .form-check
+          = f.label attribute, class: 'form-check-label' do
+            = f.check_box attribute, class: 'form-check-input'
+            =t "mongoid.attributes.poi.#{attribute}"

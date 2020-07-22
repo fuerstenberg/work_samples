@@ -1,0 +1,9 @@
+- if form.is_uploadable_by?(current_user)
+  = form_for (form.imageable.is_a?(User) ? form : [form.imageable, form]), html: { multipart: true } do |f|
+
+    .input-group.mx-3
+      = f.label :file, class: 'custom-file' do
+        = f.file_field :file, class: 'custom-file-input'
+        %span.custom-file-control Bild auswählen...
+      .input-group-btn
+        %button.btn.btn-outline-secondary{type: "submit"} Bild hochladen

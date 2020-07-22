@@ -1,0 +1,11 @@
+= render layout: "layouts/activity", object: activity, locals: { activity_title: "hat ein Foto hochgeladen" } do
+  - if activity.trackable
+    - case activity.trackable.photogenic
+    - when Bike
+      %p= link_to activity.trackable.photogenic, [activity.owner, activity.trackable.photogenic]
+    - when Route
+      %p= link_to activity.trackable.photogenic, [activity.owner, activity.trackable.photogenic]
+    - else
+      %p= link_to activity.trackable.photogenic, activity.trackable.photogenic
+    = link_to activity.trackable.url(:limit_1000_1000), class: "lightbox", rel: :group, alt: "#{activity.trackable.photogenic}" do
+      = image_tag activity.trackable.url(:limit_1000_1000)

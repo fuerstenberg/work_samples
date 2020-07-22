@@ -1,0 +1,53 @@
+- widescreen
+- title @customer
+
+- content_for :action do
+  = link_to "Kundendaten bearbeiten", [:edit, :admin, @customer], class: "btn"
+
+%table.table
+  %tr
+    %th URL
+    %td= link_to @customer.url, @customer.url, target: dom_id(@customer)
+  %tr
+    %th Ort
+    %td= @customer.city
+  %tr
+    %th Ansprechpartner
+    %td= @customer.contact
+  %tr
+    %th Land
+    %td= @customer.country
+  %tr
+    %th eMail
+    %td= mail_to @customer.email, @customer.email, subject: "Motorradfreunde.com - "
+  %tr
+    %th Firmenname
+    %td= @customer.name
+  %tr
+    %th Telefon
+    %td= @customer.phone
+  %tr
+    %th Straße
+    %td= @customer.street
+  %tr
+    %th Postleitzahl
+    %td= @customer.zip
+
+
+.page-header
+  .action= link_to "Notiz anlegen", [:new, :admin, @customer, :customer_notice], class: "btn btn-primary"
+  %h2 Notizen
+%table.table.table-striped= render @customer.customer_notices
+
+
+.page-header
+  .action= link_to "POI anlegen", [:new, :admin, @customer, :poi], class: "btn btn-primary"
+  %h2 POIs
+%table.table.table-striped= render @customer.pois
+
+.page-header
+  .action= link_to "Werbeanzeige anlegen", [:new, :admin, @customer, :ad], class: "btn btn-primary"
+  %h2 Werbeanzeigen
+%table.table.table-striped= render @customer.ads
+
+

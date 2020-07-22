@@ -1,0 +1,30 @@
+- cache ["bikes/bike", bike], expires_in: 60.minutes do
+  .col-12.col-sm-6.col-md-4.mb-4
+    = link_to vendor_bike_path(bike.vendor, bike), title: bike, class: "card bike-card", id: dom_id(bike, :card) do
+      = image_tag bike.avatar(:fill_600_600), class: "card-img-top img-fluid", alt: bike
+      .card-block.bike-card__block
+        %h2.card-title= bike
+        = render partial: 'users/small', object: bike.user, locals: { link: false }
+        %dl.row.line-height-1
+          - if bike.year_of_manufacture.present?
+            %dt.col-sm-6.text-truncate Baujahr
+            %dd.col-sm-6.text-truncate.text-right= bike.year_of_manufacture
+          - if bike.hp.present? and bike.hp > 0
+            %dt.col-sm-6.text-truncate Leistung
+            %dd.col-sm-6.text-truncate.text-right== #{bike.hp} PS
+          - if bike.ccm.present? and bike.ccm > 0
+            %dt.col-sm-6.text-truncate Hubraum
+            %dd.col-sm-6.text-truncate.text-right== #{bike.ccm} ccm
+          - if bike.color.present?
+            %dt.col-sm-6.text-truncate Farbe
+            %dd.col-sm-6.text-truncate.text-right= bike.color
+
+      .card-footer
+        - if bike.impressions_count
+          %small.text-muted
+            = icon 'eye'
+            = bike.impressions_count
+        - if bike.images.size > 1
+          %small.text-muted
+            = icon 'picture-o'
+            = bike.images.size

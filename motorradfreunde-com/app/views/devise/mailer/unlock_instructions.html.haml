@@ -1,0 +1,13 @@
+= render layout: "layouts/mailer_layout" do
+  %h1 Benutzerkonto freischalten
+
+  %p
+    == Hallo #{@resource.name},
+    %br
+    du hast diese eMail erhalten, weil dein Benutzerkonto gesperrt ist.
+    Klicke bitte auf folgenden Link, um dein Benutzerkonto zu entsperren:
+
+  %p= link_to 'Benutzerkonto entsperren', unlock_url(@resource, unlock_token: @token)
+
+  %p
+    Dein Benutzerkonto wurde gesperrt, weil du/jemand zu oft versucht hat sich mit den falschen Zugangsdaten anzumelden.

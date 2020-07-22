@@ -1,0 +1,9 @@
+- poi = vendor
+- if poi.is_vendor?
+  %dl.row
+    %dt.col-sm-3 vendor
+    %dd.col-sm-9
+      %dl
+        - if poi.hersteller_beschreibung.present?
+          %dt.hersteller_beschreibung= t 'mongoid.attributes.poi.poi.hersteller_beschreibung'
+          %dd.hersteller_beschreibung= poi.hersteller_beschreibung

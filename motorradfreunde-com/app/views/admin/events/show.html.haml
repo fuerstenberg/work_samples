@@ -1,0 +1,42 @@
+- title "Admin / #{@event}"
+
+%table.table.event
+  %tbody
+    %tr
+      %th
+        .span2 Beginn
+      %td
+        - if @event.end_at < Time.now
+          %span{:style => "text-decoration: line-through;"}
+            =l @event.start_at, format: (@event.hide_time? ? :date_only : :default)
+          %br
+          %strong Der Termin hat bereits stattgefunden.
+        - else
+          =l @event.start_at, format: (@event.hide_time? ? :date_only : :default)
+
+    - if @event.start_at < @event.end_at
+      %tr
+        %th Ende
+        %td=l @event.end_at, format: (@event.hide_time? ? :date_only : :default)
+    - if @event.user
+      %tr
+        %th erstellt von
+        %td= link_to @event.user, @event.user
+    - if @event.url.present?
+      %tr
+        %th Webseite zum Termin
+        %td= link_to @event.url, @event.url, :target => :blank
+    %tr
+      %th Beschreibung
+      %td= simple_format @event.description
+    %tr
+      %th Treffpunkt
+      %td
+        %address= @event.meeting_point
+    - if @event.geocoded?
+      %tr
+        %td{:colspan => 2}
+          #mapable{"data-lat" => @event.latitude, "data-lng" => @event.longitude, "data-title" => @event.meeting_point, :style => "height: 400px; width: 100%;"}
+    %tr
+      %th.muted zuletzt geändert
+      %td.muted=l @event.updated_at

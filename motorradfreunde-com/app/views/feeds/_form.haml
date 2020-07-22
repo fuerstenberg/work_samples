@@ -1,0 +1,25 @@
+- form = form
+- 2.times{ form.object.feeds.build }
+
+- form.object.feeds.each_with_index do |feed, index|
+  = form.fields_for :feeds, feed do |feed_field|
+    .form-group.row
+      = feed_field.label :title, "Feed #{index + 1}", class: 'col-3 col-form-label'
+      .col-9
+        = feed_field.text_field :title, placeholder: 'RSS Feed title', step: 1, class: 'form-control'
+
+      =# feed_field.label :feed_url, "Feed #{index + 1}", class: 'col-3 col-form-label'
+      .col-9.offset-3
+        = feed_field.url_field :feed_url, placeholder: 'RSS Feed URL', step: 1, class: 'form-control'
+        - Feed.import_as.options.each do |option|
+          .form-check
+            = feed_field.label :import_as, class: 'form-check-label' do
+              = feed_field.radio_button :import_as, option[1], class: 'form-check-input'
+              = option[0]
+
+        - unless feed_field.object.new_record?
+          .form-check
+            = feed_field.label :_destroy, class: 'form-check-label' do
+              = feed_field.check_box :_destroy, class: 'form-check-input'
+              löschen
+        = render feed_field.object

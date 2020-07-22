@@ -1,0 +1,7 @@
+- title 'Aktivierungs-eMail erneut anfordern'
+- hide_social_media_buttons
+
+= form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post } do |f|
+  .form-group= f.text_field :email, required: true, placeholder: true, class: 'form-control', autofocus: true
+  = f.submit 'Aktivierungs-eMail anfordern', class: 'btn btn-primary'
+  = render("links")

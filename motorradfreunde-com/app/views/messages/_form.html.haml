@@ -1,0 +1,8 @@
+- conversation = form
+
+- if conversation
+  = form_for [conversation, conversation.messages.build] do |f|
+    .input-group
+      = f.text_field :body, placeholder: 'Schreib eine Nachricht...', class: 'form-control', autocomplete: 'off', autofocus: true
+      .input-group-btn
+        = f.submit 'Nachricht senden', class: 'btn btn-secondary'

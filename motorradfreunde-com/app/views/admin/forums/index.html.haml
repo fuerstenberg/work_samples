@@ -1,0 +1,10 @@
+- title "Foren", "Admin"
+
+- content_for :action do
+  = link_to "Forum anlegen", [:new, :admin, :forum], class: "btn btn-success"
+
+= render partial: 'form', object: Forum.new
+
+%hr
+
+%table.table.table-striped= render @forums

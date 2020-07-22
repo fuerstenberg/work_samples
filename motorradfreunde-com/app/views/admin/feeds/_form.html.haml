@@ -1,0 +1,54 @@
+- hide_all_sidebars
+
+= form_for [:admin, form], html: { multipart: true } do |f|
+  .form-group.row
+    = f.label :feed_url, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.url_field :feed_url, class: 'form-control', placeholder: 'Feed url'
+
+  .form-group.row
+    = f.label :title, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.url_field :title, class: 'form-control', placeholder: 'Title'
+
+  .form-group.row
+    = f.label :url, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :url, class: 'form-control', placeholder: 'URL'
+
+  .form-group.row
+    = f.label :copyright, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :copyright, hint: 'Hubraum in ccm.', class: 'form-control', placeholder: 'Copyright'
+
+  .form-group.row
+    = f.label :description, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :description,  hint: 'Leistung in PS.', class: 'form-control', placeholder: 'Description'
+
+  .form-group.row
+    = f.label :image_link, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :image_link, hint: 'Hubraum in ccm.', class: 'form-control', placeholder: 'Image link'
+
+  .form-group.row
+    = f.label :image_title, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :image_title, hint: 'Hubraum in ccm.', class: 'form-control', placeholder: 'Image title'
+
+  .form-group.row
+    = f.label :image_url, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :image_url, hint: 'Hubraum in ccm.', class: 'form-control', placeholder: 'Image url'
+
+  .form-group.row
+    = f.label :language, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :language, hint: 'Hubraum in ccm.', class: 'form-control', placeholder: 'Language'
+
+  .actions
+    - if f.object.new_record?
+      = link_to 'Abbrechen' , [:admin, :feeds], class: 'btn btn-secondary'
+    - else
+      = link_to 'Abbrechen' , [:admin, f.object], class: 'btn btn-secondary'
+    = f.submit class: 'btn btn-primary'

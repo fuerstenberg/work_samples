@@ -1,0 +1,9 @@
+- poi = magazin
+- if poi.is_magazin?
+  %dl.row
+    %dt.col-sm-3 magazin
+    %dd.col-sm-9
+      %dl
+        - if poi.magazin_beschreibung.present?
+          %dt.magazin_beschreibung= t 'mongoid.attributes.poi.poi.magazin_beschreibung'
+          %dd.magazin_beschreibung= poi.magazin_beschreibung

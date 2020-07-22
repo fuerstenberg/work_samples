@@ -1,0 +1,18 @@
+- if forum_counter == 0
+  %tr[forum]
+    %th
+    %th Name
+    %th Beschreibung
+    %th Themen
+    %th Antworten
+    %th
+    %th
+
+%tr[forum]
+  %td= preview forum, link: [:admin, forum]
+  %td= link_to forum.name, [:admin, forum]
+  %td= forum.description
+  %td= forum.questions.count
+  %td= forum.answers.count
+  %td= link_to 'bearbeiten', [:edit, :admin, forum]
+  %td= link_to 'löschen', [:admin, forum], method: :delete, data: { confirm: "Wirklich?" } if forum.questions.count < 1

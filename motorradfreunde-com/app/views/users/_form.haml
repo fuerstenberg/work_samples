@@ -1,0 +1,165 @@
+= form_for current_user do |f|
+  .form-group.row.user_name
+    = f.label :name, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :name, class: 'form-control', autofocus: true
+
+  - if f.object.valid?
+    .form-group.row.user_date_of_birth
+      = f.label :date_of_birth, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.date_field :date_of_birth, min: (Date.today - 100.years), max: (Date.today - 15.years), class: 'form-control'
+
+    .form-group.row.user_gender
+      = f.label :gender, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.gender.options.each do |option|
+          .form-check.form-check-inline
+            = f.label :gender, class: 'form-check-label' do
+              = f.radio_button :gender, option[1], class: 'form-check-input'
+              = option[0]
+
+  .form-group.row.user_email
+    = f.label :email, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.email_field :email, class: 'form-control', placeholder: true
+
+  - if f.object.terms_of_service.blank?
+    .form-group.row
+      .form-check.col-sm-9.offset-sm-3
+        = f.label :terms_of_service, class: 'form-check-label' do
+          = f.check_box :terms_of_service, class: 'form-check-input', required: true
+          = I18n.t('mongoid.attributes.user.terms_of_service_html').html_safe
+
+  - if !f.object.new_record? and f.object.valid?
+    .form-group.row.user_interested_in_gender
+      = f.label :interested_in_gender, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.interested_in_gender.options.each do |option|
+          .form-check
+            = f.label :interested_in_gender, class: 'form-check-label' do
+              = f.check_box :interested_in_gender, { class: 'form-check-input', multiple: true }, option[1]
+              = option[0]
+
+    .form-group.row.user_status_for_relationship
+      = f.label :status_for_relationship, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.status_for_relationship.options.each do |option|
+          .form-check
+            = f.label :status_for_relationship, class: 'form-check-label' do
+              = f.radio_button :status_for_relationship, option[1], class: 'form-check-input'
+              = option[0]
+
+    .form-group.row.user_status_as_biker
+      = f.label :status_as_biker, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.status_as_biker.options.each do |option|
+          .form-check
+            = f.label :status_as_biker, class: 'form-check-label' do
+              = f.check_box :status_as_biker, { class: 'form-check-input', multiple: true }, option[1]
+              = option[0]
+
+    .form-group.row.user_has_own_motorcycle
+      = f.label :has_own_motorcycle, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.has_own_motorcycle.options.each do |option|
+          .form-check
+            = f.label :has_own_motorcycle, class: 'form-check-label' do
+              = f.radio_button :has_own_motorcycle, option[1], class: 'form-check-input'
+              = option[0]
+
+    .form-group.row.user_status_of_social_behavior
+      = f.label :status_of_social_behavior, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.status_of_social_behavior.options.each do |option|
+          .form-check
+            = f.label :status_of_social_behavior, class: 'form-check-label' do
+              = f.check_box :status_of_social_behavior, { class: 'form-check-input', multiple: true }, option[1]
+              = option[0]
+
+    .form-group.row.user_status_for_backseat
+      = f.label :status_for_backseat, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.status_for_backseat.options.each do |option|
+          .form-check
+            = f.label :status_for_backseat, class: 'form-check-label' do
+              = f.radio_button :status_for_backseat, option[1], class: 'form-check-input'
+              = option[0]
+
+    .form-group.row.user_description
+      = f.label :description, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.text_area :description, rows: 6, class: 'form-control', placeholder: true
+    .form-group.row.user_favourite_experience
+      = f.label :favourite_experience, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.text_area :favourite_experience, rows: 6, class: 'form-control', placeholder: true
+    .form-group.row.user_driving_description
+      = f.label :driving_description, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.text_area :driving_description, rows: 6, class: 'form-control', placeholder: true
+    .form-group.row.user_favourite_areas
+      = f.label :favourite_areas, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.text_area :favourite_areas, rows: 6, class: 'form-control', placeholder: true
+
+    .form-group.row.user_licence_date
+      = f.label :licence_date, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.select :licence_date, ((Date.today - 100.years).year..(Date.today.year)).to_a, { include_blank: true }, class: 'form-control'
+
+    .form-group.row.user_distance_total
+      = f.label :distance_total, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.select :distance_total, (1..10).map{|i| i*1000} + (3..20).map{|i| i*5000} + (3..20).map{|i| i*50000}, {}, class: 'form-control'
+    .form-group.row.user_distance_per_year
+      = f.label :distance_per_year, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.select :distance_per_year, [5000, 10000, 15000, 20000, 25000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000], {}, class: 'form-control'
+
+    .form-group.row.user_favorite_vendor
+      = f.label :favorite_vendor, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.text_field :favorite_vendor, class: 'form-control', placeholder: true
+
+    .form-group.row.user_favorite_engine_amount_of_cylinders
+      = f.label :favorite_engine_amount_of_cylinders, class: 'col-sm-3 col-form-label'
+      .col-sm-9
+        = f.select :favorite_engine_amount_of_cylinders, %w(1 2 3 4 5 6 8 10 12), {}, class: 'form-control'
+
+    .form-group.row.user_favorite_driving_style
+      = f.label :favorite_driving_style, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.favorite_driving_style.options.each do |option|
+          .form-check
+            = f.label :favorite_driving_style, class: 'form-check-label' do
+              = f.check_box :favorite_driving_style, { class: 'form-check-input', multiple: true }, option[1]
+              = option[0]
+
+    .form-group.row.user_favorite_drive_type
+      = f.label :favorite_drive_type, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.favorite_drive_type.options.each do |option|
+          .form-check
+            = f.label :favorite_drive_type, class: 'form-check-label' do
+              = f.check_box :favorite_drive_type, { class: 'form-check-input', multiple: true }, option[1]
+              = option[0]
+
+    .form-group.row.user_favorite_clothing
+      = f.label :favorite_clothing, class: 'col-sm-3 col-form-check-label'
+      .col-sm-9
+        - User.favorite_clothing.options.each do |option|
+          .form-check
+            = f.label :favorite_clothing, class: 'form-check-label' do
+              = f.check_box :favorite_clothing, { class: 'form-check-input', multiple: true }, option[1]
+              = option[0]
+
+  .actions
+    - if f.object.new_record?
+      = link_to 'Abbrechen', current_user, class: 'btn btn-secondary'
+    - else
+      = link_to 'Abbrechen', current_user, class: 'btn btn-secondary'
+    = f.submit class: 'btn btn-primary'
+
+%hr
+= link_to "Mitgliedschaft beenden", [:cancel,  :users], class: "btn btn-default btn-sm"

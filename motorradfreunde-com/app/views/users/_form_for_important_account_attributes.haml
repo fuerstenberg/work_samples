@@ -1,0 +1,66 @@
+- if user_signed_in?
+  .row
+    .container
+      .col-12
+        - if current_user.status_as_biker.empty?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :status_as_biker, as: :check_boxes, collection: User.status_as_biker.options
+              = f.button :submit
+
+        - elsif current_user.has_own_motorcycle.blank?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :has_own_motorcycle, as: :radio_buttons, collection: User.has_own_motorcycle.options
+              = f.button :submit
+
+        - elsif current_user.status_of_social_behavior.empty?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :status_of_social_behavior,  as: :check_boxes, collection: User.status_of_social_behavior.options
+              = f.button :submit
+
+        - elsif current_user.favorite_driving_style.empty?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :favorite_driving_style, as: :check_boxes, collection: User.favorite_driving_style.options
+              = f.button :submit
+
+        - elsif current_user.favorite_clothing.blank?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :favorite_clothing, as: :check_boxes, collection: User.favorite_clothing.options
+              = f.button :submit
+
+        - elsif current_user.status_for_backseat.blank?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :status_for_backseat, as: :radio_buttons, collection: User.status_for_backseat.options
+              = f.button :submit
+
+        - elsif current_user.status_for_relationship.blank?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :status_for_relationship, as: :radio_buttons, collection: User.status_for_relationship.options
+              = f.button :submit
+
+        - elsif current_user.interested_in_gender.blank?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :interested_in_gender, as: :check_boxes, collection: User.interested_in_gender.options
+              = f.button :submit
+
+        - elsif current_user.gender.blank?
+          .alert.alert-info
+            = form_for current_user do |f|
+              .form-group.row
+                = f.input :gender, as: :radio_buttons, collection: User.gender.options
+              = f.button :submit

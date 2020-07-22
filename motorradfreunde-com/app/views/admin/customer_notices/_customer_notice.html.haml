@@ -1,0 +1,11 @@
+- if customer_notice_counter == 0
+  %tr
+    %th Notiz
+    %th bearbeitet am
+    %th{colspan: 2} Aktionen
+
+%tr
+  %th= customer_notice.body
+  %th= customer_notice.updated_at
+  %th= link_to "bearbeiten", [:edit, :admin, customer_notice.customer, customer_notice]
+  %th= link_to "löschen", [:admin, customer_notice.customer, customer_notice], method: :delete, data: {confirm: "Wirklich?"}

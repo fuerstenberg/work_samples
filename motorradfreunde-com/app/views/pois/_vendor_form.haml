@@ -1,0 +1,10 @@
+- f = vendor_form
+
+.is_vendor_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Hersteller
+
+  .form-group.row
+    = f.label :hersteller_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :hersteller_beschreibung, class: 'form-control'

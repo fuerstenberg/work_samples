@@ -1,0 +1,8 @@
+- obj = images
+
+- if (images = obj.images and images.present?) or current_user == obj or (obj.respond_to?(:user) and current_user == obj.user) or obj.is_a?(Poi)
+  = render partial: "account/images/image", collection: images
+
+.clearfix
+- if current_user and ((obj.respond_to?(:user) and obj.user == current_user) or obj == current_user or obj.is_a?(Poi))
+  = render partial: "form", object: obj.images.build

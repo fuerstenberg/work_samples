@@ -1,0 +1,13 @@
+!!!
+
+%html{class: 'no-js', lang: 'de'}<>
+  %head= render 'layouts/head'
+  %body{style: "padding-top: 0;"}
+    .container-fluid
+      = yield
+
+    .scripts
+      = javascript_include_tag "//maps.googleapis.com/maps/api/js?libraries=geometry&sensor=true"
+      = javascript_include_tag "application"
+
+      = yield :scripts

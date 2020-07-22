@@ -1,0 +1,5 @@
+%li.item.timeline_event.timeline_form#timeline_form
+  = preview current_user
+  = simple_form_for [@commentable, form], remote: true do |f|
+    = f.text_area :body, rows: 3, placeholder: placeholder
+    = f.submit "Senden", class: "btn btn-success"

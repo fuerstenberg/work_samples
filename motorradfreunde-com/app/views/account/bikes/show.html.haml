@@ -1,0 +1,44 @@
+- meta @bike
+- title @bike.user, @bike
+
+= render partial: "account/users/sub_navigation"
+
+.page-title
+  %h2 Beschreibung
+
+
+%table.table
+  - if @bike.user
+    %tr
+      %th Besitzer
+      %td= link_to @bike.user, @bike.user
+  - if @bike.hp.present?
+    %tr
+      %th Leistung
+      %td== #{@bike.hp} PS
+  - if @bike.ccm.present?
+    %tr
+      %th Hubraum
+      %td== #{@bike.ccm} ccm
+  - if @bike.year_of_manufacture.present?
+    %tr
+      %th Baujahr
+      %td== #{l @bike.year_of_manufacture, format: "%Y"}
+  - if @bike.color.present?
+    %tr
+      %th Farbe
+      %td== #{@bike.color}
+  - if @bike.description.present?
+    %tr
+      %th Beschreibung
+      %td{:style => "width: 70%;"}= simple_format @bike.description
+
+= render partial: "images/images", object: @bike
+= render partial: "comments/comments", object: @bike
+
+- content_for :actions do
+  - if can? :update, @bike
+    = link_to "Motorrad bearbeiten", [:edit, current_user, @bike], class: "btn btn-xs btn-success"
+
+  - if can? :destroy, @bike
+    = link_to "Motorrad löschen", [current_user, @bike], method: :delete, data: {confirm: "Soll das Motorrad wirklich gelöscht werden?"}, class: "btn btn-default btn-xs"

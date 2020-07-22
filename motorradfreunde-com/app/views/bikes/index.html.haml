@@ -1,0 +1,26 @@
+- if user_scope?
+  - title @user, "Garage"
+  - subtitle @user
+- elsif @vendor
+  - title "Motorräder von #{@vendor}"
+  - meta_title "Motorräder von #{@vendor}"
+  - subtitle "Hier findest du Motorräder aller hier angemeldeten Biker."
+- else
+  - title "Bikes"
+  - meta_title "Motorräder von #{@vendor}"
+  - subtitle "Hier findest du Motorräder aller hier angemeldeten Biker."
+
+.row
+  = render @bikes
+
+= paginate @bikes
+
+- unless user_scope?
+  - content_for :filter do
+    - cache ["bikes/filter/vendors", @vendor], expires_in: 12.hours do
+      = link_to "Alle", [:bikes], class: "label #{@vendor ? 'label-default' : 'label-danger'}"
+      - Poi.vendors.where(:bikes_count.gt => 0).order(name: :asc).to_a.each do |vendor|
+        = link_to vendor, vendor_bikes_path(vendor), class: "label #{vendor == @vendor ? 'label-danger' : 'label-default'}"
+
+  - content_for :main_action do
+    = link_to "Motorrad anlegen", [:new, :bike], :class => "btn btn-success"

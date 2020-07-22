@@ -1,0 +1,47 @@
+.content
+  ul.notifications
+    border-left: 1px solid #CCC
+    margin-left: 60px
+
+    li.dropdown-header
+      margin: 10px 0 10px -22px
+      padding: 10px 0
+      width: 120px
+
+      background-color: #F9F9F9
+
+    li.notification
+      margin: 10px 0 10px -41px
+
+      &.read
+      &.unread
+
+      a
+        color: #666
+        text-decoration: none
+
+        &:hover
+          color: #428bca
+
+        .image
+          border: 1px solid #999
+          float: left
+          height: 50px
+          margin: 10px 0
+          overflow: hidden
+          outline: 4px solid #F9F9F9
+          width: 50px
+
+          +border-radius(50%)
+
+          img
+            height: 50px
+
+        .description
+          margin: 15px 60px
+          strong
+
+          time
+            display: block
+            font-size: 0.9em
+            color: #999

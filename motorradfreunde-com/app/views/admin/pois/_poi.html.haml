@@ -1,0 +1,25 @@
+- if poi_counter == 0
+  %tr
+    %th Vorschau
+    %th Name
+    %th Kunde
+    %th Plan
+    %th Website
+    %th Branche
+    %th Laufzeit
+    %th
+    %th
+
+
+%tr[poi]
+  %td= preview poi, link: [:admin, poi]
+  %td
+    = link_to poi, [:admin, poi]
+    %br
+    = poi.postal_code_and_city_and_state_and_country
+  %td= link_to poi.customer, [:admin, poi.customer] if poi.customer
+  %td= poi.http
+  %td= poi.is
+  %td=l poi.enabled_until rescue '---'
+  %td= link_to "bearbeiten", [:edit, :admin, poi]
+  %td= link_to "löschen",    [:admin, poi], method: :delete, data: {confirm: "Wirklich?"}

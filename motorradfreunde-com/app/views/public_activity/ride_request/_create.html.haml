@@ -1,0 +1,10 @@
+= render layout: "layouts/activity", object: activity, locals: { activity_title: "will Motorrad fahren" } do
+  %p= link_to activity.trackable, activity.trackable
+  %dl.dl-horizontal
+    %dt Termin
+    %dd=l activity.trackable.start_at, format: :short_date_only
+    - if activity.trackable.geocoded?
+      %dt
+        Entfernung zu dir
+      %dd
+        - distance_from_me_to activity.trackable

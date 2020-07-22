@@ -1,0 +1,12 @@
+%tr
+  %td
+    - if ad.active?
+      = link_to 'aktiv', admin_customer_ad_url(customer_id: ad.customer, id: ad, ad: {active: "0"}), method: :put
+    - else
+      = link_to 'inaktiv', admin_customer_ad_url(customer_id: ad.customer, id: ad, ad: {active: "1"}), method: :put
+  %td= ad.position
+  %td= link_to ad.customer, [:admin, ad.customer]
+  %td= link_to ad.title, [:admin, ad.customer, ad]
+  %td.text-right= ad.impressions_count
+  %td= link_to 'bearbeiten', [:edit, :admin, ad.customer, ad]
+  %td= link_to 'löschen', [:admin, ad.customer, ad], method: :delete, data: {confirm: "Wirklich?"}

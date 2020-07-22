@@ -1,0 +1,49 @@
+- if current_user and current_user.admin?
+  %dl.row
+    - if feed.feed_url.present?
+      %dt.col-sm-4 Feed url
+      %dd.col-sm-8= feed.feed_url
+
+    - if feed.import_as.present?
+      %dt.col-sm-4 Import as
+      %dd.col-sm-8= feed.import_as
+
+    - if feed.title.present?
+      %dt.col-sm-4 Title
+      %dd.col-sm-8= feed.title
+
+    - if feed.description.present?
+      %dt.col-sm-4 Description
+      %dd.col-sm-8= feed.description
+
+    - if feed.url.present?
+      %dt.col-sm-4 URL
+      %dd.col-sm-8= feed.url
+
+    - if feed.copyright.present?
+      %dt.col-sm-4 Copyright
+      %dd.col-sm-8= feed.copyright
+
+    - if feed.image_link.present?
+      %dt.col-sm-4 Image link
+      %dd.col-sm-8= feed.image_link
+
+    - if feed.image_title.present?
+      %dt.col-sm-4 Image title
+      %dd.col-sm-8= feed.image_title
+
+    - if feed.image_url.present?
+      %dt.col-sm-4 Image URL
+      %dd.col-sm-8= feed.image_url
+
+    - if feed.language.present?
+      %dt.col-sm-4 Language
+      %dd.col-sm-8= feed.language
+
+    - if feed.published_at.present?
+      %dt.col-sm-4 Published at
+      %dd.col-sm-8= feed.published_at
+
+    - if feed.build_at.present?
+      %dt.col-sm-4 Build at
+      %dd.col-sm-8= feed.build_at

@@ -1,0 +1,17 @@
+- if alert
+  .growl
+    .alert.alert-dark.alert-dismissable{:role => "alert"}
+      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+      %strong.text-danger Achtung!
+      %br
+      = alert
+
+- if notice
+  .growl
+    .alert.alert-dark.alert-dismissable{:role => "alert"}
+      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+      %strong.text-warning Hinweis!
+      %br
+      = notice

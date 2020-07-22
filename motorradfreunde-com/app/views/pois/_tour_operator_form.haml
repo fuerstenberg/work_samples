@@ -1,0 +1,23 @@
+- f = tour_operator_form
+
+.is_tour_operator_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Reiseanbieter
+
+  .form-group.row
+    = f.label :reiseanbieter_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :reiseanbieter_beschreibung, class: 'form-control'
+
+  .form-group.row
+    = f.label 'Services', class: 'col-sm-3 col-form-check-label'
+    .col-sm-9
+      .form-check
+        = f.label :reiseanbieter_touren, class: 'form-check-label' do
+          = f.check_box :reiseanbieter_touren, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.reiseanbieter_touren'
+
+      .form-check
+        = f.label :reiseanbieter_reisen, class: 'form-check-label' do
+          = f.check_box :reiseanbieter_reisen, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.reiseanbieter_reisen'

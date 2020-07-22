@@ -1,0 +1,90 @@
+body.videos.index
+  .video_container
+    // display: none
+
+body.videos.player
+
+
+
+
+
+  .content_container .container,
+  .current_users,
+  .footer
+    display: none
+
+  .headline
+    left: 0
+    position: fixed
+    right: 0
+
+  // .video_container
+  .content_container
+    bottom: 51px
+    left: 0
+    margin: 0
+    padding: 0
+    position: fixed
+    right: 0
+    top: 146px
+
+    background-color: #000
+
+    .close
+      margin: 10px 25px
+      color: #FFF
+      font-size: 3em
+
+    .video_canvas
+      height: 100%
+      width: 100%
+
+    .progress
+      position: absolute
+      bottom: 0
+      left: 0
+      right: 0
+      margin-bottom: 0
+      border-radius: 0
+      height: 7px
+      background-color: #181818
+
+      .progress-bar-playing.progress-bar,
+      .progress-bar-loading.progress-bar
+        position: absolute
+
+      .progress-bar-playing.progress-bar
+        z-index: 2
+        background-color: $red
+
+      .progress-bar-loading.progress-bar
+        z-index: 1
+        background-color: #1D1D1D
+
+
+    .video_navigation
+      .nav
+        li
+          min-width: 54px
+          a
+            min-width: 54px
+            text-align: center
+
+          &.divider
+            border-left: 1px solid #000
+            height: 50px
+            min-width: 1px
+            width: 1px
+
+          &.played_time *
+            margin-right: 4px
+          &.duration_time *
+            margin-left: 4px
+
+          &.time-divider
+            min-width: 0
+            width: auto
+            *
+              margin-left: 4px
+              margin-right: 4px
+

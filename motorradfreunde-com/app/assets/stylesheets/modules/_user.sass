@@ -1,0 +1,54 @@
+.user-media
+
+  &--small
+    .user-media__object
+      @extend .rounded
+      width: 30px
+
+    .media-body
+      overflow: auto
+
+      .user-media__name
+        font-weight: $font-weight-bold
+        font-size: $font-size-sm
+        line-height: 1
+        line-height: 1.2
+
+      .user-media__address
+        color: $text-muted
+        font-size: $font-size-xs
+
+      .user-media__name,
+      .user-media__address
+        @extend .text-truncate
+
+
+.user-card
+  &__block
+    height: 200px
+
+    h2
+      @extend .text-truncate
+
+
+.user-sub-navigation
+  &__avatar
+    img
+      max-width: 150px
+
+  &__head
+    h1
+      font-weight: normal
+
+.user-card-profile,
+.user-card-about
+  h2
+    font-size: $font-size-h6
+
+  &__nav
+    @extend .list-group
+    @extend .list-group-flush
+
+    a
+      @extend .list-group-item
+      @extend .list-group-item-action

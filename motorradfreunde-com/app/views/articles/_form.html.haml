@@ -1,0 +1,20 @@
+
+
+= simple_form_for @article, html: { multipart: true } do |f|
+  = body do
+    .alert.alert-info
+      %strong Hinweis
+      Hier kannst Du einen Artikel schreiben.
+      z.Bsp.: Motorradtests, Reiseberichte, Motorraderlebnisse oder Motorrad-News.
+      %br
+      Besonders gute Artikel schalten wir für die Hauptkategorie frei.
+      %br
+      Bilder können nach dem Speichern hinzugefügt werden.
+
+    - if current_user.admin?
+      = f.input :active
+    = f.input :title, placeholder: "Titel deines Artikels"
+    = f.input :body,  placeholder: "Text deines Artikels, Reiseberichts, Motorradtests ...", input_html: {rows: 20}, hint: "Wer? Was? Wann? Wo? Wie? Warum? Welche Quelle? Hinweis: Das wichtigste immer zuerst!"
+
+  = actions do
+    = f.button :submit, as: :button, button_html: {class: "btn btn-success"}

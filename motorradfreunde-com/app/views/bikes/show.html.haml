@@ -1,0 +1,43 @@
+- meta @bike
+- title "Motorrad #{@bike}"
+
+.bike-info.mb-4
+  .card
+    .card-header
+      %h2 Technische Daten
+    .card-block
+      %dl.row
+        - if @bike.user
+          %dt.col-sm-4 Besitzer
+          %dd.col-sm-8= link_to @bike.user, @bike.user
+        - if @bike.hp.present?
+          %dt.col-sm-4 Leistung
+          %dd.col-sm-8== #{@bike.hp} PS
+        - if @bike.ccm.present?
+          %dt.col-sm-4 Hubraum
+          %dd.col-sm-8== #{@bike.ccm} ccm
+        - if @bike.year_of_manufacture.present?
+          %dt.col-sm-4 Baujahr
+          %dd.col-sm-8= @bike.year_of_manufacture
+        - if @bike.color.present?
+          %dt.col-sm-4 Farbe
+          %dd.col-sm-8== #{@bike.color}
+        - if @bike.description.present?
+          %dt.col-sm-4 Beschreibung
+          %dd.col-sm-8{:style => "width: 70%;"}= simple_format @bike.description
+
+      - if @bike.user == current_user
+        .btn-group.float-right
+          = link_to 'Motorrad bearbeiten', [:edit, @bike], class: 'btn btn-secondary btn-sm'
+          = link_to '#', data: { toggle: 'dropdown' }, class: 'btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split', "aria-expanded" => "false", "aria-haspopup" => "true" do
+            %span.sr-only Motorrad-Optionen
+          .dropdown-menu
+            = link_to 'Motorrad löschen', @bike, method: :delete, data: { confirm: 'Wirklich?' }, class: 'dropdown-item'
+
+
+= render partial: "images/images", object: @bike
+= render partial: "comments/comments", object: @bike
+
+
+- content_for :left do
+  = render partial: 'users/user_card_profile', object: @bike.user

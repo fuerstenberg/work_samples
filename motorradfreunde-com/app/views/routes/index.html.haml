@@ -1,0 +1,30 @@
+- if user_scope?
+  - title @user, "Motorradtouren"
+  - subtitle "Motorradtouren, Motorradrouten, Motorradstrecken"
+
+  = render partial: "users/sub_navigation", object: @user
+
+- else
+  - title "Beliebte Motorradtouren"
+  - subtitle "Motorradtouren, Motorradrouten, Motorradstrecken"
+  - map collection: :routes
+
+- if !current_user or (current_user and current_user.routes.empty?)
+  .alert.alert-info
+    = link_to 'Route anlegen', [:new, :route], class: "btn btn-success pull-right btn-lg"
+    %h4 Hier kannst du deine Motorradstrecken anlegen.
+    %p Andere Biker können deine Motorradstrecken sehen.
+
+
+.row
+  = render @routes
+
+= paginate @routes
+
+- content_for :main_action do
+  = link_to 'Route anlegen', [:new, :route], class: "btn btn-success pull-right btn-lg"
+
+- content_for :filter do
+  = link_to "Alle", :routes, class: "label #{(params[:near] or current_page?(controller: :routes)) ? 'label-default' : 'label-danger'}"
+  - if current_user and current_user.geocoded?
+    = link_to "In deiner Nähe", url_for(near: 150), class: "label #{params[:near].to_i == 150 ? 'label-danger' : 'label-default'}"

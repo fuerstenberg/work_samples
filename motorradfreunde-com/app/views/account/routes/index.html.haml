@@ -1,0 +1,15 @@
+- title do
+  %h1 Deine Motorradstrecken
+  %h2 Zeige allen wo du gern Motorrad fährst
+
+= render partial: "account/users/sub_navigation"
+
+.alert.alert-info
+  - if can? :create, Route
+    = link_to 'Route anlegen', [:new, current_user, :route], class: "btn btn-success pull-right btn-lg"
+  %h4 Hier kannst du deine Motorradstrecken anlegen.
+  %p Andere Biker können deine Motorradstrecken sehen.
+
+= render partial: "routes/route", collection: @routes
+
+= paginate @routes

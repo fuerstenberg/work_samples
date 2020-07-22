@@ -1,0 +1,59 @@
+- title "#{@ride_request.user} will Motorrad fahren..."
+- meta "#{@ride_request.user} will Motorrad fahren..."
+
+= render partial: "users/sub_navigation", object: @ride_request.user
+
+%table.table
+  %tr
+    %th Tag der Tour
+    %td
+      - if @ride_request.deleted
+        .label.label-important WURDE ABGESAGT
+      %strong{class: ("deleted" if @ride_request.deleted)}
+        = humanized_date(@ride_request.start_at.to_date)
+
+  %tr
+    %th
+      - if @ride_request.user.female?
+        Bikerin
+      - else
+        Biker
+    %td= link_to_user @ride_request.user
+
+  %tr
+    %th Alter
+    %td= @ride_request.user.age
+
+  %tr
+    %th Fahrstil
+    %td=t "tags.#{@ride_request.driving_style}"
+
+  - if @ride_request.user.bikes.present?
+    %tr
+      %th Motorrad
+      %td= @ride_request.user.bikes.to_sentence last_word_connector: " oder "
+
+  - if current_user != @ride_request.user
+    %tr
+      %th Entfernung zu dir
+      %td
+        ca.
+        %strong== #{@ride_request.distance_from(current_user, unit: :km).round rescue "-"} km
+        von dir entfernt
+
+  %tr
+    %th Beschreibung
+    %td
+      Ich will Motorrad fahren. Wer kommt mit?
+
+  %tr
+    %th
+    %td
+      %a.send_facebook_message.btn.btn-primary{href: "#", style: "display: none;"} Facebook-Freunde einladen
+
+= render partial: "comments/comments", object: @ride_request, locals: { headline: "Antworten", comment_text: "Schreib etwas, z.Bsp.: Ich bin dabei. Wann und wo geht es los? ...", btn_text: "Antworten" }
+
+
+- content_for :main_action do
+  - if @ride_request.user == current_user
+    = link_to "Löschen", @ride_request, method: :delete, data: {confirm: "Wirklich löschen?"}, class: "btn btn-danger"

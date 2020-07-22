@@ -1,0 +1,10 @@
+= render layout: "layouts/mailer_layout" do
+  %h1 eMail Bestätigung
+
+  %p
+    == Hallo #{@resource.name},
+    %br
+    du hast dich bei Motorradfreunde.com angemeldet oder deine eMail geändert.
+    Um dein Benutzerkonto oder die Änderungen zu aktivieren, klicke bitte auf folgenden Link.
+
+  %p= link_to 'Aktivieren', confirmation_url(@resource, confirmation_token: @token)

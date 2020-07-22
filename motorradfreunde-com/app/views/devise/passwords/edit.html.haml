@@ -1,0 +1,9 @@
+- title "Passwort vergessen"
+- hide_social_media_buttons
+
+= form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: "form" } do |f|
+  .form-group= f.hidden_field :reset_password_token
+  .form-group= f.password_field :password,              required: true, placeholder: true, class: 'form-control' , autofocus: true
+  .form-group= f.password_field :password_confirmation, required: true, placeholder: true, class: 'form-control'
+  = f.submit "Passwort ändern", class: 'btn btn-primary'
+  = render("links")

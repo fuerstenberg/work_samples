@@ -1,0 +1,27 @@
+%html
+  %head
+    %style{:type => "text/css"}
+      \ h1{
+      \   font-size:15px;
+      \   letter-spacing:-1px;}
+      \ p{font-size:12px;}
+      \ a{color:#03D;}
+  %body{:style => "background-color:#EEE;font-family:'lucida grande',tahoma,verdana,arial,sans-serif;font-size:10px;"}
+    #mail{:style => "background-color:#BA1009;margin: 20px;width:500px;"}
+      #head{:style => "background-color:#BA1009;padding: 0 20px;"}
+        %a#logo{:href => "https://www.motorradfreunde.com", :target => "_blank", :alt => "motorradfreunde.com - Deine Motorradseite"}
+          %img{:src => "http://www.motorradfreunde.com/images/style/logo_mf.gif", :alt => "motorradfreunde.com - Deine Motorradseite"}
+
+      #content{:style => "background-color:#FFF;padding:10px 20px;"}
+        = yield
+
+      #foot{:style => "background-color:#BA1009;padding:20px 20px;color:#999;color:#EEE;"}
+
+      - if false
+        Falls Du keine eMails mehr bekommen möchtest,
+        %br
+        dann kannst Du das unter Einstellungen
+        im Reiter
+        %a{:href => "http://www.motorradfreunde.com/biker-motorradfahrer/user/edit?tab=benachrichtigungen", :style => "color:#EEE;"}<
+          Benachrichtigungen
+        abstellen.

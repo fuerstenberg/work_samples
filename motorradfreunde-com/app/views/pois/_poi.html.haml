@@ -1,0 +1,35 @@
+- cache ["pois/poi", poi] do
+  .col-12.col-sm-6.col-md-4.mb-4
+    = link_to poi, class: 'card poi-card', id: dom_id(poi, :card) do
+      = image_tag poi.avatar(:fill_600_600), class: "card-img-top img-fluid", alt: poi
+      .card-block.poi-card__block
+        %h2.card-title= poi
+        -# %p.card-text
+        -# - if poi.types.present?
+        -#   %dt Branche
+        -#   %dd
+        -#     - poi.types[0,3].each do |tag|
+        -#       %span.label.label-important= tag.name
+        = render partial: 'addresses/address_long', object: poi
+
+        %dl
+          - if poi.types.present?
+            %dt Branche
+            %dd
+              - poi.types[0,3].each do |tag|
+                %span.label.label-important= tag.name
+
+          - if poi.geocoded?
+            %dt Entfernung
+            %dd
+              - distance_from_me_to poi
+
+      .card-footer
+        - if poi.impressions_count
+          %small.text-muted
+            = icon 'eye'
+            = poi.impressions_count
+        - if poi.images.size > 1
+          %small.text-muted
+            = icon 'picture-o'
+            = poi.images.size

@@ -1,0 +1,5 @@
+<%- if flash[:alert] %>
+  $("#timeline_event_<%= @previous_timeline_event.id %>").prepend('<%=escape_javascript render(:partial => "layouts/flash_message", :locals => {:alert => flash[:alert]}) %>')
+<%- else %>
+  $("#timeline_event_<%= @previous_timeline_event.id %>").replaceWith('<%=escape_javascript render(:partial => "dashboards/user_greeted", :object => @timeline_event) %>').hide().fadeIn();
+<%- end %>

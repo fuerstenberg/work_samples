@@ -1,0 +1,46 @@
+%nav.main-navigation.article-reader-navigation.navbar.navbar-toggleable-sm.fixed-top.navbar-inverse.bg-primary.app-navbar
+  %button.navbar-toggler.navbar-toggler-right.hidden-md-up{"aria-controls" => "navbarResponsive", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarResponsive", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  = link_to '#', class: "main-navigation__brand navbar-brand back" do
+    = image_tag 'logo_white_hard_shadow', title: 'Motorradfreunde.com - Deine Motorrad-Community'
+    %span.navbar-brand-text.sr-only Motorradfreunde.com - Deine Motorrad-Community
+
+  #navbarResponsive.collapse.navbar-collapse
+    %ul.navbar-nav.mr-auto
+      %li.nav-item<>
+        = link_to '#', class: 'nav-link back', title: "Zurück zu Motorradfreunde.com" do
+          Zurück zu Motorradfreunde.com
+
+      - if prev_article = @linked_article.prev
+        %li.nav-item<>
+          = link_to prev_article, class: 'nav-link', title: "Zurück zu Motorradfreunde.com" do
+            Vorheriger Artikel
+
+      - if next_article = @linked_article.next
+        %li.nav-item<>
+          = link_to next_article, class: 'nav-link', title: "Nächster Artikel" do
+            Nächster Artikel
+
+    %ul.navbar-nav.float-right
+      %li.nav-item<>
+        = link_to '#', class: 'nav-link close', title: "iFrame entfernen" do
+          %span{ 'aria-hidden' => "true"} &times;
+
+:javascript
+  // go back to Motorradfreunde
+  var backElements = document.getElementsByClassName('back');
+  var myBackHandler = function(){
+    window.close();
+  }
+  for (var i = 0; i < backElements.length; i++) {
+    backElements[i].addEventListener('click', myBackHandler, false);
+  }
+
+  // remove iframe
+  var closeElements = document.getElementsByClassName('close');
+  var myBackHandler = function(){
+    document.location.href = document.getElementsByName('article')[0].src;
+  }
+  for (var i = 0; i < closeElements.length; i++) {
+    closeElements[i].addEventListener('click', myBackHandler, false);
+  }

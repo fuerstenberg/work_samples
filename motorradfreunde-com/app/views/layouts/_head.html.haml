@@ -1,0 +1,44 @@
+%title
+  - if content_for?(:meta_title)
+    = yield :meta_title
+    \-
+  Motorradfreunde.com
+
+= render partial: 'ads/google_vignetten_ads'
+
+%meta{:name => "Title",                  :content => "#{yield :meta_title} #{@user || current_user || "Motorradfreunde.com - der Bikertreff für Motorradfreunde"}"}
+%meta{:name => "Author",                 :content => "René Fürstenberg"}
+%meta{:name => "Publisher",              :content => "René Fürstenberg"}
+%meta{:name => "Copyright",              :content => "René Fürstenberg"}
+%meta{:name => "Keywords",               :content => "Motorrad, Motorräder, Biker, Bikertreff, Motorradfreunde, Motorrad fahren, #{yield :meta_keywords}"}
+%meta{:name => "Description",            :content => (content_for?(:meta_description) ? yield(:meta_description) : "Motorradfreunde.com ist dein Bikertreff im Internet, finde Biker und Motorradfreunde in deiner Nähe und rede mit ihnen über das Thema Motorräder und Motorrad fahren.")}
+%meta{:name => "Abstract",               :content => "Motorradfreunde.com ist dein Bikertreff im Internet, finde Biker und Motorradfreunde in deiner Nähe und rede mit ihnen über das Thema Motorräder und Motorrad fahren."}
+%meta{:name => "Robots",                 :content => "all"}
+%meta{:name => "viewport",               :content => "width=device-width, initial-scale=1.0"}
+%meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge" }
+
+%meta{:property => "fb:admins",        :content => "1531433697" }
+%meta{:property => "fb:app_id",        :content => Rails.application.secrets.facebook_key }
+%meta{:property => "og:title",         :content => "Motorradfreunde.com - der Bikertreff für Motorradfreunde" }
+%meta{:property => "og:type",          :content => "website" }
+%meta{:property => "og:url",           :content => "http://www.motorradfreunde.com" }
+%meta{:property => "og:image",         :content => "http://www.motorradfreunde.com/assets/logos/motorradfreunde_com_75_75.png" }
+%meta{:property => "og:site_name",     :content => "Motorradfreunde.com" }
+%meta{:property => "og:description",   :content => "Motorradfreunde.com ist dein Bikertreff im Internet, finde Biker und Motorradfreunde in deiner Nähe und rede mit ihnen über das Thema Motorräder und Motorrad fahren." }
+
+%meta{:property => 'current_user',     :content => (current_user.id if current_user)}
+=# javascript_include_tag "http://errors.fuerstenberg.biz/javascripts/notifier.js"
+
+= csrf_meta_tags
+
+= include_gon
+
+/[if IE]
+  = javascript_include_tag "modernizr"
+
+= stylesheet_link_tag "application", :media => "all"
+
+/[if IE lt 9]
+  = stylesheet_link_tag "ie", :media => "all"
+
+%link{:href => "//fonts.googleapis.com/css?family=Open+Sans:400,300,600", :rel => "stylesheet", :type => "text/css"}/

@@ -1,0 +1,22 @@
+- cache ["routes/route", route], expires_in: 60.minutes do
+  .col-12.col-sm-6.col-md-4.mb-4
+    = link_to route, title: route, class: "card route-card", id: dom_id(route, :card) do
+      = image_tag route.preview(:fill_600_600), class: "card-img-top img-fluid", alt: route
+      .card-block.route-card__block
+        %h2.card-title= route
+        = render partial: 'users/small', object: route.user, locals: { link: false }
+        %dl.row
+          - if route.start_address.present?
+            %dt.col-sm-6 Start
+            %dd.col-sm-6= route.start_address
+          - if route.end_address.present?
+            %dt.col-sm-6 Ziel
+            %dd.col-sm-6= route.end_address
+          %dt.col-sm-6 Länge
+          %dd.col-sm-6== #{route.distance_in_km} km
+
+      .card-footer
+        - if route.impressions_count
+          %small.text-muted
+            = icon 'eye'
+            = route.impressions_count

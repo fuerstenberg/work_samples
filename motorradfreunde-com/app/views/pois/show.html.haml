@@ -1,0 +1,43 @@
+- title @poi
+- subtitle @poi
+- meta @poi
+- map highlight_item: @poi
+
+= render partial: 'general',           object: @poi
+= render partial: 'details',           object: @poi
+= render @poi.feeds
+= render partial: 'bike_builder',      object: @poi
+= render partial: 'dealer',            object: @poi
+= render partial: 'hotel',             object: @poi
+= render partial: 'magazin',           object: @poi
+= render partial: 'mountain_pass',     object: @poi
+= render partial: 'rental_company',    object: @poi
+= render partial: 'shop',              object: @poi
+= render partial: 'tour_operator',     object: @poi
+= render partial: 'vendor',            object: @poi
+= render partial: 'workshop',          object: @poi
+= render partial: 'contact',           object: @poi
+= render partial: 'addresses/address', object: @poi
+
+- if @poi.geocoded?
+  %tr
+    %th GPS
+    %td== #{@poi.to_coordinates[0]}, #{@poi.to_coordinates[1]}
+
+  %tr
+    %th Entfernung zu dir
+    %td
+      - distance_from_me_to @poi
+
+= render partial: "images/images", object: @poi
+
+- content_for :main_action do
+  - if can? :update, @poi
+    = link_to "POI bearbeiten", [:edit, @poi], :class => "btn btn-success btn-large"
+
+  - if can? :destroy, @poi
+    = link_to "POI löschen", @poi, method: :delete, data: { confirm: 'Wirklich löschen?' } , :class => "btn btn-danger btn-large"
+
+- content_for :right do
+  - if @poi.premium? and @poi.website.present?
+    = link_to "Webseite besuchen", @poi.website, class: 'btn btn-outline-primary', target: :_blank

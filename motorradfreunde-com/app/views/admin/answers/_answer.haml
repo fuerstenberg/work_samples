@@ -1,0 +1,12 @@
+%tr
+  %td
+    = truncate answer.body
+    %small
+      Created at:
+      =l answer.created_at
+    &mdash;
+    %small
+      Updated at:
+      =l answer.updated_at
+    = link_to answer.user, [:admin, answer.user]
+  %td= link_to "Löschen", [:admin, answer], method: :delete, data: { confirm: "Wirklich?" }, class: "btn btn-danger btn-xs"

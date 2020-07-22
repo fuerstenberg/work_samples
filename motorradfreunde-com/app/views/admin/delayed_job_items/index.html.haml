@@ -1,0 +1,8 @@
+= title "Jobs (#{DelayedJobItem.count})"
+
+- content_for :main_action do
+  = link_to "Delete all jobs", [:destroy_all, :admin, :delayed_job_items], :method => :delete, :data => {:confirm => "Really?"}, :class => "btn btn-danger"
+
+%table.table.table-striped= render @delayed_job_items
+
+= paginate @delayed_job_items

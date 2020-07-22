@@ -1,0 +1,51 @@
+- title @feed.to_s
+
+- content_for :actions do
+  = link_to "Übersicht", [:admin, :feeds], class: 'btn btn-outline-secondary'
+  = link_to "Bearbeiten", [:edit, :admin, @feed], class: 'btn btn-outline-secondary'
+  = link_to "Aktualisieren", [:admin, @feed], method: :put, class: 'btn btn-outline-success'
+  = link_to "Löschen", [:admin, @feed], method: :delete, class: 'btn btn-outline-danger', data: { confirm: "Wirklich?" }
+
+%table.table
+  %tr
+    %th Title
+    %td= @feed.title
+  %tr
+    %th Feed_url
+    %td= link_to @feed.feed_url, @feed.feed_url, target: :blank
+  %tr
+    %th Url
+    %td= link_to @feed.url, @feed.url, target: :blank
+  %tr
+    %th Copyright
+    %td= @feed.copyright
+  %tr
+    %th Description
+    %td= @feed.description
+  - if @feed.image_url.present?
+    %tr
+      %th Image
+      %td= image_tag @feed.image_url
+  %tr
+    %th Image_url
+    %td= @feed.image_url
+  %tr
+    %th Image_title
+    %td= @feed.image_title
+  %tr
+    %th Image_link
+    %td= @feed.image_link
+  %tr
+    %th Language
+    %td= @feed.language
+  %tr
+    %th Build_at
+    %td= @feed.build_at
+  %tr
+    %th Published_at
+    %td= @feed.published_at
+  %tr
+    %th Linked articles
+    %td= @feed.linked_articles.count
+
+%table.table= render @feed.linked_articles

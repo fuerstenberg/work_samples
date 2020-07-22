@@ -1,0 +1,10 @@
+- cache ["forums/forum", forum], expires_in: 10.minutes do
+  %tr[forum]
+    %td
+      %h4= link_to forum, [forum, :questions]
+      %small.text-muted
+        == #{forum.questions.count} Fragen
+        &bull;
+        == #{forum.answers.count} Antworten
+        &bull;
+        == #{forum.comments.count} Kommentare

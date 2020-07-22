@@ -1,0 +1,33 @@
+- meta @route
+- title @route
+- map
+
+.user-info.mb-4
+  .card
+    .card-header
+      %h2 Beschreibung
+    .card-block
+
+      %dl.row
+        / %tr
+        /   %th Start
+        /   %td= @route.start_address
+
+        / %tr
+        /   %th Ziel
+        /   %td= @route.end_address
+
+        %dt.col-sm-4 Name der Route
+        %dd.col-sm-8= @route
+
+        %dt.col-sm-4 Beschreibung
+        %dd.col-sm-8= @route.description
+
+        %dt.col-sm-4 Länge
+        %dd.col-sm-8== #{@route.distance_in_km} km
+
+=# render partial: "images/images", object: @route
+= render partial: "comments/comments", object: @route
+
+- content_for :left do
+  = render partial: 'users/user_card_profile', object: @route.user

@@ -1,0 +1,7 @@
+= render layout: "layouts/activity", object: activity, locals: { activity_title: "verfolgt nun die Aktivitäten von:" } do
+  .media
+    = link_to activity.recipient, class: "media-left" do
+      = image_tag activity.recipient.avatar(:fill_200_200), class: "img-circle", alt: activity.recipient
+    .media-body
+      .media-heading
+        = link_to activity.recipient, activity.recipient

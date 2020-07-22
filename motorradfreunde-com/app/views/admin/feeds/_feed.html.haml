@@ -1,0 +1,27 @@
+- if feed_counter == 0
+  %tr
+    %th Bild
+    %th Name
+    %th Published at
+    %th Last build at
+    %th Feed items
+    %th
+    %th
+    %th
+
+%tr[feed]
+  %td= feed.image_url #, link: [:admin, feed]
+  %td
+    = link_to feed, [:admin, feed]
+    %br
+    URL:
+    = feed.url
+    %br
+    Feed-URL:
+    = feed.feed_url
+  %td= feed.published_at
+  %td= feed.build_at
+  %td= feed.linked_articles.count
+  %td= link_to "Aktualisieren", [:admin, feed],        class: 'btn btn-outline-success btn-sm', method: :put
+  %td= link_to "bearbeiten",    [:edit, :admin, feed], class: 'btn btn-outline-success btn-sm'
+  %td= link_to "löschen",       [:admin, feed],        class: 'btn btn-outline-danger btn-sm', method: :delete, data: {confirm: "Wirklich?"}

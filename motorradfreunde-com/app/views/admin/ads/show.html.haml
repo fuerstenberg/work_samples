@@ -1,0 +1,43 @@
+- title @ad
+
+- content_for :action do
+  = link_to "Zur Werbeübersicht", [:admin, :ads], class: :btn
+  = link_to "Zum Kunden", [:admin, @ad.customer], class: :btn
+  = link_to 'Bearbeiten', [:edit, :admin, @ad.customer, @ad], :class => "btn btn-primary"
+  - if @ad.active?
+    = link_to 'deaktivieren', admin_ad_url(customer_id: @ad.customer, id: @ad, ad: {active: "0"}), class: "btn btn-danger", method: :put
+  - else
+    = link_to 'aktivieren', admin_ad_url(customer_id: @ad.customer, id: @ad, ad: {active: "1"}), class: "btn btn-success", method: :put
+  = link_to 'Löschen', [:admin, @ad.customer, @ad], :method => :delete, :data => {:confirm => "Wirklich löschen?"}, :class => "btn btn-danger"
+
+%table.table.table-striped
+  %tr
+    %th aktiv
+    %td= @ad.active? ? 'ja' : 'nein'
+  %tr
+    %th Werbenetzwerk
+    %td= @ad.from_affiliate? ? 'ja' : 'nein'
+  %tr
+    %th Titel
+    %td= @ad.title
+  %tr
+    %th Untertitel
+    %td= @ad.subtitle
+  %tr
+    %th URL
+    %td= link_to @ad.url, @ad.url if @ad.url.present?
+  %tr
+    %th Target
+    %td= @ad.target
+  %tr
+    %th HTML
+    %td
+      %code= @ad.html
+  %tr
+    %th Javascript
+    %td
+      %code= @ad.javascript
+  %tr
+    %th Description
+    %td= @ad.description
+

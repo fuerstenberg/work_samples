@@ -1,0 +1,7 @@
+== Hallo #{@message.received_messageable},
+
+== #{@message.sent_messageable} hat Dir eine Nachricht auf motorradfreunde.com gesendet.
+
+Klicke bitte folgenden Link an, um die Nachricht zu lesen:
+
+= link_to @message, "http://www.motorradfreunde.com/account/messages/#{@message.sent_messageable_id}"

@@ -1,0 +1,27 @@
+<% if @comment.valid? %>
+
+  <% if @comment.commentable.is_a?(User) %>
+
+    <% timeline_event = @comment.timeline_events.first %>
+    $('textarea#comment_body').val('');
+    $('#timeline_form').after('<%=escape_javascript render(partial: "dashboards/#{timeline_event.event_type}", object: timeline_event) %>').hide().fadeIn();
+
+  <% elsif @comment.commentable.is_a?(Comment) %>
+
+    $('textarea#comment_body').val('');
+    // $('.comments#comment_<%= @comment.commentable_id %> .new_comment').before('<%=escape_javascript render(partial: "comments/comment", object: @comment) %>').hide().fadeIn();
+    $('.new_comment').before('<%=escape_javascript render(partial: "comments/comment", object: @comment) %>').hide().fadeIn();
+
+  <% elsif @comment.commentable.is_a?(Answer) %>
+
+    $('textarea#comment_body').val('');
+    $('#media_answer_<%= @comment.commentable_id %> .new_media_comment').before('<%=escape_javascript render(partial: "comments/comment", object: @comment) %>').hide().fadeIn();
+
+  <% else %>
+
+    $('textarea#comment_body').val('');
+    $('.new_media_comment').before('<%=escape_javascript render(partial: "comments/comment", object: @comment) %>').hide().fadeIn();
+
+  <% end %>
+
+<% end %>

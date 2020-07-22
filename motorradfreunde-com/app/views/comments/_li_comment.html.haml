@@ -1,0 +1,16 @@
+- comment = li_comment
+
+- unless comment.new_record?
+  - cache ["comments/li_comment", comment], expires_in: 10.minutes do
+    %li.item[comment]
+      = preview comment.user
+      .item_content_container
+        .content
+          .header
+            - if current_user == comment.user or (comment.commentable.is_a?(Comment) and comment.commentable.commentable == current_user)
+              .actions= link_to raw("&times;"), comment, :method => :delete, :class => 'close', :remote => true, :title => "entfernen"
+            = link_to_user comment.user if comment.user
+            %small
+              %i.icon-time<>
+              == vor #{time_ago_in_words comment.updated_at}
+          = comment.body_html

@@ -1,0 +1,12 @@
+- title do
+  %h1 Deine Garage
+  %h2 Zeige allen dein aktuelles Motorrad und deine bisherigen Motorräder
+
+
+-# = render partial: "account/users/sub_navigation"
+= render partial: "account/bikes/animation_message"
+= render partial: "bikes/bike", collection: @bikes
+
+- content_for :actions do
+  - if can? :create, Bike
+    = link_to "Motorrad anlegen", [:new, current_user, :bike], :class => "btn btn-success btn-success btn-xs"

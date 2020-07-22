@@ -1,0 +1,23 @@
+- title "Motorradforum"
+- subtitle "Diskutiere hier mit anderen Bikern über unser Lieblingsthema - Motorräder"
+- meta "Motorradforum", "Diskutiere hier mit anderen Bikern über unser Lieblingsthema - Motorräder"
+
+- if !current_user or current_user.new?
+  .alert.alert-info
+    = link_to "Neuer Eintrag", [:new, :forum, :question], class: "btn btn-success btn-lg pull-right"
+    %h4 Hier kannst du dich mit anderen Bikern über Motorradthemen austauschen.
+    Stelle einfach eine Frage zum schönsten Thema der Welt: Motorradfahren.
+    %br
+    Andere Biker werden dir antworten, so findest du Motorradfreunde.
+
+
+%hr
+
+%ul.list-unstyled.questions
+  - @questions.each_with_index do |question, index|
+    = render question
+
+= paginate @questions
+
+- content_for :main_action do
+  = link_to "Neuer Eintrag", [:new, :forum, :question], class: "btn btn-success btn-large"

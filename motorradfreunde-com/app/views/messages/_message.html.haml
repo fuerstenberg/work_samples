@@ -1,0 +1,27 @@
+-# - cache ["messages/message", message, current_user] do
+-#   %div[message]{ data: data_user_id(message.sender) }
+-#     = image_tag message.sender.avatar(:fill_200_200), alt: message.sender, class: 'message__avatar'
+-#     .message__content
+-#       .message__head
+-#         .message__sender= link_to message.sender, message.sender
+-#         .message__created-at
+-#           - time_to_words message.created_at
+-#
+-#       .message__body
+-#         = simple_format message.body
+
+- iam_the_sender = message.sender == current_user
+
+- cache ["messages/message", message, current_user] do
+  %li.chats__message{ class: (iam_the_sender ? 'chats__message--from-me' : ''), data: data_user_id(message.sender) }
+    - unless iam_the_sender
+      = image_tag message.sender.avatar(:fill_200_200), alt: message.sender, class: 'chats__message-avatar'
+    .media-body
+      .media-body-text
+        = simple_format message.body
+      .media-footer
+        %small.text-muted
+          = link_to message.sender, message.sender
+          - time_to_words message.created_at
+    - if iam_the_sender
+      = image_tag message.sender.avatar(:fill_200_200), alt: message.sender, class: 'chats__message-avatar'

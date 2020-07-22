@@ -1,0 +1,25 @@
+- meta "Private Nachrichten"
+- if @user
+  - title "Deine privaten Nachrichten mit #{@user}"
+- else
+  - title "Deine privaten Nachrichten"
+
+- hide_social_media_buttons
+- hide_footer
+- body_html_options class: 'chats'
+
+- content_for :chats do
+  .chats__conversations-list= render partial: 'conversations/conversation', collection: @conversations, locals: { active_conversation: @conversation }
+
+- content_for :form do
+  = render partial: "messages/form", object: @conversation
+
+- if @conversation
+  %ul.media-list.media-list-conversation
+    = render @conversation.messages.order(created_at: :desc) || []
+
+- elsif !@conversation and @conversations.size == 0
+  .alert.alert-info.m-3 Du hast noch keine Nachrichten, schreib doch einfach mal einem Biker in deiner Nähe eine Nachricht.
+
+- else
+  .alert.alert-info.m-3 Bitte wähle links ein Gespräch aus.

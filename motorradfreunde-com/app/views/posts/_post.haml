@@ -1,0 +1,20 @@
+- cache ["posts/post", post], expires_in: 4.hours do
+  = link_to post, title: post, class: "card post-card", id: dom_id(post, :card) do
+    = image_tag post.preview(:limit_1000_1000), class: "card-img-top img-fluid", alt: post
+    .card-block.post-card__block
+      %h2.card-title= post
+      %p= truncate post.description, length: 300
+
+    .card-footer
+      - if post.impressions_count
+        %small.text-muted
+          = icon 'eye'
+          = post.impressions_count
+      - if post.images.size > 1
+        %small.text-muted
+          = icon 'picture-o'
+          = post.images.size
+      - if post.published_at.present?
+        %small.text-muted
+          = icon 'date-o'
+          =l post.published_at

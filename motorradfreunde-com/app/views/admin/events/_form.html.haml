@@ -1,0 +1,27 @@
+
+
+= simple_form_for [:admin, form] do |f|
+  = body do
+    = fieldset "Termin" do
+      = f.input :title, placeholder: "Bikertreffen in Berlin"
+
+      = f.input :hide_time
+      = f.input :start_at, start_year: Date.today.year, end_year: (Date.today.year + 1), prompt: true, order: [:day, :month, :year], include_blank: false
+      = f.input :end_at,   start_year: Date.today.year, end_year: (Date.today.year + 1), prompt: true, order: [:day, :month, :year], include_blank: false
+
+      = f.input :url, placeholder: "http://www.__________________.de", hint: "Muss nicht ausgefüllt werden."
+
+    = fieldset "Beschreibung" do
+      = f.input :description, :input_html => {:rows => 10, :class => :span7}
+
+    = fieldset "Treffpunkt" do
+      = f.input :meeting_point, placeholder: "Spanische Allee 180, 14129 Berlin, Deutschland", hint: "Gib eine genaue Adresse ein oder ziehe den Marker an den Ort."
+
+      #mapable{"data-lat-field" => "#event_lat", "data-lng-field" => "#event_lng", "data-geocode-address" => "#event_meeting_point", "data-draggable" => "true", :style => "height: 400px; width: 100%"}
+
+      = f.input :latitude
+      = f.input :longitude
+
+  = actions do
+    = f.button :submit, as: :button, button_html: {class: "btn btn-success"}
+    = f.action :cancel, as: :link,   button_html: {class: "btn"}

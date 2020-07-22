@@ -1,0 +1,23 @@
+= form_for form, html: { multipart: true, role: :form } do |f|
+
+  .form-group.row
+    = f.label :title, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :title, class: 'form-control', placeholder: true
+
+  .form-group.row
+    = f.label :source, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :source, class: 'form-control', placeholder: true
+
+  .form-group.row
+    = f.label :http, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.url_field :http, class: 'form-control', placeholder: true
+
+  .actions
+    - if f.object.new_record?
+      = link_to 'Abbrechen' , vendor_bikes_path, class: 'btn btn-secondary'
+    - else
+      = link_to 'Abbrechen' , vendor_bike_path(f.object.vendor, f.object), class: 'btn btn-secondary'
+    = f.submit class: 'btn btn-primary'

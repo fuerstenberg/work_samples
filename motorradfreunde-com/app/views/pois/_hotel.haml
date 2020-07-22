@@ -1,0 +1,70 @@
+- poi = hotel
+- if poi.is_hotel?
+  %dl.row
+    - if poi.hotel_typ.present?
+      %dt.col-sm-3.hotel_typ= poi.hotel_typ
+      %dd.col-sm-9
+        %dl
+          - if poi.hotel_anzahl_sterne > 0
+            %dt.hotel_anzahl_sterne= t 'mongoid.attributes.poi.hotel_anzahl_sterne'
+            %dd.hotel_anzahl_sterne= poi.hotel_anzahl_sterne
+
+          - if poi.hotel_anzahl_appartments > 0
+            %dt.hotel_anzahl_appartments= t 'mongoid.attributes.poi.hotel_anzahl_appartments'
+            %dd.hotel_anzahl_appartments= poi.hotel_anzahl_appartments
+
+          - if poi.hotel_anzahl_betten > 0
+            %dt.hotel_anzahl_betten= t 'mongoid.attributes.poi.hotel_anzahl_betten'
+            %dd.hotel_anzahl_betten= poi.hotel_anzahl_betten
+
+          - if poi.hotel_anzahl_doppelzimmer > 0
+            %dt.hotel_anzahl_doppelzimmer= t 'mongoid.attributes.poi.hotel_anzahl_doppelzimmer'
+            %dd.hotel_anzahl_doppelzimmer= poi.hotel_anzahl_doppelzimmer
+
+          - if poi.hotel_anzahl_einzelzimmer > 0
+            %dt.hotel_anzahl_einzelzimmer= t 'mongoid.attributes.poi.hotel_anzahl_einzelzimmer'
+            %dd.hotel_anzahl_einzelzimmer= poi.hotel_anzahl_einzelzimmer
+
+          - if poi.hotel_anzahl_mehrbettzimmer > 0
+            %dt.hotel_anzahl_mehrbettzimmer= t 'mongoid.attributes.poi.hotel_anzahl_mehrbettzimmer'
+            %dd.hotel_anzahl_mehrbettzimmer= poi.hotel_anzahl_mehrbettzimmer
+
+          - if poi.hotel_anzahl_zimmer > 0
+            %dt.hotel_anzahl_zimmer= t 'mongoid.attributes.poi.hotel_anzahl_zimmer'
+            %dd.hotel_anzahl_zimmer= poi.hotel_anzahl_zimmer
+
+    - if poi.hotel_lage.present?
+      %dt.col-sm-3.hotel_lage= t 'mongoid.attributes.poi.hotel_lage'
+      %dd.col-sm-9.hotel_lage=simple_format poi.hotel_lage
+
+  %dl.row
+    %dt.col-sm-3 Ausstattung
+    %dd.col-sm-9
+      %ul.list-unstyled
+        - Poi.hotel_ausstattung_attribute_names.each do |attribute|
+          - if poi[attribute]
+            %li{ class: attribute }=t "mongoid.attributes.poi.#{attribute}"
+
+  %dl.row
+    %dt.col-sm-3 Essen
+    %dd.col-sm-9
+      %ul.list-unstyled
+        - Poi.hotel_essen_attribute_names.each do |attribute|
+          - if poi[attribute]
+            %li{ class: attribute }=t "mongoid.attributes.poi.#{attribute}"
+
+  %dl.row
+    %dt.col-sm-3 Service
+    %dd.col-sm-9
+      %ul.list-unstyled
+        - Poi.hotel_service_attribute_names.each do |attribute|
+          - if poi[attribute]
+            %li{ class: attribute }=t "mongoid.attributes.poi.#{attribute}"
+
+  %dl.row
+    %dt.col-sm-3 Zimmer
+    %dd.col-sm-9
+      %ul.list-unstyled
+        - Poi.hotel_zimmer_attribute_names.each do |attribute|
+          - if poi[attribute]
+            %li{ class: attribute }=t "mongoid.attributes.poi.#{attribute}"

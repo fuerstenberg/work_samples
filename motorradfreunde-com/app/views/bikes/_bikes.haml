@@ -1,0 +1,14 @@
+- user = bikes
+
+.bikes.my-5
+  .row
+    .col-12
+      %h2 Motorräder
+      %hr
+  .row
+    = render user.bikes
+
+  - if user == current_user
+    .row
+      .col-12
+        = link_to 'Motorrad anlegen', [:new, :bike], class: 'btn btn-outline-primary'

@@ -1,0 +1,18 @@
+- timeline_event = joyride_created
+
+.main_item.joyride_created[timeline_event]
+  = preview timeline_event.actor, link: timeline_event.subject
+  .content_box
+    .head
+      == #{timeline_event.actor} #{link_to "will Motorrad fahren", timeline_event.subject}
+    .content
+      - if timeline_event.subject.is_a?(Event)
+        =l timeline_event.subject.start_at
+        %br
+        = truncate timeline_event.subject.description, :length => 200
+    .foot
+      == vor #{time_ago_in_words timeline_event.created_at}
+
+  %ul.list.comments
+    = render :partial => "comments/comment", :collection => timeline_event.subject.comments
+    = render :partial => "comments/form",    :object     => timeline_event.subject.comments.build(:user => current_user)

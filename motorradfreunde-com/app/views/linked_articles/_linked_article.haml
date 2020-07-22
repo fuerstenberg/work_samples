@@ -1,0 +1,35 @@
+- cache ["linked_articles/linked_article", linked_article], expires_in: 4.hours do
+  = link_to article_reader_url(linked_article), title: linked_article, class: "card linked_article-card", id: dom_id(linked_article, :card), target: 'reader' do
+    = image_tag linked_article.preview(:limit_800_800), class: "card-img-top img-fluid", alt: linked_article
+    .card-block.linked_article-card__block
+      %h2.card-title= linked_article
+      -# = render partial: 'users/small', object: linked_article.user, locals: { link: false }
+      %p= truncate linked_article.description, length: 300
+
+    .card-footer
+      - if linked_article.impressions_count
+        %small.text-muted
+          = icon 'eye'
+          = linked_article.impressions_count
+      - if linked_article.images.size > 1
+        %small.text-muted
+          = icon 'picture-o'
+          = linked_article.images.size
+      - if linked_article.published_at.present?
+        %small.text-muted
+          = icon 'date-o'
+          =l linked_article.published_at
+
+// Regardless of the context, there seems to be some details that are always important:
+/
+// Title the linked_article
+// Short description
+// Publication date
+// Call out to action (read more, continue reading, see more, etc.)
+// A series of details occur often, but are not present in all lists.
+/
+// Category label
+// Thumbnail image
+// Comment count
+// Picture count (in gallery)
+// Author

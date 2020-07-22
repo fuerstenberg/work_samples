@@ -1,0 +1,12 @@
+= render :layout => "layouts/mailer_layout" do
+  %h1 Neue Nachricht erhalten auf motorradfreunde.com
+
+  %p
+    == Hallo #{@message.received_messageable},
+    %br/
+    == #{@message.sent_messageable} hat Dir eine Nachricht auf motorradfreunde.com gesendet.
+    %br/
+    %br/
+    Klicke bitte folgenden Link an, um die Nachricht zu lesen:
+    %br/
+    = link_to "Nachricht anzeigen", "https://www.motorradfreunde.com/account/messages/#{@message.sent_messageable_id}"

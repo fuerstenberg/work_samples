@@ -1,0 +1,34 @@
+- content_for :meta_title, @message
+
+= render partial: "account/users/sub_navigation"
+
+- content_for :layout_title do
+  = @message
+  %small=l @message.created_at
+
+= render :layout => 'users/layout', :object => current_user do
+  .row
+    .span3
+      %address
+        %strong Von:
+        %br
+        = link_to @message.sender, @message.sender
+    .span3
+      %address
+        %strong An:
+        %br
+        = link_to @message.receiver, @message.receiver
+    .span3
+      %strong
+        geschrieben vor
+        = distance_of_time_in_words_to_now @message.created_at
+
+    .span9
+      %blockquote
+        %p= @message.body
+
+
+%ul.thumbnails
+  %li.span1
+    = link_to @message.sender, :class => :thumbnail do
+      = image_tag @message.sender.avatar(:limit_800_800)

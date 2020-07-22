@@ -1,0 +1,24 @@
+%h1= link_to @question.title, question_url(@question )
+
+%table
+  %tr
+    %th title
+    %td= @question.title
+  %tr
+    %th user
+    %td= link_to @question.user, user_url(@question.user)
+  %tr
+    %th body_html
+    %td= @question.body_html
+  %tr
+    %th highlight
+    %td= @question.highlight
+  %tr
+    %th answers_count
+    %td= @question.answers_count
+  %tr
+    %th created_at
+    %td= @question.created_at
+  %tr
+    %th updated_at
+    %td= @question.updated_at

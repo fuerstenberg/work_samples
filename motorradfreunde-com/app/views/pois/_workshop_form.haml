@@ -1,0 +1,73 @@
+- f = workshop_form
+
+.is_workshop_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Werkstatt
+
+  .form-group.row
+    = f.label :werkstatt_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :werkstatt_beschreibung, class: 'form-control'
+
+  .form-group.row
+    = f.label :werkstatt_marken, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :werkstatt_marken, class: 'form-control'
+
+  .form-group.row
+    = f.label 'Services', class: 'col-sm-3 col-form-check-label'
+    .col-sm-9
+      .form-check
+        = f.label :werkstatt_ist_typenoffen, class: 'form-check-label' do
+          = f.check_box :werkstatt_ist_typenoffen, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_ist_typenoffen'
+
+      .form-check
+        = f.label :werkstatt_austauschmotorraeder, class: 'form-check-label' do
+          = f.check_box :werkstatt_austauschmotorraeder, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_austauschmotorraeder'
+
+      .form-check
+        = f.label :werkstatt_hol_bring, class: 'form-check-label' do
+          = f.check_box :werkstatt_hol_bring, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_hol_bring'
+
+      .form-check
+        = f.label :werkstatt_hu, class: 'form-check-label' do
+          = f.check_box :werkstatt_hu, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_hu'
+
+      .form-check
+        = f.label :werkstatt_inspektionen, class: 'form-check-label' do
+          = f.check_box :werkstatt_inspektionen, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_inspektionen'
+
+      .form-check
+        = f.label :werkstatt_pannenservice, class: 'form-check-label' do
+          = f.check_box :werkstatt_pannenservice, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_pannenservice'
+
+      .form-check
+        = f.label :werkstatt_reifen, class: 'form-check-label' do
+          = f.check_box :werkstatt_reifen, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_reifen'
+
+      .form-check
+        = f.label :werkstatt_reparatur, class: 'form-check-label' do
+          = f.check_box :werkstatt_reparatur, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_reparatur'
+
+      .form-check
+        = f.label :werkstatt_stellplaetze, class: 'form-check-label' do
+          = f.check_box :werkstatt_stellplaetze, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_stellplaetze'
+
+      .form-check
+        = f.label :werkstatt_tuev, class: 'form-check-label' do
+          = f.check_box :werkstatt_tuev, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_tuev'
+
+      .form-check
+        = f.label :werkstatt_umbauten, class: 'form-check-label' do
+          = f.check_box :werkstatt_umbauten, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.werkstatt_umbauten'

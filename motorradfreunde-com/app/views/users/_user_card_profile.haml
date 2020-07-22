@@ -1,0 +1,39 @@
+- user = user_card_profile
+
+- if user
+  .user-card-profile.card.mb-4
+    = image_tag user.avatar(:limit_800_800), class: 'card-img-top img-fluid'
+    .card-block.text-center
+      %h2.card-title= user
+      %strong= user.formatted_address.join(', ')
+
+      %ul.card-menu
+        %li.card-menu-item
+          %a.text-inherit{"data-toggle" => "modal", :href => "#userModal"}
+            Freunde
+            %h6.my-0= user.friends.size
+        %li.card-menu-item
+          %a.text-inherit{"data-toggle" => "modal", :href => "#userModal"}
+            Motorräder
+            %h6.my-0= user.bikes.size
+
+    .user-card-profile__nav
+      - if user == current_user
+        = link_to "Deine Pinnwand", [:dashboard, user], class: "#{(current_page?(controller: :users, action: :dashboard) ? 'active' : 'inactive')}"
+        = link_to "Info", user, class: "#{(current_page?(controller: :users, action: :show) ? 'active' : 'inactive')}"
+        = link_to "Private Nachrichten", :conversations, class: "#{(controller_name == "messages" ? 'active' : 'inactive')}"
+
+      - else
+        = link_to "Pinnwand", [:dashboard, user], class: "#{(current_page?(controller: :users, action: :dashboard) ? 'active' : 'inactive')}"
+        = link_to "Profil", user, class: "#{(current_page?(controller: :users, action: :show) ? 'active' : 'inactive')}"
+
+        = link_to "Bikergruß senden", [user, :greetings], method: :post
+        = link_to "Nachricht senden", conversation_messages_path(:new, user_id: user)
+
+        - if user_signed_in?
+          - if user.invited?(current_user)
+            = link_to 'Freundschaft annehmen', [user, :friendships], method: :post
+          - elsif current_user.friend_with? user
+            = link_to 'Freundschaft beenden', [user, :friendships], method: :delete
+          - elsif !current_user.friend_with? user
+            = link_to 'Freund hinzufügen', [user, :invitations], method: :post

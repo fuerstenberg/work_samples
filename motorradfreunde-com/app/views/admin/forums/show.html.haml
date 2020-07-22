@@ -1,0 +1,36 @@
+- title @forum, "Admin"
+
+- content_for :action do
+  = link_to "Alle Foren", [:admin, :forums], class: "btn"
+  = link_to "Forum bearbeiten", [:edit, :admin, @forum], class: "btn"
+  - if @forum.questions.count < 1
+    = link_to 'löschen', [:admin, @forum], method: :delete, confirm: "Wirklich?"
+
+%p=markdown @forum.description
+
+= render partial: "admin/photos/form", object: (@forum.photos.first || @forum.photos.build(user: current_user))
+
+%table.table.table-striped
+  - questions = @forum.questions.order(updated_at: :desc).page(params[:page]).per 10
+  - questions.each do |question|
+    %tr[question]
+      %td= link_to question, question
+      %td= select_tag :forum_id, options_from_collection_for_select(Forum.all, :id, :name), class: :forum_selector, data: {question_id: question.id}
+
+= paginate questions
+
+
+- content_for :scripts do
+  :javascript
+    $('select.forum_selector').on('change', function() {
+      $.ajax({
+        url: '/admin/questions/' + $(this).data('question-id'),
+        type: 'put',
+        data: {
+          forum_id: this.value
+        },
+        success: function(data){
+          $('#question_' + data.id).fadeOut();
+        }
+      });
+    });

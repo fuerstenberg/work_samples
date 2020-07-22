@@ -1,0 +1,37 @@
+- meta (user_signed_in? ? "Kartenansicht" : "Motorradfreunde.com - Dein Bikertreff im Internet")
+- title (user_signed_in? ? "Kartenansicht" : "Motorradfreunde.com - Dein Bikertreff im Internet")
+
+.map#map<>
+  - if user_signed_in? and current_user.geocoded?
+    = content_tag "div", "Karte wird geladen...", id: "map_canvas", data: {current_user: current_user.to_json(only: [:id, :name, :latitude, :longitude], methods: [:avatar, :object_type])}
+  - else
+    = content_tag "div", "Karte wird geladen...", id: "map_canvas", data: {current_user: {latitude: 52.451786, longitude: 13.415039}}
+
+- unless user_signed_in?
+  - content_for :scripts do
+    #advertise
+      %a.close.close_advertise{href: "#"} &times;
+      %p
+        %strong Motorradfreunde.com
+        &nbsp;
+        ermöglicht es dir, mit anderen Bikern in Verbindung zu treten und Inhalte rund ums Thema Motorrad mit diesen zu teilen.
+
+      %ul
+        %li Triff dich mit anderen Bikern
+        %li Folge den Aktivitäten anderer Biker
+        %li
+          Schreibe Artikel über deine
+          %strong Motorraderlebnisse
+        %li
+          Erlebe die
+          %strong Motorrad-Community
+          online
+
+      .for_free Das alles ist kostenlos für dich!
+      .btns
+        - unless request.referrer.to_s.include?("facebook") or cookies[:facebook_user]
+          = link_to "Benutzerkonto erstellen", new_user_registration_path, :class => "btn btn-large btn-success sign_up"
+          %span oder
+        = link_to user_facebook_omniauth_authorize_path, :class => "sign_in btn btn-large btn-primary facebook" do
+          %i.icon-facebook-sign
+          Facebook Login

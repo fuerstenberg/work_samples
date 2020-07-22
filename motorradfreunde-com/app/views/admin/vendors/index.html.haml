@@ -1,0 +1,6 @@
+- title "Hersteller"
+
+%table.table= render @vendors
+
+- content_for :main_action do
+  = link_to "Hersteller anlegen", [:new, :admin, :vendor], class: "btn btn-success"

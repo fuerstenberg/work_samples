@@ -1,0 +1,206 @@
+- title "Übersicht"
+
+- content_for :scripts do
+  = javascript_include_tag "//www.google.com/jsapi", "chartkick"
+
+.row
+  .col-xs-12
+    %strong
+      Users per day
+      == (#{User.count} gesamt)
+    %hr
+    = line_chart admin_statistic_path(id: "users_overview")
+
+.row
+  .col-xs-12
+    %strong Object stats
+    %hr
+    = line_chart admin_statistic_path(id: "objects")
+
+
+.row
+  .col-xs-12
+    %strong Object stats
+    %hr
+    = line_chart admin_statistic_path(id: "objects_2")
+
+
+.row
+  .col-xs-12
+    %strong Videos audio language
+    %hr
+    %pre=raw (`df -h`)
+
+
+
+
+
+
+
+
+
+= panel do
+  = heading "Biker" do
+    == #{User.count} gesamt
+
+  %table.table
+    %tr
+      %th Online
+      %th
+    - User.is_online.to_a.each do |user|
+      %tr
+        %td= image_tag user.avatar(:small), width: "50px"
+        %td= link_to user, user
+
+
+    %tr
+      %th Tage
+      %th Anmeldungen
+    - (0..14).each do |i|
+      %tr
+        %td
+          - if i == 0
+            heute
+          - else
+            =l Date.today - i.days, format: :longer
+        %td= User.where(created_at: (Date.today-i.days).beginning_of_day..(Date.today-i.days).end_of_day).count
+    %tr
+      %th Woche
+      %th Anmeldungen
+    - (0..8).each do |i|
+      %tr
+        %td
+          - if i == 0
+            diese Woche
+          - else
+            =l (Date.today - i.weeks).beginning_of_week, format: :short_default
+            &mdash;
+            =l (Date.today - i.weeks).end_of_week, format: :short_default
+        %td= User.where(created_at: ((Date.today - i.weeks).beginning_of_week..(Date.today - i.weeks).end_of_week)).count
+
+= panel do
+  = heading "Nachrichten" do
+    = Message.count
+  %table.table
+    %tr
+      %th Sender
+      %th Empfänger
+      %th Nachricht
+    - Message.order(updated_at: :desc).limit(10).each do |message|
+      %tr
+        %td= link_to message.sent_messageable, message.sent_messageable, target: dom_id(message.sent_messageable)
+        %td= link_to message.received_messageable, message.received_messageable, target: dom_id(message.received_messageable)
+        %td
+          = message.body
+          %small.text-muted== vor #{distance_of_time_in_words_to_now message.updated_at}
+
+
+= panel do
+  = heading "Artikel" do
+    = Article.count
+
+  %table.table
+    - Article.where(active: false).order(updated_at: :desc).limit(10).each do |article|
+      %tr
+        %td= link_to article, [:edit, :admin, article], target: dom_id(article)
+        %td== vor #{distance_of_time_in_words_to_now article.updated_at}
+
+= panel do
+  = heading "Forum" do
+    = Question.count
+  %table.table
+    - Question.order(updated_at: :desc).limit(10).each do |question|
+      %tr
+        %td= link_to question, [:forum, question], target: dom_id(question)
+        %td== vor #{distance_of_time_in_words_to_now question.updated_at}
+
+= panel do
+  = heading "Motorrad fahren" do
+    = RideRequest.count
+  %table.table
+    - RideRequest.order(updated_at: :desc).limit(10).each do |ride_request|
+      %tr
+        %td= link_to "#{ride_request.user} will fahren", ride_request, target: dom_id(ride_request)
+        %td= #{ride_request.comments.count} Kommentare
+        %td== vor #{distance_of_time_in_words_to_now ride_request.updated_at}
+
+
+= panel do
+  = heading "Kommentare" do
+    = Comment.count
+
+  %table.table
+    - Comment.limit(10).each do |comment|
+      %tr
+        %td= link_to comment.user, comment.user
+        %td= link_to comment.commentable, comment.commentable rescue nil
+        %td
+          = comment
+          %small.text-muted=l comment.updated_at
+
+
+= panel do
+  = heading "Routen" do
+    = Route.count
+  %table.table
+    - Route.limit(10).order(updated_at: :desc).each do |route|
+      %tr
+        %td= link_to(route, [route.user, route], target: dom_id(route)) rescue nil
+        %td== vor #{distance_of_time_in_words_to_now route.updated_at}
+
+= panel do
+  = heading "Termine" do
+    = Event.count
+  %table.table
+    - Event.limit(10).order(updated_at: :desc).each do |event|
+      %tr
+      %td= link_to event, event.becomes(Event), target: dom_id(event)
+      %td=l event.start_at, format: :shorten
+      %td== vor #{distance_of_time_in_words_to_now event.updated_at}
+
+
+= panel do
+  = heading "Rest" do
+    = Message.count
+  %table.table
+    %tr
+      %th Bikes
+      %td.r= Bike.count
+      %td
+        - Bike.limit(10).order(updated_at: :desc).each do |bike|
+          = link_to bike, [bike.user, bike], target: dom_id(bike) rescue nil
+          %small.muted== vor #{distance_of_time_in_words_to_now bike.updated_at}
+          %br
+      %td
+      %td
+    %tr
+      %th FeedItems
+      %td.r= FeedItem.count
+      %td
+        - FeedItem.order(updated_at: :desc).limit(10).each do |feed_item|
+          = link_to feed_item, [:admin, feed_item.feed], target: dom_id(feed_item)
+          %small.muted== vor #{distance_of_time_in_words_to_now feed_item.updated_at}
+          %br
+      %td
+      %td
+
+
+/ %table
+/   .span4
+/     %dl.dl-horizontal
+/       %li Neue Biker letzte 20
+
+/   .span4
+
+/ %ol
+/   %li Neue Artikel nicht aktiviert letzte 20
+/   %li Neue Bilder letzte 20
+/   %li Neue Bikes letzte 20
+/   %li POIs auslaufend
+/   %li Aktive Werbeanzeigen
+/   %li Werbeanzeigen auslaufend
+/   %li Neuste Forenbeiträge
+/   %li Neuste Messages
+/   %li Neuste Routen
+/   %li Neuste Kommentare
+/   %li Neuste Termine

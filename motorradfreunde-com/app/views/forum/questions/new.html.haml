@@ -1,0 +1,8 @@
+- widescreen
+
+- if @question.forum
+  - title "Neuer Foreneintrag in #{@question.forum}", "Stelle hier eine Motorradfrage..."
+- else
+  - title "Neuer Foreneintrag", "Stelle hier eine Motorradfrage..."
+
+= render partial: "form", object: @question

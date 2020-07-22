@@ -1,0 +1,10 @@
+- f = magazin_form
+
+.is_magazin_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Magazin
+
+  .form-group.row
+    = f.label :magazin_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :magazin_beschreibung, class: 'form-control'

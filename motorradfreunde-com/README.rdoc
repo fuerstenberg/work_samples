@@ -1,0 +1,13 @@
+== Welcome to motorradfreunde.com
+
+It was my own social network for motorcyclists (like Facebook for bikers only).
+Caused by GDPR I decided to stop working on it, so I took it offline. 😭
+In May 2018 motorradfreunde.com had ~13000 users.
+
+This project is just a sample of my work.
+If you are interested in my work, have a look here:
+
+app/javascripts (Backbone.js, Marionette.js and Coffeescript)
+app/models (Mongoid)
+
+This project does not work anymore (I had to delete some critical files and folders for security reasons).

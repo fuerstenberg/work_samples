@@ -1,0 +1,122 @@
+.card
+  border: 1px solid #ccc
+  border-bottom-width: 2px
+  display: block
+  margin-bottom: 16px
+  overflow: hidden
+  position: relative
+
+  background-color: #FFF
+  -webkit-transition: all 0.3s ease-in-out
+  transition: all 0.3s ease-in-out
+  +border-radius(3px)
+
+  &.card-bike,
+  &.card-poi,
+  &.card-route,
+  &.card-user,
+  &.card-video
+    .card-caption
+      height: 160px
+      overflow: hidden
+
+  &.card-with-image
+    width: 100%
+
+    .card-head
+      border: none
+      left: 0
+      position: absolute
+      right: 0
+
+      .btn
+        display: none
+
+
+  &:hover
+    text-decoration: none
+    border-color: #3879D9
+    .card-head
+      .btn
+        display: block
+
+    h2
+      color: #3879D9
+
+
+  .card-head,
+  .card-caption
+    padding: 8px
+
+  .card-head
+    border-bottom: 1px solid #ccc
+
+    .label
+      float: right
+      margin-left: 2px
+
+
+
+  .card-image
+    width: 100%
+
+  .card-caption
+    *
+      color: #000
+
+    &.card-caption-with-avatar
+      padding-left: 52px
+
+      img
+        float: left
+        margin-left: -42px
+        width: 32px
+
+  .user
+    font-size: 0.9em
+    color: #666
+
+  .date
+    font-size: 0.8em
+    color: #999
+
+  .label,
+  .label i
+    color: #FFF
+
+  h2
+    margin-top: 8px
+    margin-bottom: 8px
+
+    font-size: 1.2em
+    font-weight: 500
+    transition: all 0.3s ease-in-out
+    -webkit-transition: all 0.3s ease-in-out
+
+  p
+    color: #999
+    font-size: 0.9em
+
+  dl
+    margin: 6px 0
+    dt,
+    dd
+      font-size: 0.9em
+
+    dt
+      width: 35%
+
+      color: #999
+      font-weight: normal
+      text-align: left
+
+    dd
+      color: #666
+      margin-left: 30%
+
+  dt,
+  dd
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+

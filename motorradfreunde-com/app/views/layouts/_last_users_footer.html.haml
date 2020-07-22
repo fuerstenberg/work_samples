@@ -1,0 +1,7 @@
+.last_users_footer
+  %ul
+    - if user_signed_in?
+      - (last_visited_users + User.with_photo_and_most_impressions(30)).uniq.each_with_index do |user, index|
+        %li
+          = link_to user, title: user do
+            = image_tag user.avatar(:fill_200_200), alt: user, height: '100%'

@@ -1,0 +1,14 @@
+- if !user_signed_in? and not request.path == '/'
+  .flash_message
+    .container
+      .row
+        .col-sm-12
+          %p
+            %strong Jetzt kostenlos Motorradfreund werden.
+          .btn-toolbar
+            - unless request.referrer.to_s.include?("facebook") or cookies[:facebook_user]
+              = link_to "Benutzerkonto erstellen", new_user_registration_path, :class => "btn btn-success sign_up"
+              %span oder
+            = link_to user_facebook_omniauth_authorize_path, :class => "sign_in btn btn-primary facebook" do
+              %i.icon-facebook-sign
+              Facebook Login

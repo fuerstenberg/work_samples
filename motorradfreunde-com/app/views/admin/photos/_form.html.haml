@@ -1,0 +1,6 @@
+- if current_user.admin?
+
+  = simple_form_for (form.photogenic.is_a?(User) ? [:account, form] : [form.photogenic, form]), html: { multipart: true } do |f|
+    = fieldset "Bilder hochladen" do
+      = f.input :photo
+    = f.button :submit, button_html: { class: "btn btn-success" }

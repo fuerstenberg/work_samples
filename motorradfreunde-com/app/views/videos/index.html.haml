@@ -1,0 +1,23 @@
+- title do
+  - if @tag
+    %h1== Motorradvideos - #{@tag.name}
+  - else
+    %h1 Motorradvideos
+    %h2 Motorradvideos, Raservideos, Motorradtouren, Motorradcrashs
+
+.row
+  = render @videos
+
+= paginate @videos
+
+- content_for :filter do
+  = link_to 'Alle',  url_for(action: :index),         class: "label #{params[:order] ? 'label-default' : 'label-danger'}"
+  = link_to 'Name',  url_for(order: 'title asc'),     class: "label #{params[:order] == 'title asc'     ? 'label-danger' : 'label-default'}"
+  = link_to 'Länge', url_for(order: 'duration desc'), class: "label #{params[:order] == 'duration desc' ? 'label-danger' : 'label-default'}"
+
+/ - content_for :filter do
+/   - cache "videos/index/filter", expires_in: 12.hour do
+/     = link_to "Alle", url_for(tag: nil), class: "label #{@tag ? 'label-default' : 'label-danger'}"
+/     - Video.tag_counts_on(:types).order(name: :asc).each do |tag|
+/       - if tag.count > 0
+/         = link_to tag, url_for(tag: tag.becomes(Tag)), class: "label label-default"

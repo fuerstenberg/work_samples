@@ -1,0 +1,42 @@
+= form_for form, html: { multipart: true, role: :form } do |f|
+  .form-group.row
+    = f.label :poi_id, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.select :poi_id, Poi.vendors.order(name: :asc).map{ |vendor| [vendor, vendor.id] }, { include_blank: 'Hersteller' }, class: 'form-control', required: true, autofocus: true
+
+  .form-group.row
+    = f.label :model, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :model, class: 'form-control', placeholder: true
+
+  .form-group.row
+    = f.label :year_of_manufacture, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.select :year_of_manufacture, (1900..(Date.today.year + 1)).map{ |year| [year, year] }, { include_blank: 'Baujahr' }, class: 'form-control'
+
+  .form-group.row
+    = f.label :color, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_field :color, class: 'form-control', placeholder: true
+
+  .form-group.row
+    = f.label :ccm, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.number_field :ccm, hint: 'Hubraum in ccm.', class: 'form-control', placeholder: true
+
+  .form-group.row
+    = f.label :hp, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.number_field :hp,  hint: 'Leistung in PS.', class: 'form-control', placeholder: true
+
+  .form-group.row
+    = f.label :description, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :description, rows: 4, class: 'form-control', placeholder: true
+
+  .actions
+    - if f.object.new_record?
+      = link_to 'Abbrechen' , vendor_bikes_path, class: 'btn btn-secondary'
+    - else
+      = link_to 'Abbrechen' , vendor_bike_path(f.object.vendor, f.object), class: 'btn btn-secondary'
+    = f.submit class: 'btn btn-primary'

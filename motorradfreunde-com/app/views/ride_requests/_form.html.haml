@@ -1,0 +1,28 @@
+- if user_signed_in?
+  - ride_requests = current_user.ride_requests
+  #ride-request.ride-request-popover.popover.bottom{style: "top: 105px; left: 193px; display: block; #{"display: none;" if ride_requests.count > 0 or rand(9) > 0}"}
+    - ride_requests = ride_requests.upcoming
+    .arrow
+    %h3.popover-title Willst du Motorrad fahren?
+
+    .popover-content
+      = select_tag :driving_style, options_for_select(User.favorite_driving_style.options), prompt: "- Fahrstil -"
+
+    .popover-content
+
+      .btn-group
+        %button.day-btn.btn.btn-default.btn-sm{class: (:disabled if ride_requests.for_date?(Date.today)), data: {start_at: Date.today}}
+          =l(Date.today, format: :only_short_wday) + " (heute)"
+        %button.day-btn.btn.btn-default.btn-sm{class: (:disabled if ride_requests.for_date?(Date.today+1.day)), data: {start_at: (Date.today+1.day)}}
+          =l Date.today+1.day, format: :only_short_wday
+        %button.day-btn.btn.btn-default.btn-sm{class: (:disabled if ride_requests.for_date?(Date.today+2.day)), data: {start_at: (Date.today+2.day)}}
+          =l Date.today+2.day, format: :only_short_wday
+        %button.day-btn.btn.btn-default.btn-sm{class: (:disabled if ride_requests.for_date?(Date.today+3.day)), data: {start_at: (Date.today+3.day)}}
+          =l Date.today+3.day, format: :only_short_wday
+        %button.day-btn.btn.btn-default.btn-sm{class: (:disabled if ride_requests.for_date?(Date.today+4.day)), data: {start_at: (Date.today+4.day)}}
+          =l Date.today+4.day, format: :only_short_wday
+
+    %ul= render partial: "ride_requests/ride_request", collection: ride_requests
+
+    .popover-content
+      %a.close-ride-request.btn.btn-default.btn-sm Abbrechen

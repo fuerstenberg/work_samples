@@ -1,0 +1,32 @@
+- cache ["articles/article", article], expires_in: 4.hours do
+  .col-12.col-sm-6.col-md-4.mb-4
+    = link_to article, title: article, class: "card article-card", id: dom_id(article, :card) do
+      = image_tag article.avatar(:fill_600_600), class: "card-img-top img-fluid", alt: article
+      .card-block.article-card__block
+        %h2.card-title= article
+        -# = render partial: 'users/small', object: article.user, locals: { link: false }
+        %p= truncate article.body, length: 200
+
+      .card-footer
+        - if article.impressions_count
+          %small.text-muted
+            = icon 'eye'
+            = article.impressions_count
+        - if article.images.size > 1
+          %small.text-muted
+            = icon 'picture-o'
+            = article.images.size
+
+// Regardless of the context, there seems to be some details that are always important:
+/
+// Title the article
+// Short description
+// Publication date
+// Call out to action (read more, continue reading, see more, etc.)
+// A series of details occur often, but are not present in all lists.
+/
+// Category label
+// Thumbnail image
+// Comment count
+// Picture count (in gallery)
+// Author

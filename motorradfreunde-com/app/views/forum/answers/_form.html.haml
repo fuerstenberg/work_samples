@@ -1,0 +1,11 @@
+- if false and user_signed_in?
+  .media[form, :media]
+    = link_to current_user, class: "media-left", data: data_user_id(current_user) do
+      = image_tag current_user.avatar(:fill_200_200), class: "img-circle", alt: current_user
+    .media-body
+      .media-heading
+        = link_to current_user, current_user
+      = simple_form_for [:forum, form.question, form] do |f|
+        = f.input :body, input_html: {rows: 5}, placeholder: "Schreibe hier eine Antwort auf die Frage."
+        = actions do
+          = f.button :submit

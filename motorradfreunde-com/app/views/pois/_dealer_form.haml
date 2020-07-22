@@ -1,0 +1,22 @@
+- f = dealer_form
+
+.is_dealer_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Händler
+
+  .form-group.row
+    = f.label :haendler_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :haendler_beschreibung, class: 'form-control'
+
+  .form-group.row
+    = f.label :haendler_marken, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :haendler_marken, class: 'form-control'
+
+  .form-group.row
+    .col-sm-9.offset-3
+      .form-check
+        = f.label :haendler_finanzierung, class: 'form-check-label' do
+          = f.check_box :haendler_finanzierung, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.haendler_finanzierung'

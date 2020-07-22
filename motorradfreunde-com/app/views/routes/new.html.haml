@@ -1,0 +1,31 @@
+- meta "Neue Route anlegen"
+- title "Neue Route anlegen"
+- subtitle "Klicke in die Karte um Wegpunkte hinzuzufügen."
+- subtitle "Einen Wegpunkt kannst du durch klicken auf die Markierung wieder löschen."
+- hide_social_media_buttons
+- hide_premium_pois
+- hide_footer
+- render_map
+
+- content_for :main_action do
+  %a.btn.btn-primary.btn-lg.nextButton{ href: "#route", role: "button", style: 'display: none;' }
+    Speichern
+
+- content_for :fullscreen_map do
+  .fullscreen-map__search.container-fluid
+    %form
+      %input.form-control#search{ type: :text, placeholder: "Ort, Straße", tabindex: 1, autofocus: true }
+
+  .fullscreen-map__route{ style: "display: none;" }
+    %form.fullscreen-map__route-form
+      .alert.alert-danger{style: "display: none;"}
+
+      .form-group
+        %input.form-control#name{ type: :text, placeholder: "Name der Route", tabindex: 2 }
+
+      .form-group
+        %textarea.form-control#description{ type: :text, placeholder: "Beschreibung der Route", tabindex: 3, rows: 3 }
+
+      .actions
+        %button.btn.btn-secondary.btn-close{ type: "button", "data-dismiss" => "modal", "aria-hidden" => "true" } Abbrechen
+        %button.btn.btn-outline-primary.btn-save{ style: "display: none;" } Route speichern

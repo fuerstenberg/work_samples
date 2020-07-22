@@ -1,0 +1,35 @@
+%h1= link_to @object, [@object]
+
+%p
+  Link:
+  = link_to @object, [@object]
+
+%p
+  Admin-Link:
+  = link_to @object, [:admin, @object]
+
+
+- if @object.respond_to?(:previous_version) and @object.previous_version
+  - @new = @object.attributes
+  - @old = @object.previous_version.attributes
+  %table
+    %tr
+      %th Attribute
+      %th Neue Version
+      %th Alte Version
+    - @new.keys.each do |key|
+      - same = (@new[key] == @old[key])
+      %tr
+        %th{style: ("background-color:#BE6E5B;" unless same)}= key
+        %td{style: ("background-color:#BE6E5B;" unless same)}= @new[key]
+        %td{style: ("background-color:#BE6E5B;" unless same)}= @old[key]
+
+- else
+  %table
+    %tr
+      %th Attribute
+      %th Keine Versionskontrolle m&ouml;glich
+    - @object.attributes.each do |key, value|
+      %tr
+        %th= key
+        %td= value

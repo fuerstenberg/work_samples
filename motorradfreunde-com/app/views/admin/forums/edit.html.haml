@@ -1,0 +1,6 @@
+- title "Forum bearbeiten", "Admin"
+
+- content_for :action do
+  = link_to "Alle Forum", [:admin, :forums], class: "btn btn-success"
+
+= render partial: 'form', object: @forum

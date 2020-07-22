@@ -1,0 +1,45 @@
+.route-card
+
+  &__block
+    height: 150px
+
+    h2
+      @extend .text-truncate
+      overflow-wrap: break-word
+      word-wrap: break-word
+
+
+body.routes__new
+  display: flex
+  flex-direction: column
+
+  .fullscreen-map
+    flex: 1
+    position: relative
+
+    .map__canvas
+      height: 100%
+
+    &__container
+      position: absolute
+      right: 0
+      top: 0
+      width: 30%
+
+    &__search
+      padding-bottom: 1rem
+      padding-top: 1rem
+
+      form
+        background-color: rgba(0,0,0,0.4)
+        padding: 1rem
+        border-radius: 6px
+
+    &__route
+      background-color: $white
+      border-radius: 6px
+      margin: 1rem
+      padding: 1rem
+
+      .actions
+        text-align: right

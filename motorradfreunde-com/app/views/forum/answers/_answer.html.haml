@@ -1,0 +1,13 @@
+- unless answer.new_record?
+  - cache ["answers/answer", answer] do
+    .media[answer, :media]
+      = link_to answer.user, class: "media-left", data: data_user_id(answer.user) do
+        = image_tag answer.user.avatar(:fill_200_200), class: "img-circle", alt: answer.user
+      .media-body
+        .media-heading
+          = link_to answer.user, answer.user
+          .stats
+            - time_to_words answer.updated_at
+        = answer.body_html
+        = render partial: "comments/comment", collection: answer.comments
+        = render partial: "comments/form", object: answer.comments.build if current_user

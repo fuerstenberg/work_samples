@@ -1,0 +1,9 @@
+- user = user_card_bikes
+.user-card-bikes.card.visible-md-block.visible-lg-block.mb-4
+  .card-block
+    %h6.mb-3
+      Motorräder
+      %small
+        ·
+        = link_to 'Motorrad anlegen', [:new, current_user, :bike]
+    = render partial: 'bikes/bike_small', collection: user.bikes.limit(3)

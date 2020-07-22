@@ -1,0 +1,11 @@
+- cache ["addresses/address_long", address_long] do
+  - if address_long.geocoded?
+    %address.address--long
+      - if address_long.formatted_street.present?
+        .text-truncate= address_long.formatted_street
+      - if address_long.formatted_zip_city.present?
+        .text-truncate= address_long.formatted_zip_city
+      - if address_long.formatted_state.present?
+        .text-truncate= address_long.formatted_state
+      - if address_long.formatted_country.present?
+        .text-truncate= address_long.formatted_country

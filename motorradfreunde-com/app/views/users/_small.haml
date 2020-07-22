@@ -1,0 +1,13 @@
+- if small
+  - if defined?(link) and link
+    = link_to small, class: 'media user-media--small' do
+      = image_tag small.avatar(:fill_200_200), class: 'media-object user-media__object mr-2 align-self-start', alt: small
+      .media-body
+        .user-media__name= small
+        .user-media__address= small.formatted_address.join(', ')
+  - else
+    .media.user-media--small
+      = image_tag small.avatar(:fill_200_200), class: 'media-object user-media__object mr-2 align-self-start', alt: small
+      .media-body
+        .user-media__name= small
+        .user-media__address= small.formatted_address.join(', ')

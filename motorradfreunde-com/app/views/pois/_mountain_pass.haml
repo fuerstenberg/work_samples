@@ -1,0 +1,9 @@
+- poi = mountain_pass
+- if poi.is_mountain_pass?
+  %dl.row
+    %dt.col-sm-3 Pass
+    %dd.col-sm-9
+      %dl
+        - if poi.pass_beschreibung.present?
+          %dt.pass_beschreibung= t 'mongoid.attributes.poi.poi.pass_beschreibung'
+          %dd.pass_beschreibung= poi.pass_beschreibung

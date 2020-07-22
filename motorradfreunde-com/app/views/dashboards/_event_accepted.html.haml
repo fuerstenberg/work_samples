@@ -1,0 +1,20 @@
+- timeline_event = event_accepted
+
+- if timeline_event.actor and timeline_event.subject
+  %li.item.event_accepted[timeline_event]
+    = preview timeline_event.actor, link: timeline_event.actor
+    .content_box
+      .head
+        = link_to timeline_event.actor, timeline_event.actor
+        nimmt am Termin
+        = link_to timeline_event.subject, timeline_event.subject
+        teil.
+      .content
+        %strong= timeline_event.subject
+        %br
+        =l timeline_event.subject.start_at
+        %br
+        = truncate timeline_event.subject.description, :length => 200
+      .foot
+        == vor #{time_ago_in_words timeline_event.created_at}
+

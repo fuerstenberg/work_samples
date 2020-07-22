@@ -1,0 +1,87 @@
+- cache ["notifications/notification", notification] do
+  - if notification.subject
+    %li.row[notification]{class: (notification.read ? :read : :unread)}
+      = link_to [current_user, notification] do
+        - if actor = notification.actor
+          .image{data: data_user_id(notification.actor)}
+            = image_tag notification.actor.avatar(:fill_200_200), alt: notification.actor
+          .description
+            - case notification.notification_type
+
+            - when 'answer_created'
+              - if notification.actor
+                %strong= actor
+                hat im Forum eine Antwort geschrieben
+              %p= notification.to_s
+
+            - when 'article_created'
+              - if notification.actor
+                %strong= actor
+                hat einen Artikel geschrieben
+              %p= notification.to_s
+
+            - when 'article_comment_created'
+              - if notification.actor
+                %strong= actor
+                hat einen Artikel kommentiert
+              %p= notification.to_s
+
+            - when 'bike_created'
+              - if notification.actor
+                %strong= actor
+                hat ein Motorrad angelegt
+              %p= notification.to_s
+
+            - when 'bike_comment_created'
+              - if notification.actor
+                %strong= actor
+                hat ein Motorrad kommentiert
+              %p= notification.to_s
+
+            - when 'event_comment_created'
+              - if notification.actor
+                %strong= actor
+                hat einen Termin kommentiert
+              %p= notification.to_s
+
+            - when 'joyride_comment_created'
+              - if notification.actor
+                %strong= actor
+                hat einen Kommentar geschrieben
+              %p= notification.to_s
+
+            - when 'route_comment_created'
+              - if notification.actor
+                %strong= actor
+                hat einen Kommentar geschrieben
+              %p= notification.to_s
+
+            - when 'ride_request_created'
+              - if notification.actor
+                %strong= actor
+                will Motorrad fahren
+
+            - when 'ride_request_updated'
+              - if notification.actor
+                %strong= actor
+                hat den Termin "Motorrad fahren" aktualisiert
+
+            - when 'ride_request_comment_created'
+              - if notification.actor
+                %strong= actor
+                hat einen Kommentar geschrieben
+              %p= notification.to_s
+
+            - when 'user_greeted'
+              - if notification.actor
+                %strong= actor
+                hat dich mit der linken Hand gegrüßt.
+
+            - else
+              - if notification.actor
+                %strong= actor
+              %p= notification.to_s
+
+            %time
+              %i.glyphicon.glyphicon-time
+              - time_to_words notification.updated_at

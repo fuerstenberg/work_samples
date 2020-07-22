@@ -1,0 +1,17 @@
+- poi = tour_operator
+- if poi.is_tour_operator?
+  %dl.row
+    %dt.col-sm-3 tour_operator
+    %dd.col-sm-9
+      %dl
+        - if poi.reiseanbieter_beschreibung.present?
+          %dt.reiseanbieter_beschreibung= t 'mongoid.attributes.poi.poi.reiseanbieter_beschreibung'
+          %dd.reiseanbieter_beschreibung= poi.reiseanbieter_beschreibung
+
+        - if poi.reiseanbieter_touren.present?
+          %dt.reiseanbieter_touren= t 'mongoid.attributes.poi.poi.reiseanbieter_touren'
+          %dd.reiseanbieter_touren= poi.reiseanbieter_touren
+
+        - if poi.reiseanbieter_reisen.present?
+          %dt.reiseanbieter_reisen= t 'mongoid.attributes.poi.poi.reiseanbieter_reisen'
+          %dd.reiseanbieter_reisen= poi.reiseanbieter_reisen

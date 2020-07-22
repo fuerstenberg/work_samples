@@ -1,0 +1,22 @@
+- timeline_event = event_declined
+
+- if timeline_event.subject
+  %li.item.event_declined[timeline_event]
+    = preview timeline_event.actor, link: timeline_event.actor
+    .content_box
+      .head
+        = link_to timeline_event.actor, timeline_event.actor
+        nimmt
+        %strong nicht
+        am Termin
+        = link_to timeline_event.subject, timeline_event.subject
+        teil.
+      .content
+        %strong= timeline_event.subject
+        %br
+        =l timeline_event.subject.start_at rescue nil
+        %br
+        = truncate timeline_event.subject.description, :length => 200
+      .foot
+        == vor #{time_ago_in_words timeline_event.created_at}
+

@@ -1,0 +1,13 @@
+= simple_form_for @route do |f|
+  = body do
+    = f.input :user_id
+    = f.input :routable_id
+    = f.input :routable_type
+    = f.input :name
+    = f.input :start_address
+    = f.input :end_address
+    = f.input :distance
+    = f.input :waypoints
+
+  = actions do
+    = f.button :submit

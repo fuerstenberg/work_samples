@@ -1,0 +1,8 @@
+
+
+= simple_form_for [:admin, form.customer, form] do |f|
+  = body do
+    = f.input :body, input_html: {class: :span12}
+  = actions do
+    = f.button :submit
+    = link_to "Zurück zum Kunden", [:admin, form.customer], class: "btn btn-default"

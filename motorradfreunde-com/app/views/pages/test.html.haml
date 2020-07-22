@@ -1,0 +1,2 @@
+%p
+  = render_map_collection User.in_bounds( Geokit::Bounds.from_point_and_radius(User.first, 20) ).sort_by_distance_from(User.first), :id => :user_map

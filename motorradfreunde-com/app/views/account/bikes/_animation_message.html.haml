@@ -1,0 +1,7 @@
+- if can? :create, Bike
+  .alert.alert-info
+    = link_to 'Motorrad anlegen', [:new, current_user, :bike], class: "btn btn-success pull-right btn-lg"
+    %h4 Hier kannst du Motorräder anlegen.
+    %p
+      Du kannst hier dein Motorrad anlegen oder auch alle Motorräder,
+      die du mal gefahren hast oder alle Motorräder von denen du träumst.

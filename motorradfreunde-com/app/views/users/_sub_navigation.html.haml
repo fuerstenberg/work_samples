@@ -1,0 +1,15 @@
+- user = sub_navigation
+
+.user-sub-navigation.container
+  %ul.nav.nav-pills.nav-justified.mb-3
+    - if user == current_user
+      %li.nav-item
+        = link_to "Deine Pinnwand", [:dashboard, user], class: "nav-link #{(current_page?(controller: :users, action: :dashboard) ? 'active' : 'inactive')}"
+      %li.nav-item
+        = link_to "Info", user, class: "nav-link #{(current_page?(controller: :users, action: :show) ? 'active' : 'inactive')}"
+
+    - else
+      %li.nav-item
+        = link_to "Pinnwand", [:dashboard, user], class: "nav-link #{(current_page?(controller: :users, action: :dashboard) ? 'active' : 'inactive')}"
+      %li.nav-item
+        = link_to "Profil", user, class: "nav-link #{(current_page?(controller: :users, action: :show) ? 'active' : 'inactive')}"

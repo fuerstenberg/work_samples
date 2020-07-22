@@ -1,0 +1,9 @@
+- poi = bike_builder
+- if poi.is_bike_builder?
+  %dl.row
+    %dt.col-sm-3 bike_builder
+    %dd.col-sm-9
+      %dl
+        - if poi.motorradbauer_beschreibung.present?
+          %dt.motorradbauer_beschreibung= t 'mongoid.attributes.poi.poi.motorradbauer_beschreibung'
+          %dd.motorradbauer_beschreibung= poi.motorradbauer_beschreibung

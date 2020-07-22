@@ -1,0 +1,48 @@
+- f = shop_form
+
+.is_shop_form.hidden-xs-up
+  .form-group.row
+    .col-sm-3 Shop
+
+  .form-group.row
+    = f.label :shop_beschreibung, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.text_area :shop_beschreibung, class: 'form-control'
+
+  .form-group.row
+    = f.label 'Services', class: 'col-sm-3 col-form-check-label'
+    .col-sm-9
+      .form-check
+        = f.label :shop_bekleidung, class: 'form-check-label' do
+          = f.check_box :shop_bekleidung, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.shop_bekleidung'
+
+      .form-check
+        = f.label :shop_bekleidung_helme, class: 'form-check-label' do
+          = f.check_box :shop_bekleidung_helme, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.shop_bekleidung_helme'
+
+      .form-check
+        = f.label :shop_bekleidung_leder, class: 'form-check-label' do
+          = f.check_box :shop_bekleidung_leder, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.shop_bekleidung_leder'
+
+      .form-check
+        = f.label :shop_bekleidung_textil, class: 'form-check-label' do
+          = f.check_box :shop_bekleidung_textil, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.shop_bekleidung_textil'
+
+      .form-check
+        = f.label :shop_finanzierung, class: 'form-check-label' do
+          = f.check_box :shop_finanzierung, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.shop_finanzierung'
+
+      .form-check
+        = f.label :shop_geschenkgutscheine, class: 'form-check-label' do
+          = f.check_box :shop_geschenkgutscheine, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.shop_geschenkgutscheine'
+
+      .form-check
+        = f.label :shop_zubehoer, class: 'form-check-label' do
+          = f.check_box :shop_zubehoer, class: 'form-check-input'
+          = t 'mongoid.attributes.poi.shop_zubehoer'

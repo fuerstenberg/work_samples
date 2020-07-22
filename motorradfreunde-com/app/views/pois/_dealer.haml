@@ -1,0 +1,17 @@
+- poi = dealer
+- if poi.is_dealer?
+  %dl.row
+    %dt.col-sm-3 dealer
+    %dd.col-sm-9
+      %dl
+        - if poi.haendler_beschreibung.present?
+          %dt.haendler_beschreibung= t 'mongoid.attributes.poi.poi.haendler_beschreibung'
+          %dd.haendler_beschreibung= poi.haendler_beschreibung
+
+        - if poi.haendler_marken.present?
+          %dt.haendler_marken= t 'mongoid.attributes.poi.haendler_marken'
+          %dd.haendler_marken= poi.haendler_marken
+
+        - if poi.haendler_finanzierung.present?
+          %dt.haendler_finanzierung= t 'mongoid.attributes.poi.haendler_finanzierung'
+          %dd.haendler_finanzierung= poi.haendler_finanzierung

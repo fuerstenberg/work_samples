@@ -1,0 +1,31 @@
+- user = user_card_about
+
+.user-card-about.card.visible-md-block.visible-lg-block.mb-4
+  .card-block
+    %h6.mb-3
+      Über
+      = user
+      - if user == current_user
+        %small
+          ·
+          = link_to 'bearbeiten', [:edit, current_user]
+    %dl
+      - if user.gender_male? or user.gender_female?
+        %dt Geschlecht:
+        %dd= user.gender_text
+
+      - if user.status_for_relationship.present?
+        %dt Beziehungsstatus:
+        %dd= user.status_for_relationship_text
+
+      - if user.status_for_backseat.present?
+        %dt Rücksitzstatus:
+        %dd= user.status_for_backseat_text
+
+      - if user.age.present?
+        %dt Alter:
+        %dd= user.age
+
+  .user-card-about__nav
+    - if can? :update, user
+      = link_to 'Profil bearbeiten', [:edit, user]

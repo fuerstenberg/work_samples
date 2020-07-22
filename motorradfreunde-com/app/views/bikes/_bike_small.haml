@@ -1,0 +1,6 @@
+- bike = bike_small
+.bike-small.media.my-2
+  = link_to vendor_bike_path(bike.vendor, bike), class: 'media-object mr-2' do
+    = image_tag bike.avatar(:fill_200_200), class: 'img-fluid bike-small__image'
+  .media-body
+    = link_to bike, vendor_bike_path(bike.vendor, bike), class: 'mt-0 text-truncate'

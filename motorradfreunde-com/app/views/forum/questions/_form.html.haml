@@ -1,0 +1,10 @@
+
+
+= simple_form_for [:forum, form] do |f|
+
+  = body do
+    = f.input :title
+    = f.input :body,  input_html: {rows: 12}
+
+  = footer do
+    = f.button :submit

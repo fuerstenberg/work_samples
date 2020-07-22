@@ -1,0 +1,26 @@
+- if content_for?(:cover)
+  .site-wrapper{style: "background-image: url('#{Image.cover}')"}
+    .site-wrapper-inner
+      .cover-container
+        .inner.cover= yield :cover
+
+- if content_for?(:title) and show_title?
+  - map_css_class = content_for?(:map) ? "with-map" : ""
+  - sub_navigation_css_class = content_for?(:sub_navigation) ? "with-sub-navigation" : ""
+
+  .page-title-container{class: [map_css_class, sub_navigation_css_class].join(" ")}
+    .container
+      .row
+        .col-12.title
+          .actions
+            .text-right
+              = yield :main_action
+              = yield :actions
+            - if show_social_media_buttons?
+              .social.mt-2
+                .fb-like{:data => { "href" => url_for(host: "www.motorradfreunde.com"), "send" => "true", "layout" => "button_count", "width" => "200", "show-faces" => "false", "font" => "lucida grande"}}
+
+          - if content_for?(:title)
+            %h1= yield :title
+          - if content_for?(:subtitle)
+            %h2= yield :subtitle

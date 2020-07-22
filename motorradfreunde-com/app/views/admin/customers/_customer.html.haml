@@ -1,0 +1,12 @@
+- if customer_counter and customer_counter == 0
+  %tr
+    %th URL
+    %th Kunde
+    %th Adresse
+    %th Status
+    %th
+
+%tr
+  %td= link_to customer.url, [:admin, customer]
+  %td= link_to customer.name, [:admin, customer]
+  %td= link_to "bearbeiten", [:edit, :admin, customer]

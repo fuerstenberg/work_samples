@@ -1,0 +1,116 @@
+- f = details_form
+- if user_signed_in? and current_user.admin?
+  .form-group.row
+    = f.label 'Admin Einstellungen', class: 'col-sm-3 col-form-check-label'
+    .col-sm-9
+      .form-check
+        = f.label :published, class: 'form-check-label' do
+          = f.check_box :published, class: 'form-check-input'
+          veröffentlicht
+
+      .form-check
+        = f.label :premium, class: 'form-check-label' do
+          = f.check_box :premium, class: 'form-check-input'
+          Premium
+
+  .form-group.row
+    = f.label :meta_inspector_url, class: 'col-sm-3 col-form-label'
+    .col-sm-9
+      = f.url_field :meta_inspector_url, class: 'form-control'
+      - if f.object.meta_inspector_url.present?
+        %small= link_to f.object.meta_inspector_url, f.object.meta_inspector_url, target: :_blank
+
+.form-group.row
+  = f.label 'Allgemeine Daten', class: 'col-sm-3 col-form-check-label'
+  .col-sm-9
+    .form-check
+      = f.label :is_bike_builder, class: 'form-check-label' do
+        = f.check_box :is_bike_builder, class: 'form-check-input', data: { fields: 'is_bike_builder_form' }
+        = t 'mongoid.attributes.poi.is_bike_builder'
+
+    .form-check
+      = f.label :is_dealer, class: 'form-check-label' do
+        = f.check_box :is_dealer, class: 'form-check-input', data: { fields: 'is_dealer_form' }
+        = t 'mongoid.attributes.poi.is_dealer'
+
+    .form-check
+      = f.label :is_hotel, class: 'form-check-label' do
+        = f.check_box :is_hotel, class: 'form-check-input', data: { fields: 'is_hotel_form' }
+        = t 'mongoid.attributes.poi.is_hotel'
+
+    .form-check
+      = f.label :is_magazin, class: 'form-check-label' do
+        = f.check_box :is_magazin, class: 'form-check-input', data: { fields: 'is_magazin_form' }
+        = t 'mongoid.attributes.poi.is_magazin'
+
+    .form-check
+      = f.label :is_mountain_pass, class: 'form-check-label' do
+        = f.check_box :is_mountain_pass, class: 'form-check-input', data: { fields: 'is_mountain_pass_form' }
+        = t 'mongoid.attributes.poi.is_mountain_pass'
+
+    .form-check
+      = f.label :is_rental_company, class: 'form-check-label' do
+        = f.check_box :is_rental_company, class: 'form-check-input', data: { fields: 'is_rental_company_form' }
+        = t 'mongoid.attributes.poi.is_rental_company'
+
+    .form-check
+      = f.label :is_shop, class: 'form-check-label' do
+        = f.check_box :is_shop, class: 'form-check-input', data: { fields: 'is_shop_form' }
+        = t 'mongoid.attributes.poi.is_shop'
+
+    .form-check
+      = f.label :is_tour_operator, class: 'form-check-label' do
+        = f.check_box :is_tour_operator, class: 'form-check-input', data: { fields: 'is_tour_operator_form' }
+        = t 'mongoid.attributes.poi.is_tour_operator'
+
+    .form-check
+      = f.label :is_vendor, class: 'form-check-label' do
+        = f.check_box :is_vendor, class: 'form-check-input', data: { fields: 'is_vendor_form' }
+        = t 'mongoid.attributes.poi.is_vendor'
+
+    .form-check
+      = f.label :is_workshop, class: 'form-check-label' do
+        = f.check_box :is_workshop, class: 'form-check-input', data: { fields: 'is_workshop_form' }
+        = t 'mongoid.attributes.poi.is_workshop'
+
+.form-group.row
+  = f.label :name, class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = f.text_field :name, class: 'form-control', autofocus: true
+
+.form-group.row
+  = f.label :description, class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = f.text_area :description, class: 'form-control', rows: 6
+
+.form-group.row
+  = f.label :contact, class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = f.text_field :contact, class: 'form-control'
+
+.form-group.row
+  = f.label :phone, class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = f.telephone_field :phone, class: 'form-control'
+
+.form-group.row
+  = f.label :mobile, class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = f.telephone_field :mobile, class: 'form-control'
+
+.form-group.row
+  = f.label :fax, class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = f.telephone_field :fax, class: 'form-control'
+
+.form-group.row
+  = f.label :website, class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = f.url_field :website, class: 'form-control'
+    - if f.object.website.present?
+      %small= link_to f.object.website, f.object.website, target: :_blank
+
+.form-group.row
+  = f.label :email, class: 'col-sm-3 col-form-label'
+  .col-sm-9
+    = f.email_field :email, class: 'form-control'

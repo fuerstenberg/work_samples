@@ -1,0 +1,41 @@
+= simple_form_for [:admin, form] do |f|
+
+  = body do
+    = fieldset "Persönliche Daten" do
+      = f.input :name
+      = f.input :zip, :input_html => { :maxlength => 5 }
+      = f.input :city
+      = f.input :date_of_birth, :as => :date, :start_year => (Date.today.year - 90), :end_year => (Date.today.year - 15), :wrapper_html => { :class => :date_of_birth }, :prompt => true
+      = f.input :gender_list, as: :radio, collection: User.gender_options
+      = f.input :http, :wrapper_html => { :class => :http }
+
+    = fieldset "Anmeldedaten" do
+      = f.input :email,                 :required => true
+      = f.input :password,              :required => true
+      = f.input :password_confirmation, :required => true, :wrapper_html => {:class => :nolabel}
+
+    - if f.object.terms_of_service.blank?
+      = fieldset "Allgemeine Geschäftsbedingungen" do
+        = f.check_box :terms_of_service
+        = f.label :terms_of_service, raw(t("activerecord.attributes.user.terms_of_service") + '<abbr title="benötigt">*</abbr>')
+        = link_to "AGB jetzt durchlesen.", terms_pages_path(:lightbox => {:width => 500, :height => 500}), :class => :lightbox
+
+    - unless f.object.new_record?
+      = fieldset "Beschreibung" do
+        = f.input :description
+        = f.input :favourite_experience
+        = f.input :favourite_areas
+        = f.input :driving_description
+
+      = fieldset "Vorlieben" do
+        = f.input :licence_date, :as => :date, :discard_day => true, :discard_month => true, :start_year => Date.today.year - 90, :end_year => Date.today.year
+        = f.input :distance, :collection => (1..10).map{|i| i*1000} + (3..20).map{|i| i*5000} + (3..20).map{|i| i*50000}
+        = f.input :distance_per_year, :collection => [5000, 10000, 15000, 20000, 25000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+        = f.input :favorite_vendor
+        = f.input :favorite_amount_of_cylinders, :collection => %w(1 2 3 4 5 6 8)
+        = f.input :driving_style_list, as: :check_boxes, collection: User.driving_style_options
+        = f.input :drive_type_list, as: :check_boxes, collection: User.drive_type_options
+        = f.input :clothing_list, as: :check_boxes, collection: User.clothing_options
+
+  = actions do
+    = f.button :submit, as: :button, button_html: {class: "btn btn-primary"}

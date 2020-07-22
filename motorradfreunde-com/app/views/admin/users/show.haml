@@ -1,0 +1,20 @@
+- title @user
+
+- content_for :main_action do
+  = link_to "Zurück", :back, class: "btn btn-default"
+  = link_to "Löschen", [:admin, @user], method: :delete, data: { confirm: "Wirklich?" }, class: "btn btn-danger"
+
+%table
+  - @user.attribute_names.each do |name|
+    %tr
+      %td= name
+      %td= @user.read_attribute name
+
+%h2 Fragen
+%table.table.table-striped= render @user.questions.order(updated_at: :desc)
+
+%h2 Antworten
+%table.table.table-striped= render @user.answers.order(updated_at: :desc)
+
+%h2 Kommentare
+%table.table.table-striped= render @user.comments.order(updated_at: :desc)

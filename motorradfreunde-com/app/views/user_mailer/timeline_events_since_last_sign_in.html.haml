@@ -1,0 +1,11 @@
+= render :layout => "layouts/mailer_layout" do
+  %h1 Es gibt Neuigkeiten auf deiner Pinnwand
+
+  %p
+    == Hallo #{@user},
+    %br/
+    %strong es gibt Neuigkeiten auf deiner Pinnwand.
+
+    %br/
+    %br/
+    = link_to "Klicke hier um zu deiner Pinnwand zu gelangen", "https://www.motorradfreunde.com/account/dashboards"

@@ -1,0 +1,14 @@
+- timeline_event = article_comment_created
+
+%li.item.article_comment_created[timeline_event]
+  = preview timeline_event.secondary_subject
+  .content_box
+    .left_content
+      .head== #{link_to timeline_event.actor, timeline_event.actor} hat den Artikel #{link_to timeline_event.secondary_subject, timeline_event.secondary_subject} kommentiert
+      .subhead
+      .content
+        = truncate timeline_event.subject.body, length: 100
+        = link_to 'mehr', timeline_event.secondary_subject
+    .right_content
+      == vor #{time_ago_in_words timeline_event.created_at}
+

@@ -1,0 +1,48 @@
+= render layout: "layouts/mail_layout" do
+
+  == Hallo #{@user.to_s},
+  %br
+  es gibt Neues bei Motorradfreunde:
+  %br
+  - if @content_objects["users"].present?
+    %br
+    %strong Neue Motorradfreunde in deiner Nähe
+    %ul
+      - @content_objects["users"].each do |user|
+        %li= link_to user, user_url(user, utm_source: "UserMailer", utm_medium: "E-Mail", utm_campaign: "User")
+
+  - if @content_objects["events"].present?
+    %br
+    %strong Termine in deiner Nähe
+    %ul
+      - @content_objects["events"].each do |event|
+        %li
+          =l event.start_at
+          %br
+          = link_to event, event_url(event, utm_source: "UserMailer", utm_medium: "E-Mail", utm_campaign: "Event")
+
+
+  - if @content_objects["questions"].present?
+    %br
+    %strong Aktuelle Forenbeiträge
+    %ul
+      - @content_objects["questions"].each do |question|
+        %li= link_to question, question_url(question, utm_source: "UserMailer", utm_medium: "E-Mail", utm_campaign: "Question")
+
+
+  - if @content_objects["articles"].present?
+    %br
+    %strong Neue Artikel
+    %ul
+      - @content_objects["articles"].each do |article|
+        %li= link_to article, article_url(article, utm_source: "UserMailer", utm_medium: "E-Mail", utm_campaign: "Article")
+
+
+  - if @content_objects["pois"].present?
+    %br
+    %strong Neue Orte in deiner Nähe
+    %ul
+      - @content_objects["pois"].each do |poi|
+        %li= link_to poi, poi_url(poi, utm_source: "UserMailer", utm_medium: "E-Mail", utm_campaign: "Poi")
+
+  =#raw I18n.t "notifications.#{@notification.notification_type}.message", @objects

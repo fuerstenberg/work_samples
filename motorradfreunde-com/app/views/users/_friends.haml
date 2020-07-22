@@ -1,0 +1,15 @@
+- user = friends
+
+.friends.container__images.mb-4
+  .card
+    .card-header
+      %h2 Freunde
+    .card-block
+      .row
+        - user.friends.sort_by(&:to_s).each do |friend|
+          .col-6.my-2= render partial: 'users/small', object: friend, locals: { link: true }
+
+    -# .card-footer
+    -#   - if current_user and ((obj.respond_to?(:user) and obj.user == current_user) or obj == current_user or obj.is_a?(Poi))
+    -#     .row
+    -#       = render partial: "images/form", object: obj.images.build

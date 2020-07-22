@@ -1,0 +1,24 @@
+.main_item[feed_item]{class: (feed_item.image_url.present? ? :with_image : :no_image)}
+  = preview feed_item.feed, link: feed_item.url, target: :blank
+
+  .item_content_container
+    .items
+      .header
+        = feed_item.feed
+        %h2= link_to feed_item, feed_item.url, target: :blank
+        %small
+          %i.icon.icon-time
+          == vor #{time_ago_in_words feed_item.timeline_events.first.created_at}
+
+      - if feed_item.image_url.present?
+        = image_tag feed_item.image_url, width: '100%'
+
+      - if feed_item.content.present?
+        %p= truncate feed_item.content, length: 250
+      - if feed_item.description.present?
+        %p= truncate feed_item.description, length: 250
+
+      .footer
+        = link_to feed_item.url, target: :blank do
+          %i.icon-external-link
+          mehr

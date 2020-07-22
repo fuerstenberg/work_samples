@@ -1,0 +1,47 @@
+- if !@backseatStatusAvailable()
+  .alert.alert-info
+    %form
+      %h4 Ändere deinen Rücksitzstatus
+      %label.radio
+        %input.backseat_radio{name: "backseat_list", type: "radio", value: "looking_for_someone"}
+        Ich suche jemanden der auf meinem Motorrad mitfährt.
+      %label.radio
+        %input.backseat_radio{name: "backseat_list", type: "radio", value: "looking_for_a_backseat"}
+        Ich suche jemanden der mich auf seinem Motorrad mitnimmt.
+      %label.radio
+        %input.backseat_radio{name: "backseat_list", type: "radio", value: "busy"}
+        Mein Rücksitz ist bereits besetzt.
+
+- else if !@genderStatusAvailable()
+  .alert.alert-info
+    hasGender
+
+- else if !@drivingStyleStatusAvailable()
+  .alert.alert-info
+    drivingStyleStatusAvailable
+
+- else if !@genderStatusAvailable()
+  .alert.alert-info
+    genderStatusAvailable
+
+- else if !@interestedInGenderStatusAvailable()
+  .alert.alert-info
+    interestedInGenderStatusAvailable
+
+- else if !@ownsMotorcycleStatusAvailable()
+  .alert.alert-info
+    ownsMotorcycleStatusAvailable
+
+- else if !@relationshipStatusAvailable()
+  .alert.alert-info
+    relationshipStatusAvailable
+
+- else if !@ridesStatusAvailable()
+  .alert.alert-info
+    ridesStatusAvailable
+
+- else if !@ridesWithOtherStatusAvailable()
+  .alert.alert-info
+    ridesWithOtherStatusAvailable
+
+

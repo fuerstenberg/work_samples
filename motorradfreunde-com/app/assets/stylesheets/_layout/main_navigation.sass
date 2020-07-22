@@ -1,0 +1,134 @@
+.main-navigation
+  background-color: $red
+  @include linear-gradient(to left, $red, $red_lighter, $red)
+  border-color: $red_lighter
+  border-color: #dc1216
+  color: #FFF
+  z-index: 2000
+
+
+.main-navigation
+  margin-bottom: 0
+
+  box-shadow: rgba(0,0,0,0.1) 0 0 6px 0
+
+  // &.navbar > .container .navbar-brand,
+  &.navbar > .container h1
+    // margin-left: 15px
+    margin-left: -15px
+
+  &.navbar > .container .navbar-brand
+    display: block
+    height: 50px
+    overflow: hidden
+    width: 200px
+
+    background: transparent url(asset_path("logo_m.png")) no-repeat left center
+    background-size: 167px 33px
+    text-indent: -1000px
+
+  .dropdown .badge
+    background-color: $red + #333
+
+  .dropdown-menu
+    min-width: 220px
+    z-index: 2000
+
+    & > .active > a
+      background-color: $red
+
+  .nav > li > a
+    padding-left: 9px
+    padding-right: 9px
+
+    &.current_user
+      padding-top: 7px
+      padding-bottom: 8px
+
+  // .current_user_name
+  //   display: none
+
+  .current_user_avatar
+    margin-right: 5px
+    img
+      width: 32px
+
+  &.navbar-inverse
+    .navbar-nav
+      & > li > a
+        color: $red_light
+
+      & > .dropdown > a.dropdown-toggle .caret
+        border-top-color: $red_light
+        border-bottom-color: $red_light
+
+      & > li > a:hover,
+      & > li > a:focus,
+      & > .open > a,
+      & > .open > a:hover,
+      & > .open > a:focus,
+      & > .open > a.dropdown-toggle .caret,
+        background-color: $red_lighter
+        background-color: $red_darker
+        border-top-color: white
+        border-bottom-color: white
+        color: white
+
+      & > .active > a
+        background-color: $red_lighter + #111
+        background-color: $red_darker
+        color: white
+
+  .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus
+    background-color: #EEE
+    color: #333
+
+  .dropdown-menu .badge
+    background-color: #F3292D
+
+  .dropdown-toggle img
+    width: 35px
+
+  form.navbar-form
+    input
+      background-color: rgba(255,255,255,0.2)
+      border-color: rgba(255,255,255,0.2)
+      color: #FFF
+      &:focus
+        background-color: #FFF
+        border-color: #DDD
+        color: #333
+
+  .navbar-text
+    color: #FFF
+
+
+
+body > .headline
+  border-bottom: 1px solid $red_darker - #222
+  position: fixed
+  top: 51px
+  left: 0
+  right: 0
+  z-index: 1999
+
+  background-color: $red_darker
+  color: #333
+  color: #FFF
+
+
+  .btn-toolbar
+    margin: 11px
+    margin-right: 0
+    a
+      // +single_box_shadow(rgba(0,0,0,0.5),1px,1px,2px,0)
+
+  h1
+    margin: 7px 0
+
+    color: #FFF
+    font-family: 'Helvetica Neue', helvetica, arial, sans-serif
+    font-size: 2em
+    font-style: italic
+    font-weight: 700
+    line-height: 1.3em

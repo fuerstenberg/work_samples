@@ -1,0 +1,14 @@
+- obj = images
+
+#images.images.container__images.mb-4
+  .card
+    .card-header
+      %h2 Bilder
+    .card-block
+      - if (images = obj.images and images.present?) or current_user == obj or (obj.respond_to?(:user) and current_user == obj.user) or obj.is_a?(Poi)
+        .row= render partial: "images/image", collection: images
+
+    .card-footer
+      - if can? :update, obj
+        .row
+          = render partial: "images/form", object: obj.images.build

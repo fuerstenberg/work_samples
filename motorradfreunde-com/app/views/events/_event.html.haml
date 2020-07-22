@@ -1,0 +1,21 @@
+- cache ["events/event", event], expires_in: 1.hour do
+
+  - outdated = "outdated" if event.end_at < Time.now
+  %div[event]{class: outdated}
+    .event__date
+      .event__start-at
+        =l event.start_at, format: :longest
+
+      - if event.start_at.to_date < event.end_at.to_date
+        .event__end-at
+          =l event.end_at, format: :longest
+
+    .event__body
+      %h2.h5.mt-0= link_to event, event
+
+      - if event.geocoded?
+        %address.text-muted
+          = event.formatted_zip_city
+
+        %small.text-muted.pull-right
+          - distance_from_me_to event

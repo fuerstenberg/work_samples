@@ -1,0 +1,29 @@
+- cache ["day_break", day], expires_in: 1.hour do
+  .main_item.day
+    = preview day
+    .item_content_container
+      .items
+        .header
+          %h2
+            =l day, format: :longer
+            &mdash;
+            = link_to "Nächste Termine", :events
+
+        %ul.events
+          - Event.upcoming_since(day).limit(3).each do |event|
+            %li
+              .event
+                %h3= link_to event, event
+                %small
+                  %i.icon-calendar
+                  %span{style: ("text-decoration: line-through;" if event.end_at < Time.now)}
+                    =l event.start_at, format: (event.hide_time? ? :date_only : :shorten)
+                    %br
+                    - if event.start_at < event.end_at
+                      %i.icon-no
+                      =l event.end_at, format: (event.hide_time? ? :date_only : :shorten)
+                - if event.geocoded?
+                  %br
+                  %small
+                    %i.icon-globe
+                    = event.postal_code_and_city_and_state_and_country

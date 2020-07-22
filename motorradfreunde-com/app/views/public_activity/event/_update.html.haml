@@ -1,0 +1,3 @@
+- if true or activity.complete?
+  = render layout: "layouts/activity", object: activity, locals: { activity_title: "hat einen Termin bearbeitet" } do
+    = render partial: "events/event", object: activity.trackable

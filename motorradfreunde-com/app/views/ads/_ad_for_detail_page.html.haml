@@ -1,0 +1,15 @@
+- if ad_for_detail_page.html_only?
+  .row
+    .col-xs-12
+      =raw ad_for_detail_page.html
+      =raw ad_for_detail_page.javascript
+
+- else
+  .text-center
+    = link_to ad_for_detail_page.url do
+      %h2= ad_for_detail_page.title
+      - if ad_for_detail_page.subtitle
+        %p= ad_for_detail_page.subtitle
+      %p.text-muted= (ad_for_detail_page.displayed_url.present? ? ad_for_detail_page.displayed_url : ad_for_detail_page.url).downcase.gsub("http://", "")
+      =raw ad_for_detail_page.html
+      =raw ad_for_detail_page.javascript

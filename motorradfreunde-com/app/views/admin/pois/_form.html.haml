@@ -1,0 +1,49 @@
+
+
+= simple_form_for [:admin, form.customer, form], html: { multipart: true } do |f|
+
+  = body do
+    = fieldset "Name (wird angezeigt)" do
+      = f.input :name
+      = f.input :contact
+      = f.input :description, input_html: { rows: 4 }
+      = f.input :opening_times, input_html: { rows: 3 }
+      = f.input :log, input_html: { rows: 3 }
+
+    = fieldset "Kontaktinformationen (wird angezeigt)" do
+      = f.input :enabled_at, end_year: (Date.today.year + 1), order: [:day, :month, :year], include_blank: true
+      = f.input :enabled_until, end_year: (Date.today.year + 1), order: [:day, :month, :year], include_blank: true
+      = f.input :http
+      = f.input :email
+      = f.input :phone
+      = f.input :handy
+      = f.input :fax
+
+    = fieldset "Kategorie (wird angezeigt)" do
+      = f.input :type_list, as: :text, input_html: { rows: 3 }
+
+    = fieldset "Properties" do
+      = f.input :property_list, as: :text, input_html: { rows: 3 }
+
+    = fieldset "Adresse (wird angezeigt)" do
+      = f.input :country, collection: I18n.t(:countries).invert.select{|k,v| %w(DE AT CH IT).include?(v.to_s)}, as: :select
+      = f.input :postal_code
+      = f.input :city
+      = f.input :route
+      = f.input :latitude
+      = f.input :longitude
+      / .map
+      /   %div#mapable{:style => "width: 100%; height: 400px;"}
+
+    = fieldset "Bilder" do
+      - index = 0
+      = f.simple_fields_for :photos do |photo|
+        - if photo.object.new_record?
+          = photo.input :photo, label: "Bild #{index += 1}"
+        - else
+          = photo.input :_destroy, label: "löschen", as: :boolean
+
+  = actions do
+    = f.button :submit
+    = link_to "Übersicht", [:admin, :pois], class: "btn btn-default"
+

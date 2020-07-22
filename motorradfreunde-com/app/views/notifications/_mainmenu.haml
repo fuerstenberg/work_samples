@@ -1,0 +1,13 @@
+- notifications = current_user.notifications.unread.count
+
+%li.nav-item.dropdown.notifications
+  %a.js--notifications-menu.nav-link.dropdown-toggle{href: '#', data: data_user_id(current_user, {toggle: "dropdown"})}
+    - if notifications > 0
+      %span.badge.badge-pill.badge-success= notifications
+    = icon 'bell-o'
+
+  %ul.notifications__list
+    - current_user.notifications.limit(5).all.each do |notification|
+      - partial = 'notifications/' + notification.notification_type.gsub('.', '_')
+      = render partial: partial, locals: { notification: notification }
+

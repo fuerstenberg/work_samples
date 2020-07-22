@@ -1,0 +1,15 @@
+- meta @user
+- title @user
+- subtitle "Verfolger"
+
+= render layout: "users/layout", object: @user do
+  = render partial: "users/section_followings", object: @user
+  = render partial: "users/section_followers",  object: @user
+
+- content_for :actions do
+  - if @user == current_user
+    = link_to "bearbeiten", [:edit, :account], class: "btn btn-success"
+  - else
+    = link_to "Bikergruß senden", [@user, :greetings], method: :post, class: "btn btn-success", :rel => "nofollow"
+    = link_to "Nachricht senden", [@user, :messages], class: "btn btn-success", :rel => "nofollow"
+    = link_to_toggle_followings_in_btn_group current_user, @user

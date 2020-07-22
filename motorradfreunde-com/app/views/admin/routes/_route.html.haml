@@ -1,0 +1,13 @@
+%tr
+  %td= preview route
+  %td= link_to route, route, title: "#{route}"
+  %td
+    = route.start_address
+    &mdash;
+    = route.end_address
+  %td== #{route.distance_in_km} km
+  %td
+    wurde vor
+    = time_ago_in_words route.created_at
+    angelegt
+  %td= link_to "löschen", [:admin, route.routable, route], method: :delete, data: {confirm: "Wirklich?"}, class: "btn btn-danger"

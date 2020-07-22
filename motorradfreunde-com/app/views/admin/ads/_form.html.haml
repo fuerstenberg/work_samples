@@ -1,0 +1,21 @@
+
+
+= simple_form_for [:admin, form.customer, form] do |f|
+
+  = body do
+    = f.input :active
+    = f.input :position
+    = f.input :html_only
+    = f.input :title
+    = f.input :subtitle
+    = f.input :displayed_url
+    = f.input :url
+    = f.input :target,          collection: Ad::TARGETS.invert
+    = f.input :html,            input_html: { rows: 5 }
+    = f.input :javascript,      input_html: { rows: 5 }
+    = f.input :description,     input_html: { rows: 5 }
+
+  = actions do
+    = f.button :submit, as: :input, label: "Speichern"
+    = link_to "Zur Werbeübersicht", [:admin, :ads], class: "btn btn-default"
+    = link_to "Zum Kunden", [:admin, form.customer], class: "btn btn-default"

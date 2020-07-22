@@ -1,0 +1,13 @@
+- user = user_card_images
+.user-card-images.card.visible-md-block.visible-lg-block.mb-4
+  .card-block
+    %h6.mb-3
+      Bilder
+      %small
+        ·
+        = link_to 'Bild hinzufügen', user_path(current_user, anchor: 'images')
+
+    .d-flex.justify-content-around.flex-wrap
+      - user.images.limit(10).each do |image|
+        = link_to user_path(user, anchor: 'images'), class: 'w-50' do
+          = image_tag image.file.url(:fill_300_300), class: 'img-fluid p-1'

@@ -1,0 +1,15 @@
+- if ad_for_sidebar.html_only?
+  .panel.panel-default.panel-ad.panel-ad-html-only
+    .panel-body
+      =raw ad_for_sidebar.html
+      =raw ad_for_sidebar.javascript
+
+- else
+  = link_to ad_for_sidebar.url, class: "panel panel-default panel-ad" do
+    .panel-body
+      %h2= ad_for_sidebar.title
+      - if ad_for_sidebar.subtitle
+        %p= ad_for_sidebar.subtitle
+      %p.text-muted= (ad_for_sidebar.displayed_url.present? ? ad_for_sidebar.displayed_url : ad_for_sidebar.url).downcase.gsub("http://", "")
+      =raw ad_for_sidebar.html
+      =raw ad_for_sidebar.javascript

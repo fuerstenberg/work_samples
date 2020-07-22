@@ -1,0 +1,25 @@
+.container
+  = form_for form, html: { multipart: true, autocomplete: "off" } do |f|
+    = render partial: 'form_errors',         object: f
+    = render partial: 'details_form',        object: f
+    = render partial: 'addresses/form',      object: f
+    = render partial: 'images/fields',       object: f
+    = render partial: 'feeds/form',          object: f
+    -# = render partial: 'tags_form',           object: f
+    = render partial: 'bike_builder_form',   object: f
+    = render partial: 'dealer_form',         object: f
+    = render partial: 'hotel_form',          object: f
+    = render partial: 'magazin_form',        object: f
+    = render partial: 'mountain_pass_form',  object: f
+    = render partial: 'rental_company_form', object: f
+    = render partial: 'shop_form',           object: f
+    = render partial: 'tour_operator_form',  object: f
+    = render partial: 'vendor_form',         object: f
+    = render partial: 'workshop_form',       object: f
+
+    .actions
+      - if f.object.new_record?
+        = link_to 'Abbrechen', f.object, class: 'btn btn-outline-secondary'
+      - else
+        = link_to 'Abbrechen', :back, class: 'btn btn-outline-secondary'
+      = f.submit 'Speichern', class: 'btn btn-primary'

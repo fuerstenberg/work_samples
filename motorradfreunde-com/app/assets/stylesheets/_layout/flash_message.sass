@@ -1,0 +1,20 @@
+.flash_message
+  border-bottom: 1px solid #E6E6E6
+  padding: 20px 0
+
+  background-color: #FED627
+  color: #6D5B05
+  font-size: 1.2em
+  text-align: center
+
+  @include linear-gradient(to left, #F9D325, #FDDF52, #F9D325)
+  text-shadow: rgba(0,0,0,0.2) 1px 1px 2px
+
+
+body.messages
+  .flash_message
+    position: relative
+    z-index: 1
+
+    &.flash-message-ie-warning
+      display: none

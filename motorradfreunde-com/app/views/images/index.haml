@@ -1,0 +1,10 @@
+- title @user, "Fotos"
+- subtitle @user
+
+= render partial: "users/sub_navigation", object: @user
+
+- if @user.photos.empty?
+  .alert.alert-info
+    Du hast noch keine Bilder hochgeladen. Zeig uns deine Bilder von dir und deinen Motorraderlebnissen! Hier kannst du auch deinen Avatar anlegen.
+
+= render partial: "images/images", object: @user

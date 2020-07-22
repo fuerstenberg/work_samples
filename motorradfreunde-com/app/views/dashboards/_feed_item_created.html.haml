@@ -1,0 +1,15 @@
+- timeline_event = feed_item_created
+
+%li.item.feed_item_created[timeline_event]
+  = preview timeline_event.actor, link: timeline_event.subject.url, target: "_blank"
+  .content_box
+    .head
+      = link_to timeline_event.actor, timeline_event.actor.url, target: "_blank"
+      = link_to timeline_event.subject, timeline_event.subject.url, target: "_blank"
+    .content
+      - if timeline_event.subject.image_url.present?
+        = image_tag timeline_event.subject.image_url
+      = truncate timeline_event.subject.content, :length => 250
+      = truncate timeline_event.subject.description, :length => 250
+    .foot
+      == vor #{time_ago_in_words timeline_event.created_at}

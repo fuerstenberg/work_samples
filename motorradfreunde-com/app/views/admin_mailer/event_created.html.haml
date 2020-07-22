@@ -1,0 +1,36 @@
+%h1= link_to @event.title, event_url(@event)
+
+%table
+  %tr
+    %th user
+    %td= link_to @event.user, user_url(@event.user)
+  %tr
+    %th start_at
+    %td= @event.start_at
+  %tr
+    %th end_at
+    %td= @event.end_at
+  %tr
+    %th meeting_point
+    %td= @event.meeting_point
+  %tr
+    %th latitude
+    %td= @event.latitude
+  %tr
+    %th longitude
+    %td= @event.longitude
+  %tr
+    %th description
+    %td= @event.description
+  %tr
+    %th url
+    %td= link_to @event.url, @event.url
+  %tr
+    %th hide_time
+    %td= @event.hide_time
+  %tr
+    %th created_at
+    %td= @event.created_at
+  %tr
+    %th updated_at
+    %td= @event.updated_at

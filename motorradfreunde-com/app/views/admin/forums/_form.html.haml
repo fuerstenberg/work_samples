@@ -1,0 +1,7 @@
+= simple_form_for [:admin, form] do |f|
+  = body do
+    = f.input :name
+    = f.input :description, input_html: { rows: 5 }
+
+  = actions do
+    = f.button :submit

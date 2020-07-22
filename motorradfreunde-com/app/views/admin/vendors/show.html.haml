@@ -1,0 +1,10 @@
+- title @vendor.name
+
+%table.table
+  %tr
+    %th Name
+    %td= @vendor.name
+
+- content_for :actions do
+  = link_to "Bearbeiten", [:edit, :admin, @vendor], class: "btn btn-success"
+  = link_to "Löschen", [:admin, @vendor], method: :delete, confirm: "Wirklich löschen?", class: "btn btn-default"

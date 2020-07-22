@@ -1,0 +1,38 @@
+- if @tag
+  - title @tag.name_plural
+  - subtitle "Orte, die Motorradfahrer lieben"
+  - meta_title @tag.name_plural
+- else
+  - title "Orte, die Motorradfahrer lieben"
+  - subtitle "Orte, Pässe, Werkstätten, Bikertreffs, Motorradhotels"
+  - meta_title "Orte, die Motorradfahrer lieben"
+
+- if current_user and current_user.geocoded?
+  .filter.row
+    .col-12.mb-4
+      .btn-group
+        = link_to "Alle", url_for(tag: nil), class: "btn btn-sm #{(params[:near] or params[:tagged_with]) ? 'btn-secondary' : 'btn-danger'}"
+        = link_to  "50km Umkreis", url_for(near:  50), class: "btn btn-sm #{params[:near].to_i ==  50 ? 'btn-danger' : 'btn-secondary'}"
+        = link_to "100km Umkreis", url_for(near: 100), class: "btn btn-sm #{params[:near].to_i == 100 ? 'btn-danger' : 'btn-secondary'}"
+        = link_to "150km Umkreis", url_for(near: 150), class: "btn btn-sm #{params[:near].to_i == 150 ? 'btn-danger' : 'btn-secondary'}"
+        = link_to "200km Umkreis", url_for(near: 200), class: "btn btn-sm #{params[:near].to_i == 200 ? 'btn-danger' : 'btn-secondary'}"
+
+.row= render partial: 'pois/poi', collection: @pois
+
+= paginate @pois
+
+- map collection: :pois
+
+- content_for :main_action do
+  - if can? :create, Poi
+    = link_to "POI anlegen", [:new, :poi], :class => "btn btn-success btn-large"
+
+-# TODO: tag cloud
+-# - content_for :sidebar do
+-#   - cache ["pois/index/filter", (params[:tagged_with] || '').parameterize], expires_in: 12.hour do
+-#     = panel do
+-#       = heading "Schlagwörter"
+-#       = body do
+-#         - Poi.tag_counts_on(:types).order(name: :asc).each do |tag|
+-#           - if tag.count > 0
+-#             = link_to tag, pois_tag_path(tag.becomes(Tag)), class: "label #{(tag.id == params[:tag_id].to_i) ? 'btn-danger' : 'btn-secondary'}"

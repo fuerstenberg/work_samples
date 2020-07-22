@@ -1,0 +1,13 @@
+= methods.sort
+= instance_variable_names
+
+%li[small_item]{data: (data_user_id(small_item) if small_item.is_a?(User))}
+  = preview small_item, format: :small
+  .content
+    - if small_item.is_a?(User)
+      = link_to_user small_item
+    - else
+      = link_to small_item, small_item
+
+    - if block_given?
+      = yield

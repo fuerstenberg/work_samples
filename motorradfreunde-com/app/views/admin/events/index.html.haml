@@ -1,0 +1,6 @@
+- title "Admin / Termine"
+
+= link_to "Neuen Termin anlegen", [:new, :admin, :event], :class => "btn btn-primary"
+%table= render @events
+
+= paginate @events

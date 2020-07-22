@@ -1,0 +1,8 @@
+= simple_form_for [:admin, @message] do |f|
+  = f.input :subject
+  = f.input :body
+  = f.input :sender_id, as: :hidden
+
+  = f.button :submit, value: "Systemnachricht schreiben"
+
+= render partial: "users/user_links", object: current_user, as: :user

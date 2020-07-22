@@ -1,0 +1,9 @@
+- poi = rental_company
+- if poi.is_rental_company?
+  %dl.row
+    %dt.col-sm-3 rental_company
+    %dd.col-sm-9
+      %dl
+        - if poi.vermietung_beschreibung.present?
+          %dt.vermietung_beschreibung= t 'mongoid.attributes.poi.poi.vermietung_beschreibung'
+          %dd.vermietung_beschreibung= poi.vermietung_beschreibung

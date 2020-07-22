@@ -1,0 +1,5 @@
+= render layout: "layouts/activity", object: activity, locals: { activity_title: "hat eine Motorradroute angelegt" } do
+  %p= link_to activity.trackable, [activity.owner, activity.trackable]
+
+  = link_to activity.trackable, title: activity.trackable, class: "card route-card", id: dom_id(activity.trackable, :card) do
+    = image_tag activity.trackable.address.static_map_url, class: "card-img-top img-fluid", alt: activity.trackable

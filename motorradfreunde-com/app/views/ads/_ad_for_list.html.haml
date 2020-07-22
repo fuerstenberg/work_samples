@@ -1,0 +1,15 @@
+- if ad_for_list.html_only?
+  .row
+    .col-xs-12
+      =raw ad_for_list.html
+      =raw ad_for_list.javascript
+
+- else
+  .col-xs-12
+    = link_to ad_for_list.url, class: "card card-ad" do
+      %h2= ad_for_list.title
+      - if ad_for_list.subtitle
+        %p= ad_for_list.subtitle
+      %p.text-muted= (ad_for_list.displayed_url.present? ? ad_for_list.displayed_url : ad_for_list.url).downcase.gsub("http://", "")
+      =raw ad_for_list.html
+      =raw ad_for_list.javascript

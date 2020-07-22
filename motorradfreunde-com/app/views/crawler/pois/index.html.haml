@@ -1,0 +1,94 @@
+.row
+  .col-xs-6
+    %h5 Motorradseite merken
+    = form_for [:crawler, InterestingUrl.new], html: { class: "form-inline" } do |f|
+      .input-group.col-xs-12
+        = f.text_field :url, class: "form-control", placeholder: "http://www.irgendeine-motorradseite.de"
+        %span.input-group-btn
+          = f.submit "Merken", class: "btn btn-success"
+    %hr
+    - poi = Poi.where("images_count < 1").order("RAND()").first
+    = link_to "ToDo", [:edit, :crawler, poi], class: "btn btn-sm btn-default pull-right"
+    %ul.list-unstyled
+      - InterestingUrl.where("checked_at IS NULL").order(created_at: :desc).limit(20).all.each do |interesting_url|
+        / %li=# link_to interesting_url, interesting_url.url, target: "interesting_url_preview"
+        %li= link_to interesting_url, new_crawler_poi_path(interesting_url_id: interesting_url.id), class: "interesting_url", data: {url: interesting_url.url}
+
+    %hr
+    %h5 Zuletzt bearbeitet
+    %ul.list-unstyled
+      - Poi.order(updated_at: :desc).limit(10).each do |poi|
+        %li
+          .pull-right
+            %small=l poi.updated_at, format: :short
+            = link_to "bearbeiten", [:edit, :crawler, poi], class: "btn btn-default btn-xs"
+          %small
+            = link_to poi, poi, target: :poi_preview
+
+
+
+  .col-xs-6
+    %h5 Ort/Seite anlegen
+    .btn-toolbar
+      = link_to "Später", [:crawler, InterestingUrl.new], class: "btn btn-warning"
+      - if @poi and @poi.persisted?
+        = link_to "Löschen", [:crawler, @poi], method: :delete, class: "btn btn-danger"
+      - else
+        = link_to "Ablehnen", [:crawler, InterestingUrl.new], class: "btn btn-danger"
+    %hr
+    = form_for [:crawler, (@poi || Poi.new)], html: { class: "" } do |f|
+      .form-group
+        = f.text_field :http, class: "form-control input-sm", placeholder: "http://www.irgendeine-motorradseite.de"
+      .form-group
+        = f.text_field :name, class: "form-control input-sm", placeholder: "Name"
+      .form_group
+        - Tag.where(poi_category: true).order(:name).to_a.each do |tag|
+          %label.checkbox-inline
+            %input{name: :types, type: "checkbox", id: dom_id(tag), value: tag.id}
+            %small= tag
+      .form-group
+        = f.text_field :type_list, class: "form-control input-sm", placeholder: "Weitere Schlagwörter"
+      .form-group
+        = f.text_field :full_address, class: "form-control input-sm", placeholder: "Adresse"
+      .form-group
+        = f.text_area :description, class: "form-control input-sm", placeholder: "Beschreibung", rows: (f.object.description and f.object.description.size > 100 ? 5 : 3)
+      - f.object.photos.build
+      - f.object.photos.build
+      -# f.object.photos.each do |photo|
+      -# if photo.new_record?
+      = f.fields_for :photos, f.object.photos do |photo|
+        - if photo.object.persisted?
+          = link_to photo.object.url(:limit_1000_1000), class: "lightbox", rel: :group, alt: "#{photo.object.photogenic}" do
+            = image_tag photo.object.url(:square), style: "max-width: 50px;"
+        - elsif f.object.photos.index(photo.object) == f.object.photos.size-2
+          .form-group
+            = photo.file_field :photo, class: "form-control input-sm", placeholder: "Foto"
+        - else
+          .form-group
+            = photo.text_field :photo, class: "form-control input-sm", placeholder: "Foto URL", value: ""
+      .form-group
+        = f.text_field :contact, class: "form-control input-sm", placeholder: "Ansprechpartner"
+      .form-group
+        = f.text_field :phone, class: "form-control input-sm", placeholder: "Festnetztelefon"
+      .form-group
+        = f.text_field :handy, class: "form-control input-sm", placeholder: "Handy"
+      .form-group
+        = f.text_field :fax, class: "form-control input-sm", placeholder: "Fax"
+      .form-group
+        = f.text_field :email, class: "form-control input-sm", placeholder: "Email"
+      .form-group
+        = f.text_area :opening_times, class: "form-control input-sm", placeholder: "Öffnungszeiten"
+
+      .input-group.col-xs-12
+        %span.input-group-btn
+          = f.submit "Speichern", class: "btn btn-success"
+
+
+- content_for :scripts do
+  :coffee
+    $ ->
+      $('a.interesting_url').click (event) ->
+        window.open $(event.target).data('url'), 'interesting_url'
+
+
+

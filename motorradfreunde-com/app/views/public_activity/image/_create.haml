@@ -1,0 +1,5 @@
+= render layout: "layouts/activity", object: activity, locals: { activity_title: "hat ein Bild hochgeladen" } do
+  %p= link_to activity.trackable, [activity.owner, activity.trackable]
+  - if activity.trackable and activity.trackable.images.present?
+    = link_to activity.trackable.images.first.file.url(:limit_1000_1000), class: "lightbox", rel: :group, alt: "#{activity.owner}" do
+      = image_tag activity.trackable.images.first.file.url(:limit_1000_1000), class: "card-image"

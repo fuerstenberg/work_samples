@@ -1,0 +1,80 @@
+- @activity_counter ||= 0
+- @activity_counter += 1
+
+-# TODO: Dashboard-Posts
+-# - if @activity_counter == 1
+-#   %li.media.list-group-item.p-4
+-#     .input-group
+-#       %input.form-control{:placeholder => "Message", :type => "text"}/
+-#       .input-group-btn
+-#         %button.btn.btn-secondary{:type => "button"}
+-#           %span.icon.icon-camera
+
+%li.media.p-4
+  = image_tag activity.owner&.preview(:fill_200_200), class: "media-object d-flex align-self-start mr-3", alt: activity.owner
+
+  .media-body
+    .media-heading
+      %small.float-right.text-muted= time_ago_in_words activity.created_at
+      %h6
+        = link_to activity.owner, activity.owner
+        - if defined?(activity_title)
+          = activity_title
+
+    -# %p
+    -#   = activity.id
+    -#   = activity.key
+    -#   = activity.trackable
+    -#   = activity.coordinates
+
+    = yield
+
+    -# TODO: Dashboard-Comments
+    -# %ul.media-list.my-2
+    -#   %li.media.mb-3
+    -#     %img.media-object.d-flex.align-self-start.mr-3{:src => "assets/img/avatar-fat.jpg"}/
+    -#     .media-body
+    -#       %strong Jacon Thornton:
+    -#       Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
+    -#   %li.media
+    -#     %img.media-object.d-flex.align-self-start.mr-3{:src => "assets/img/avatar-mdo.png"}/
+    -#     .media-body
+    -#       %strong Mark Otto:
+    -#       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+
+
+
+
+-# - cache ["layouts/activity", activity] do
+-#   - if true or activity.complete?
+-#     .media[activity]{class: activity.key.gsub(".", "-")}
+-#       = link_to activity.owner, class: "media-left" do
+-#         = image_tag activity.owner.avatar(:fill_200_200), class: "img-circle", alt: activity.owner
+-#       .media-body
+-#         .media-heading
+-#           = activity.id
+-#           = activity.key
+-#           = activity.trackable
+-#           = activity.coordinates
+-#           = link_to activity.owner, activity.owner
+-#           - if defined?(activity_title)
+-#             = activity_title
+-#           .stats
+-#             - if activity.owner and !activity.owner.admin? and activity.owner.geocoded?
+-#               = geo = activity.owner.formatted_address
+-#               &bull;
+-#
+-#             - if defined?(activity_stats)
+-#               = activity_stats
+-#               &bull;
+-#             - time_to_words activity.created_at
+-#         = yield
+-#         %hr
+-#
+-#   - elsif activity.trackable.present?
+-#     .media[activity]{class: activity.key.gsub(".", "-")}
+-#       .media-left
+-#         %div{style: "width: 50px"}
+-#       .media-body
+-#         = yield
+-#         %hr

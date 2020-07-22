@@ -1,0 +1,5 @@
+= form_tag searches_url, method: :get do |f|
+
+  = text_field_tag :query, params[:query], placeholder: "Suche"
+
+  %button.btn.btn-inverse{:type => "submit"}<> Suchen

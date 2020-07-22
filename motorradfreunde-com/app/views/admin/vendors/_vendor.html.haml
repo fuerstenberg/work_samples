@@ -1,0 +1,4 @@
+%tr[vendor]
+  %td= link_to vendor.name, [:admin, vendor]
+  %td= link_to "Bearbeiten", [:edit, :admin, vendor]
+  %td= link_to "Löschen", [:admin, vendor], mehtod: :delete, confirm: "Bist du sicher?"

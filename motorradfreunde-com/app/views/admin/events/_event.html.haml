@@ -1,0 +1,24 @@
+- if event_counter == 0
+  %tr
+    %th Datum
+    %th Name / Adresse / Webseite
+    %th Beschreibung
+    %th
+    %th
+
+%tr[event]
+  %td{:style => "width: 230px"}
+    =l event.start_at, format: (event.hide_time? ? :date_only : :default)
+    - if event.start_at < event.end_at
+      %br
+      =l event.end_at, format: (event.hide_time? ? :date_only : :default)
+  %td
+    = link_to event, [:admin, event]
+    %br
+    = event.postal_code_and_city_and_state_and_country
+    %br
+    = link_to event.url, event.url, target: :blank if event.url.present?
+  %td= truncate event.description, :length => 200
+  %td= link_to "bearbeiten", [:edit, :admin, event]
+  %td= link_to "löschen",    [:admin, event], :method => :delete, :data => {:confirm => "Wirklich?"}
+
