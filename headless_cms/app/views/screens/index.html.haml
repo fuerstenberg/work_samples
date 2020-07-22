@@ -1,0 +1,7 @@
+- title @customer.screens
+
+- content_for :actions do
+  - if can? :create, Screen
+    = link_to t('button.new'), [:new, @customer, :screen], class: "btn btn-sm btn-success"
+
+.list-group= render @customer.screens

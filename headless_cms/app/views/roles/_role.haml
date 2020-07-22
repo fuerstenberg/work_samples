@@ -1,0 +1,38 @@
+- if role_counter == 0
+  %tr
+    %th Customer
+    %th Type
+    %th
+
+- if can?(:read, role)
+  %tr
+    %td.col-3
+      - if role.new_record? && defined?(edit_role) && role == edit_role && can?(:create, role)
+        = form_for [role.user, role], html: { class: 'form-inline' } do |f|
+          = render partial: "shared/errors", object: f
+          = f.select :customer_id, Customer.without_role_for_user(role.user).collect {|customer| [ customer.to_s, customer.id ] }, {}, placeholder: "User role", class: "form-control"
+          = f.submit t('button.save'), class: "btn btn-primary-outline"
+          = link_to t('button.cancel'), role.user, class: "btn btn-default"
+
+      - else
+        = link_to role.customer, role.customer
+
+    %td
+      - if role.persisted? && defined?(edit_role) && role == edit_role && can?(:update, role)
+        = form_for [role.user, role], html: { class: 'form-inline' } do |f|
+          = render partial: "shared/errors", object: f
+          - if Current.user.god?
+            = f.select :type, Role::TYPES, {}, placeholder: "User role", class: "form-control"
+          - elsif Current.user.admin?
+            = f.select :type, Role::CUSTOMER_DEPENDENT_TYPES, {}, placeholder: "User role", class: "form-control"
+          = f.submit t('button.save'), class: "btn btn-primary-outline"
+          = link_to t('button.cancel'), f.object.user, class: "btn btn-default"
+
+      - elsif role.persisted?
+        = role.type
+        - if can?(:update, role)
+          = link_to 'Edit', [:edit, role.user, role], class: 'btn btn-default'
+
+    %td.text-right
+      - if role.persisted? && can?(:destroy, role)
+        = link_to 'Delete', [role.user, role], method: :delete, data: { confirm: t('confirmations.destroy') }, class: 'btn btn-default'

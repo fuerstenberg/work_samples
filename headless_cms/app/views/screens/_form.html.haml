@@ -1,0 +1,18 @@
+= form_for [form.customer, form], html: { class: "form-horizontal" } do |f|
+
+  = render partial: "shared/errors", object: f
+
+  .form-group
+    = f.label :name, class: "control-label col-sm-2"
+    .col-sm-10
+      = f.text_field :name, class: "form-control", placeholder: "My screen name"
+
+  = render partial: "addresses/form", object: f
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit t('button.save'), class: "btn btn-primary-outline"
+      - if f.object.new_record?
+        = link_to t('button.cancel'), [f.object.customer, :screens], class: "btn btn-default-outline"
+      - else
+        = link_to t('button.cancel'), [f.object.customer, f.object], class: "btn btn-default-outline"

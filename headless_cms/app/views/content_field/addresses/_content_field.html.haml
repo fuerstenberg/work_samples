@@ -1,0 +1,6 @@
+- unless content[content_field.field_id].blank?
+  - if content_field.has_one? and address = content.send(content_field.field_id)
+    = render address, content_field: content_field
+  - else
+    - (content.send(content_field.field_id) or []).each do |address|
+      = render address, content_field: content_field

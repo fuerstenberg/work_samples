@@ -1,0 +1,10 @@
+= link_to [screen.customer, screen], class: 'list-group-item' do
+  .pull-left
+    -# TODO: last api request status
+    -# screen.status
+    %div{ class: "text-#{screen.last_api_get_request_status}" }
+      &bull;
+  .p-x
+    = screen
+    .text-muted
+      %small= screen.address

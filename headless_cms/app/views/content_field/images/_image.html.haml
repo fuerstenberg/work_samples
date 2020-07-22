@@ -1,0 +1,18 @@
+- if image_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[image]
+  %td= image.name
+  %td= image._type
+  %td= image.field_id
+  %td= image.required
+  %td.text-right
+    - if image.global_content_type
+      = link_to "Settings", [:edit, image.global_content_type, image], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, image.content_type.customer, image.content_type, image], class: "btn btn-sm btn-default-outline"

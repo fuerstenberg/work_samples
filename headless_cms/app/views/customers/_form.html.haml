@@ -1,0 +1,27 @@
+= form_for form, html: { multipart: true, class: "form-horizontal" } do |f|
+
+  = render partial: "shared/errors", object: f
+
+  .form-group
+    = f.label :name, class: "control-label col-sm-2"
+    .col-sm-10
+      = f.text_field :name, class: "form-control", placeholder: "My company name"
+
+  = render partial: "addresses/form", object: f
+
+  .form-group
+    = f.label :logo, class: "control-label col-sm-2"
+    .col-sm-10
+      = f.file_field :logo, placeholder: "Company logo"
+      = f.hidden_field :logo_cache
+    - if f.object.logo?
+      .col-sm-10.col-sm-offset-2
+        = image_tag f.object.logo_url(:xs)
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit t('button.save'), class: "btn btn-primary-outline"
+      - if f.object.new_record?
+        = link_to t('button.cancel'), :customers, class: "btn btn-default"
+      - else
+        = link_to t('button.cancel'), f.object, class: "btn btn-default"

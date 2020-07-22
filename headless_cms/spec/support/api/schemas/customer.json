@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": ["customer"],
+  "properties": {
+    "customer" : {
+      "type" : "object",
+      "required" : [
+        "address",
+        "id",
+        "name",
+        "screen_ids",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties" : {
+        "address" : { "type" : "address" },
+        "id" : { "type" : "string" },
+        "name" : { "type" : "string" },
+        "screen_ids" : { "type" : "array" },
+        "createdAt" : { "type" : "date-time" },
+        "updatedAt" : { "type" : "date-time" }
+      }
+    }
+  }
+}

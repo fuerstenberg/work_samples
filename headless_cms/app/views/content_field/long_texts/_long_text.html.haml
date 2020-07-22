@@ -1,0 +1,18 @@
+- if long_text_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[long_text]
+  %td= long_text.name
+  %td= long_text._type
+  %td= long_text.field_id
+  %td= long_text.required
+  %td.text-right
+    - if long_text.global_content_type
+      = link_to "Settings", [:edit, long_text.global_content_type, long_text], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, long_text.content_type.customer, long_text.content_type, long_text], class: "btn btn-sm btn-default-outline"

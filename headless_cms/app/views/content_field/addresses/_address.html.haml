@@ -1,0 +1,18 @@
+- if address_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[address]
+  %td= address.name
+  %td= address._type
+  %td= address.field_id
+  %td= address.required
+  %td.text-right
+    - if address.global_content_type
+      = link_to "Settings", [:edit, address.global_content_type, address], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, address.content_type.customer, address.content_type, address], class: "btn btn-sm btn-default-outline"

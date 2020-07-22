@@ -1,0 +1,17 @@
+- title @content_types
+
+.row
+  .col-xs-12
+    .list-group= render @content_types
+
+- if can? :create, ContentType
+  - content_for :actions do
+    .btn-group
+      = link_to t('button.new'), [:new, @customer, :content_type], class: "btn btn-sm btn-success-outline"
+      %button.btn.btn-sm.btn-success-outline.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+        %span.caret
+      %ul.dropdown-menu.dropdown-menu-right
+        %li.dropdown-header
+          = t '.button.copy_hint'
+        - GlobalContentType.order(name: :asc).each do |global_content_type|
+          %li= link_to t('.button.copy', title: global_content_type.to_s), customer_content_types_path(@customer, global_content_type_id: global_content_type.id), method: :post

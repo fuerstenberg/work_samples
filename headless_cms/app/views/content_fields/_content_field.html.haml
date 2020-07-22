@@ -1,0 +1,14 @@
+- if content_field_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[content_field]
+  %td= content_field.name
+  %td= content_field._type
+  %td= content_field.field_id
+  %td= content_field.required
+  %td.text-right= link_to "Settings", [:edit, content_field.content_type.customer, content_field.content_type, content_field], class: "btn btn-sm btn-default-outline"

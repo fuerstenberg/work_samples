@@ -1,0 +1,22 @@
+- title @contents
+
+- content_for :actions do
+  .btn-group
+    %button.btn.btn-sm.btn-success-outline.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+      = t 'button.new'
+      %span.caret
+    %ul.dropdown-menu.dropdown-menu-right
+      - ContentType.order("name asc").all.each do |content_type|
+        %li= link_to content_type.name, new_customer_content_path(@customer, content_type_id: content_type.id)
+
+.row
+  .col-xs-12
+    = form_tag search_customer_contents_url, method: :get do
+      .form-group
+        = search_field_tag :q, params[:q], class: 'form-control form-control-lg', placeholder: 'Suche', autofocus: true
+
+.row
+  .col-xs-12
+    .list-group{data: { sortable: sort_customer_contents_url(@customer) }}= render @contents
+
+= paginate @contents

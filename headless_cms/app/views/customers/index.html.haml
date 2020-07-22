@@ -1,0 +1,24 @@
+- title
+
+- main_action_to_if can?(:create, Customer), t('link_to.new'), [:new, :customer]
+
+.row
+  .col-xs-12
+    %table.table.table-striped= render @customers
+
+- if current_user.god?
+  .row
+    .col-xs-12
+      .statcard.p-3
+        %h3.statcard-number
+          = Screen.active.count
+        %span.statcard-desc Active screens
+
+    .col-xs-12
+      %ul.list-group
+        - Screen.grouped_by_month.each do |day, screens|
+          %li.list-group-item
+            = day.month
+            = day.year
+            %span.list-group-progress{style: "width: 75%;"}
+            .pull-right= screens.size

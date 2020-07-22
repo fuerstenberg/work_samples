@@ -1,0 +1,175 @@
+- host = Rails.env.production? ? 'https://cms.____.systems' : 'http://localhost:3000'
+- access_token = application.access_tokens.last.token rescue "your-valid-token"
+
+%dl.dl-horizontal
+  %dt Name
+  %dd= application.name
+
+  %dt UID (Client ID)
+  %dd= application.uid
+
+  %dt Secret
+  %dd= application.secret
+
+  %dt Redirect URI
+  %dd= application.redirect_uri
+
+
+%hr
+%h2
+  Screen API
+%p Die Screen API wird benutzt um Inhalte für Screens / Terminals / Stelen abzurufen.
+%p
+  Die Beispiele werden anhand des Befehls
+  %kbd curl
+  gezeigt, können aber auch mit einer beliebigen Programmiersprache durchgeführt werden.
+
+%hr
+- api = '/api/screens/v1/token.json'
+%h3
+  OAuth Access-Token erzeugen
+  %small== POST #{api}
+%p Der erzeugte Access-Token wird für alle weiteren Requests benutzt und ist nur eine bestimmte Zeit lang gültig.
+
+%h4 Request
+%pre
+  == curl -X POST -F "client_id=#{application.uid}" -F "client_secret=#{application.secret}" -F "grant_type=client_credentials" #{host}#{api}
+
+%h4 JSON Response (Beispiel)
+%p
+  Der access_token ist nur eine gewisse Zeit gültig (siehe expires_in).
+
+%pre
+  :preserve
+    {
+      "access_token":"#{access_token}",
+      "token_type":"Bearer",
+      "expires_in":7200,
+      "created_at":1574946771
+    }
+
+
+%hr
+- api = '/api/screens/v1/screen.json'
+%h3
+  Screen info
+  %small== GET #{api}
+%p Gibt Informationen zum Screen zurück.
+
+%h4 Request
+%pre
+  == curl -H 'Accept: application/json' -H "Authorization: Bearer #{access_token}" #{host}#{api}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "screen": {
+        "id": "5ddfc6abe21d4f5a9a88e744",
+        "createdAt": "2019-11-28T13:07:55.404Z",
+        "updatedAt": "2019-11-28T16:13:40.087Z",
+        "customerId": "5ddfc614e21d4f5a9a88e740",
+        "name": "____ Testscreen 1",
+        "address": {
+          "id": "5ddfc6abe21d4f5a9a88e746",
+          "createdAt": null,
+          "updatedAt": null,
+          "coordinates": [],
+          "street": "",
+          "zip": "",
+          "city": "",
+          "region": "",
+          "state": "",
+          "country": "",
+          "country_code": "",
+          "floor": ""
+        }
+      }
+    }
+
+
+%hr
+- api = '/api/screens/v1/contents.json'
+%h3
+  Alle veröffentlichte Inhalte abfragen
+  %small== GET #{api}
+%p Gibt Informationen zu den Inhalten eines Screen zurück.
+
+%h4 Request
+%pre
+  == curl -H 'Accept: application/json' -H "Authorization: Bearer #{access_token}" #{host}#{api}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "contents": [{
+        "id": "5ddfee27e1da34097700b8d3",
+        "createdAt": "2019-11-28T15:56:23.101Z",
+        "updatedAt": "2019-11-28T16:15:40.857Z",
+        "_checksum": null,
+        "content_type": "titel_text_bild",
+        "foreign_id": null
+      }]
+    }
+
+
+%hr
+- api = '/api/screens/v1/contents/:id.json'
+%h3
+  Veröffentlichten Inhalt abfragen
+  %small== GET #{api}
+%p Gibt Informationen einem Inhalt eines Screen zurück.
+%p Die :id im Pfad muss durch eine Content-ID ersetzt werden. z.Bsp: 5ddfee27e1da34097700b8d3
+
+%h4 Request
+%pre
+  == curl -H 'Accept: application/json' -H "Authorization: Bearer #{access_token}" #{host}#{api.gsub(':id', '5ddfee27e1da34097700b8d3')}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "content": {
+        "id": "5ddfee27e1da34097700b8d3",
+        "createdAt": "2019-11-28T15:56:23.101Z",
+        "updatedAt": "2019-11-28T16:15:40.857Z",
+        "assets": [],
+        "content_type": "titel_text_bild",
+        "_checksum": null,
+        "titel": "Testtitel",
+        "text": "Testtext"
+      }
+    }
+
+
+%hr
+- api = '/api/screens/v1/customer.json'
+%h3
+  Informationen vom Kunden abfragen
+  %small== GET #{api}
+%p Gibt Informationen des zugehörigen Kunden zurück.
+
+%h4 Request
+%pre
+  == curl -H 'Accept: application/json' -H "Authorization: Bearer #{access_token}" #{host}#{api}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "customer": {
+        "id": "5ddfc614e21d4f5a9a88e740",
+        "createdAt": "2019-11-28T13:05:24.550Z",
+        "updatedAt": "2019-11-28T14:39:17.551Z",
+        "name": "____ Systems Testkunde",
+        "screen_ids": ["5ddfc6abe21d4f5a9a88e744", "5ddfc6b7e21d4f5a9a88e748"],
+        "address": {
+          "id": "5ddfc614e21d4f5a9a88e742",
+          "street": "Musterstraße 1",
+          "zip": "12345",
+          "city": "Musterstadt",
+          "country": "Deutschland",
+        }
+      }
+    }

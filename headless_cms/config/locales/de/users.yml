@@ -1,0 +1,19 @@
+de:
+  users:
+    index:
+      title: Benutzer
+    edit:
+      title: Benutzer "%{title}" bearbeiten
+    new:
+      title: Benutzer anlegen
+    show:
+      title: Benutzer "%{title}"
+
+  mongoid:
+    attributes:
+      user:
+        email: eMail
+        language: Sprache
+        name: Name
+        password_confirmation: Passwortwiederholung
+        password: Passwort

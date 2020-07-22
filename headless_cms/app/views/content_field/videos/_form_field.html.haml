@@ -1,0 +1,25 @@
+- content_field = form_field
+
+.form-group
+  = form.label content_field.field_id, content_field.name, class: "control-label col-sm-2"
+  .col-sm-10
+    = form.fields_for content_field.field_id do |video_field|
+      - if video_field.object.new_record?
+        .form-group
+          .col-sm-12
+            = video_field.file_field :file, placeholder: content_field.name, step: 1
+      - else
+        .form-group
+          .col-sm-12
+            - if video = video_field.object
+              = video_tag video.file.url, controls: true, autobuffer: true, width: "100%"
+              = video_field.label :_destroy do
+                = video_field.check_box :_destroy
+                delete
+
+      .form-group
+        .col-sm-6
+          = video_field.text_field :title, class: "form-control", placeholder: "Title"
+
+        .col-sm-6
+          = video_field.text_field :copyright, class: "form-control", placeholder: "Copyright"

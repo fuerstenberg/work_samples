@@ -1,0 +1,23 @@
+- if customer_counter == 0
+  %tr
+    %th Name
+    %th Adresse
+    %th Screens
+    %th Letztes Update
+    %th
+
+%tr
+  %td= link_to customer, customer
+  %td
+    = customer.zip
+    = customer.city
+  %td== #{customer.screens.size} Screens
+  %td
+    - if updated_at = customer.recent_updated_content&.updated_at
+      %span.label{alt: l(updated_at), class: ((Time.now - 3.days) < updated_at ? 'label-success' : 'label-danger')}
+        Letztes Update
+        = time_ago_in_words updated_at
+        zuvor
+    - else
+      %span.label.label-default no content
+  %td= link_to 'Details', customer, class: 'btn btn-default-outline'

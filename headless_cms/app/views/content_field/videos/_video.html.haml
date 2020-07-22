@@ -1,0 +1,18 @@
+- if video_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[video]
+  %td= video.name
+  %td= video._type
+  %td= video.field_id
+  %td= video.required
+  %td.text-right
+    - if video.global_content_type
+      = link_to "Settings", [:edit, video.global_content_type, video], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, video.content_type.customer, video.content_type, video], class: "btn btn-sm btn-default-outline"

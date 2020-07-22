@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "required": ["contents"],
+  "properties": {
+    "contents" : {
+      "type" : "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

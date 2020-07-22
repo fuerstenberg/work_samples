@@ -1,0 +1,19 @@
+= render partial: "shared/errors", object: fields
+
+.form-group
+  = fields.label :name, class: "control-label col-sm-2"
+  .col-sm-10
+    = fields.text_field :name, class: "form-control", placeholder: "Name", autofocus: true
+
+- disabled_field_id_class = fields.object.new_record? ? "disabled" : ""
+.form-group{class: disabled_field_id_class}
+  = fields.label :field_id, class: "control-label col-sm-2"
+  .col-sm-10
+    = fields.text_field :field_id, class: "form-control", placeholder: "Description", disabled: fields.object.persisted?
+
+.form-group
+  .col-sm-10.col-sm-offset-2
+    .checkbox
+      %label
+        = fields.check_box :is_display_field, placeholder: "Description", disabled: fields.object.is_display_field
+        is display field

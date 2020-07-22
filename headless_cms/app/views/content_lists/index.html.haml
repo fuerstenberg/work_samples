@@ -1,0 +1,7 @@
+- title @content_lists
+
+- main_action_to_if can?(:create, ContentList), t('link_to.new'), [:new, Current.customer, :content_list]
+
+.row
+  .col-xs-12
+    %table.table.table-striped= render @content_lists

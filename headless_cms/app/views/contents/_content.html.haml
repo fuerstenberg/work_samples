@@ -1,0 +1,21 @@
+= link_to [content.customer, content], class: 'list-group-item sortable', id: dom_id(content), data: {id: content.id.to_s} do
+  .pull-left
+    - if content.has_released_to_any_screen?
+      %span.icon.icon-controller-record.text-success
+    - else
+      %span.icon.icon-controller-record.text-danger
+    -# TODO: draft/published/scheduled
+    -# content.status
+
+  .p-x
+    = content
+    .text-muted= content.content_type
+    .text-muted
+      %small
+        = content.id
+        - if content.foreign_id.present?
+          &mdash;
+          = content.foreign_id
+    .text-muted
+      %small
+        =time_ago_in_words content.updated_at

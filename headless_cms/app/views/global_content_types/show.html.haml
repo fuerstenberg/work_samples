@@ -1,0 +1,19 @@
+- title @global_content_type
+
+- content_for :actions do
+  - if can? :update, @global_content_type
+    = link_to t('button.edit'), [:edit, @global_content_type], class: 'btn btn-sm btn-success-outline'
+    = render partial: "content_fields/button_new", locals: { link_prefix: [:new, @global_content_type, :content_field] }
+
+
+.row
+  .col-xs-12
+    %table.table
+      %tr
+        %th Type
+        %td= @global_content_type.type
+      %tr
+        %th auto publish
+        %td= @global_content_type.auto_publish
+
+    %table.table= render @global_content_type.content_fields

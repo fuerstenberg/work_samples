@@ -1,0 +1,69 @@
+%nav.navbar.navbar-inverse.navbar-fixed-top
+  .container-fluid
+    .navbar-header
+      - if user_signed_in?
+        %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+      = link_to root_path, class: "navbar-brand navbar-brand-emphasized" do
+        %span.navbar-brand-icon
+        ____ v2
+
+    #navbar.navbar-collapse.collapse
+      %ul.nav.navbar-nav
+        - if user_signed_in?
+          - if can?(:create, Customer) || current_user.has_many_customers?
+            %li{class: (:active if controller.controller_name == 'customers' and controller.action_name == 'index')}
+              = link_to t('defaults.customers'), :customers
+          - if can? :read, Current.customer
+            %li{class: (:active if controller.controller_name == 'customers' and controller.action_name == 'show')}
+              = link_to Current.customer.to_s.truncate(20), Current.customer
+            %li{class: (:active if controller.controller_name == 'contents')}
+              = link_to t('defaults.contents'), [Current.customer, :contents]
+          - if can?(:read, Current.customer) && Current.user.god?
+            %li{class: (:active if controller.controller_name == 'content_lists')}
+              = link_to t('defaults.content_lists'), [Current.customer, :content_lists]
+          - if can? :read, Current.customer
+            %li.navbar-divider
+            %li{class: (:active if controller.controller_name == 'screens')}
+              = link_to t('defaults.screens'), [Current.customer, :screens]
+            %li{class: (:active if controller.controller_name == 'content_types')}
+              = link_to t('defaults.content_types'), [Current.customer, :content_types]
+            %li{class: (:active if request.path =~ /users/)}
+              = link_to t('defaults.users'), [Current.customer, :users]
+
+      %ul.nav.navbar-nav.pull-right
+        - if user_signed_in?
+          - if Current.user.admin? || Current.user.god?
+            %li{class: (:active if request.path =~ /users/)}
+              = link_to t('defaults.users'), :users
+
+          - if can? :read, GlobalContentType
+            %li{class: (:active if request.path =~ /global_content_types/)}
+              = link_to t('defaults.global_content_types'), :global_content_types
+
+          %li.dropdown
+            = link_to "#", class: "nav-link dropdown-toggle", "aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", role: "button" do
+              - if current_user.admin? or current_user.god?
+                %span.text-danger= current_user.name
+              - else
+                = current_user.name
+              %span.caret
+
+            %ul.dropdown-menu.dropdown-menu-right{role: "menu"}
+              - if can? :manage, current_user
+                %li{class: (:active if request.path =~ /\/users\/edit/)}
+                  = link_to t('defaults.settings'), current_user
+                %li.divider
+              %li= link_to "Abmelden", destroy_user_session_path, method: :delete
+        - else
+          - if controller_name != 'sessions'
+            %li{class: (:active if request.path =~ /^\/users\/sign_in/)}
+              = link_to "Anmelden", new_user_session_path
+
+          - if devise_mapping.registerable? && controller_name != 'registrations'
+            %li.vertical-divider
+            %li{class: (:active if request.path =~ /^\/users\/sign_up/)}
+              = link_to "Benutzerkonto erstellen", new_user_registration_path

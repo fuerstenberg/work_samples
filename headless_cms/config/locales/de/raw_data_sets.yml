@@ -1,0 +1,6 @@
+de:
+  raw_data_sets:
+    index:
+      title: Rohdaten für %{title}
+    show:
+      title: Rohdaten für %{title}

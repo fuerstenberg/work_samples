@@ -1,0 +1,18 @@
+- if short_text_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[short_text]
+  %td= short_text.name
+  %td= short_text._type
+  %td= short_text.field_id
+  %td= short_text.required
+  %td.text-right
+    - if short_text.global_content_type
+      = link_to "Settings", [:edit, short_text.global_content_type, short_text], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, short_text.content_type.customer, short_text.content_type, short_text], class: "btn btn-sm btn-default-outline"

@@ -1,0 +1,10 @@
+de:
+  content_fields:
+    button:
+      new: Feld anlegen
+  content_field:
+    base:
+      edit:
+        title: "%{title} bearbeiten"
+      new:
+        title: "Feld anlegen"

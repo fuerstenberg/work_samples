@@ -1,0 +1,12 @@
+- unless content[content_field.field_id].blank?
+  %dt
+    %abbr{ title: content_field.field_id }= content_field.name
+  %dd
+    .row
+      - if content_field.has_one?
+        - if document = content.send(content_field.field_id)
+          = render document
+      - else
+        - content.send(content_field.field_id).each do |document|
+          - if document
+            = render document

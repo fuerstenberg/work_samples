@@ -1,0 +1,15 @@
+- title
+
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'form-horizontal' }) do |f|
+  = devise_error_messages!
+  .form-group
+    = f.label :email, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.email_field :email, autofocus: true, placeholder: "eMail", class: "form-control"
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit t('.submit'), class: "btn btn-primary-outline"
+
+      %hr
+      = render "devise/shared/links"

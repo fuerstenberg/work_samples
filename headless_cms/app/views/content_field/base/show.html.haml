@@ -1,0 +1,21 @@
+- title @content_field
+- main_action_to_if can?(:update, @content_field), "Content field bearbeiten", [:edit, @content_field.customer, @content_field.content_type, @content_field]
+
+.row
+  .col-xs-12
+    %table.table
+      %tr
+        %td Name
+        %td= @content_field.name
+      %tr
+        %td Field id
+        %td= @content_field.field_id
+      %tr
+        %td required
+        %td= @content_field.required
+      %tr
+        %td Localized
+        %td= @content_field.localized
+      %tr
+        %td Validations
+        %td= @content_field.validations

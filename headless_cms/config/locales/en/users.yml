@@ -1,0 +1,10 @@
+en:
+  users:
+    index:
+      title: Users
+    edit:
+      title: Edit user "%{title}"
+    new:
+      title: Create user
+    show:
+      title: User "%{title}"

@@ -1,0 +1,18 @@
+- if time_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[time]
+  %td= time.name
+  %td= time._type
+  %td= time.field_id
+  %td= time.required
+  %td.text-right
+    - if time.global_content_type
+      = link_to "Settings", [:edit, time.global_content_type, time], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, time.content_type.customer, time.content_type, time], class: "btn btn-sm btn-default-outline"

@@ -1,0 +1,37 @@
+- title @content
+
+- content_for :actions do
+  - if can? :update, @content
+    = link_to t('button.edit'), [:edit, @customer, @content], class: "btn btn-sm btn-success-outline"
+    = link_to t('contents.buttons.releases'), [:releases, @content.customer, @content], class: 'btn btn-sm btn-success-outline'
+  - if @content.raw_data_sets.exists?
+    = link_to 'Raw data sets', [@customer, @content, :raw_data_sets], class: "btn btn-sm btn-success-outline"
+  - if can? :destroy, @content
+    = link_to t('button.destroy'), [@customer, @content], method: :delete, data: { confirm: t('confirmations.destroy') }, class: "btn btn-sm btn-danger-outline"
+
+%dl.dl-horizontal[@content]
+  %dt
+    %abbr{ title: 'Created at' } Created at
+  %dd
+    =l @content.created_at
+  %dt
+    %abbr{ title: 'Updated at' } Updated at
+  %dd
+    =l @content.updated_at
+
+  - @content.content_type.content_fields.all.each_with_index do |content_field, index|
+    = render partial: "content_field/#{content_field._type.to_s.demodulize.underscore.downcase.pluralize}/content_field",
+      object: content_field,
+      locals: { content: @content, content_field_counter: index }
+
+%hr
+
+%h2 Veröffentlicht
+- @content.customer.screens.each do |screen|
+  .col-sm-12
+    - if @content.has_released_for_screen?(screen)
+      %span.icon.icon-controller-record.text-success
+      = screen
+    - else
+      %span.icon.icon-controller-record.text-danger
+      = screen

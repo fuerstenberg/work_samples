@@ -1,0 +1,5 @@
+= form_for content_field_form_url((form.global_content_type || form.content_type), form), as: :content_field, html: { class: "form-horizontal" } do |f|
+  = render partial: "fields", object: f
+  = render partial: "has_many", object: f
+  = render partial: "required_field", object: f
+  = render partial: "buttons", object: f

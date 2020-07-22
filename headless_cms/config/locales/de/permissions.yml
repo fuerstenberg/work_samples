@@ -1,0 +1,7 @@
+de:
+  mongoid:
+    attributes:
+      permission:
+        action: Aktion
+        subject_class: Klasse
+        subject_id: Objekt

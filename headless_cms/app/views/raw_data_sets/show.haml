@@ -1,0 +1,7 @@
+- title @content
+
+- content_for :actions do
+  = link_to t('button.back'), [@customer, @content, :raw_data_sets], class: "btn btn-sm btn-success-outline"
+
+%pre
+  %code= @raw_data_set.xml

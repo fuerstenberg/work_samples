@@ -1,0 +1,25 @@
+- content_field = form_field
+
+.form-group
+  = form.label content_field.field_id, content_field.name, class: "control-label col-sm-2"
+  .col-sm-10
+    = form.fields_for content_field.field_id do |document_field|
+      - if document_field.object.new_record?
+        .form-group
+          .col-sm-12
+            = document_field.file_field :file, placeholder: content_field.name, step: 1
+      - else
+        .form-group
+          .col-sm-12
+            - if document = document_field.object
+              = image_tag document.file.url
+              = document_field.label :_destroy do
+                = document_field.check_box :_destroy
+                delete
+
+      .form-group
+        .col-sm-6
+          = document_field.text_field :title, class: "form-control", placeholder: "Title"
+
+        .col-sm-6
+          = document_field.text_field :copyright, class: "form-control", placeholder: "Copyright"

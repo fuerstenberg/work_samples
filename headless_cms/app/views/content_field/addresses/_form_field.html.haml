@@ -1,0 +1,28 @@
+- content_field = form_field
+
+.form-group
+  = form.label content_field.field_id, content_field.name, class: "control-label col-sm-2"
+  .col-sm-10
+    = form.fields_for content_field.field_id do |address_field|
+      .form-group
+        = address_field.label :street, class: "control-label col-sm-2 hidden"
+        .col-sm-12
+          = address_field.text_field :street, class: "form-control", placeholder: "Street"
+      .form-group.row
+        .col-sm-2.hidden
+          = address_field.label :zip, class: "control-label hidden"
+          \/
+          = address_field.label :city, class: "control-label hidden"
+        .col-sm-3
+          = address_field.text_field :zip,  class: "form-control", placeholder: "Zip"
+        .col-sm-9
+          = address_field.text_field :city, class: "form-control", placeholder: "City"
+      .form-group
+        = address_field.label :country, class: "control-label col-sm-2 hidden"
+        .col-sm-12
+          = address_field.text_field :country, class: "form-control", placeholder: "Country"
+
+      - if address_field.object.persisted?
+        = address_field.label :_destroy do
+          = address_field.check_box :_destroy
+          delete

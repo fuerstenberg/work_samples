@@ -1,0 +1,285 @@
+- host = Rails.env.production? ? 'https://cms.____.systems' : 'http://localhost:3000'
+- access_token = application.access_tokens.last.token rescue "your-valid-token"
+
+%dl.dl-horizontal
+  %dt Name
+  %dd= application.name
+
+  %dt UID (client_id)
+  %dd= application.uid
+
+  %dt Secret (client_secret)
+  %dd= application.secret
+
+  %dt Redirect URI
+  %dd= application.redirect_uri
+
+%hr
+%h2
+  Kunden API
+%p Die Kunden API wird benutzt um Inhalte für den Kunden zu erstellen. Diese API wird NICHT benutzt um Inhalte für Screens / Terminals / Stelen abzurufen.
+%p
+  Die Beispiele werden anhand des Befehls
+  %kbd curl
+  gezeigt, können aber auch mit einer beliebigen Programmiersprache durchgeführt werden.
+
+%hr
+- api = '/api/customers/v1/token.json'
+%h3
+  OAuth Access-Token erzeugen
+  %small== POST #{api}
+%p Der erzeugte Access-Token wird für alle weiteren Requests benutzt und ist nur eine bestimmte Zeit lang gültig.
+
+%h4 Request
+%pre
+  == curl -X POST -F "client_id=#{application.uid}" -F "client_secret=#{application.secret}" -F "grant_type=client_credentials" #{host}#{api}
+
+%h4 JSON Response (Beispiel)
+%p
+  Der access_token ist nur eine gewisse Zeit gültig (siehe expires_in).
+
+%pre
+  :preserve
+    {
+      "access_token":"#{access_token}",
+      "token_type":"Bearer",
+      "expires_in":7200,
+      "created_at":1574946771
+    }
+
+%hr
+- api = '/api/customers/v1/customer.json'
+%h3
+  Customer info
+  %small== GET #{api}
+%p Gibt Informationen zum Kunden zurück.
+
+%h4 Request
+%pre
+  == curl -H 'Accept: application/json' -H "Authorization: Bearer #{access_token}" #{host}#{api}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "customer": {
+        "id":"5ddfc614e21d4f5a9a88e740",
+        "createdAt":"2019-11-28T13:05:24.550Z",
+        "updatedAt":"2019-11-28T13:07:30.262Z",
+        "name":"____ Systems Testkunde",
+        "screen_ids":[
+          "5ddfc6abe21d4f5a9a88e744",
+          "5ddfc6b7e21d4f5a9a88e748"
+        ],
+        "address":{
+          "id":"5ddfc614e21d4f5a9a88e742",
+          "street":"Musterstraße 1",
+          "zip":"12345",
+          "city":"Musterstadt",
+          "country":"Deutschland",
+        }
+      }
+    }
+
+
+%hr
+- api = '/api/customers/v1/contents.json'
+%h3
+  IDs aller Inhalte abfragen
+  %small== GET #{api}
+%p
+
+%h4 Request
+%pre
+  == curl -H "Authorization: Bearer #{access_token}" #{host}#{api}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "contents": [{
+        "id": "5ddfdfefe1da34097700b8c8",
+        "createdAt": "2019-11-28T14:55:45.955Z",
+        "updatedAt": "2019-11-28T14:55:57.115Z",
+        "_checksum": null,
+        "content_type": "titel_text_bild",
+        "foreign_id": null
+      }]
+    }
+
+
+%hr
+- api = '/api/customers/v1/content_types/:content_type_id/contents.json'
+%h3
+  Inhalt anlegen
+  %small== POST #{api}
+%p Im Pfad muss die :content_type_id gesetzt werden, also welcher Inhaltstyp benutzt werden soll: z.Bsp.: titel_text_bild
+
+%h4 Request
+%pre
+  == curl -X POST -H "Authorization: Bearer #{access_token}" -F "content[titel]=Testtitel" -F "content[text]=Testtext" #{host}#{api.gsub(':content_type_id', 'titel_text_bild')}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "content": {
+        "id": "5ddfe70ee1da34097700b8cd",
+        "createdAt": "2019-11-28T15:26:06.842Z",
+        "updatedAt": "2019-11-28T15:26:06.842Z",
+        "assets": [],
+        "content_type": "titel_text_bild",
+        "_checksum": null,
+        "titel": "Testtitel",
+        "text": "Testtext"
+      }
+    }
+
+
+%hr
+- api = '/api/customers/v1/contents/:id.json'
+%h3
+  Inhalt löschen
+  %small== DELETE #{api}
+%p Im Pfad muss die :id gesetzt werden von dem Content, der gelöscht werden soll: z.Bsp.: 5ddfe70ee1da34097700b8cd
+
+%h4 Request
+%pre
+  == curl -X DELETE -H "Authorization: Bearer #{access_token}" #{host}#{api.gsub(':id', '5ddfe70ee1da34097700b8cd')}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "content": {
+        "id": "5ddfe70ee1da34097700b8cd",
+        "createdAt": "2019-11-28T15:26:06.842Z",
+        "updatedAt": "2019-11-28T15:26:06.842Z",
+        "assets": [],
+        "content_type": "titel_text_bild",
+        "_checksum": null,
+        "titel": "Testtitel",
+        "text": "Testtext"
+      }
+    }
+
+
+%hr
+- api = '/api/customers/v1/contents/:content_id/images.json'
+%h3
+  Alle Bilder eines Inhaltes abfragen
+  %small== GET #{api}
+%p Im Pfad muss die :content_id gesetzt werden von dem Content, dem ein Bild hinzugefügt werden soll: z.Bsp.: 5ddfe70ee1da34097700b8cd
+
+%h4 Request
+%pre
+  == curl -H "Authorization: Bearer #{access_token}" #{host}#{api.gsub(':content_id', '5ddfe70ee1da34097700b8cd')}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "images": [{
+        "id": "5ddfef2ee1da34097700b8d6",
+        "createdAt": "2019-11-28T16:00:46.352Z",
+        "updatedAt": "2019-11-28T16:00:46.352Z",
+        "content_type": "image/png",
+        "copyright": "",
+        "files": {
+          "original": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/original.png",
+          "l": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/l.png",
+          "m": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/m.png",
+          "s": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/s.png",
+          "xs": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/xs.png"
+        },
+        "file_hash": "865ab54879c726ae54ccd7933d176131",
+        "title": ""
+      }]
+    }
+
+
+%hr
+- api = '/api/customers/v1/contents/:content_id/images.json'
+%h3
+  Bild zu Inhalt hinzufügen
+  %small== POST #{api}
+%p Im Pfad muss die :content_id gesetzt werden von dem Content, dem ein Bild hinzugefügt werden soll: z.Bsp.: 5ddfe70ee1da34097700b8cd
+%p Der Parametername ergibt sich aus der field_id aus dem Inhaltstyp: z.Bsp: bild -> bild_attributes
+
+%h4 Request
+%pre
+  == curl -X POST -H "Authorization: Bearer #{access_token}" -F "bild_attributes[file]=@/path/to/image.png" #{host}#{api.gsub(':content_id', '5ddfe70ee1da34097700b8cd')}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "image": {
+        "id": "5ddfeccbe1da34097700b8d0",
+        "createdAt": "2019-11-28T15:50:36.931Z",
+        "updatedAt": "2019-11-28T15:50:36.931Z",
+        "content_type": "image/jpeg",
+        "copyright": "",
+        "files": {
+          "original": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfdfefe1da34097700b8c8/images/5ddfeccbe1da34097700b8d0/original.png",
+          "l": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfdfefe1da34097700b8c8/images/5ddfeccbe1da34097700b8d0/l.png",
+          "m": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfdfefe1da34097700b8c8/images/5ddfeccbe1da34097700b8d0/m.png",
+          "s": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfdfefe1da34097700b8c8/images/5ddfeccbe1da34097700b8d0/s.png",
+          "xs": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfdfefe1da34097700b8c8/images/5ddfeccbe1da34097700b8d0/xs.png"
+        },
+        "file_hash": "865ab54879c726ae54ccd7933d176131",
+        "title": ""
+      }
+    }
+
+
+%hr
+- api = '/api/customers/v1/contents/:content_id/images/:id.json'
+%h3
+  Ein Bild eines Inhaltes löschen
+  %small== DELETE #{api}
+%p Im Pfad muss die :content_id gesetzt werden von dem Content, dem ein Bild hinzugefügt werden soll: z.Bsp.: 5ddfdfefe1da34097700b8c8
+%p Im Pfad muss die :id gesetzt werden von dem Bild, welches gelöscht werden soll: z.Bsp.: 5ddfeccbe1da34097700b8d0
+
+%h4 Request
+%pre
+  == curl -X DELETE -H "Authorization: Bearer #{access_token}" #{host}#{api.gsub(':content_id', '5ddfdfefe1da34097700b8c8').gsub(':id', '5ddfeccbe1da34097700b8d0')}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {
+      "image": {
+        "id": "5ddfef2ee1da34097700b8d6",
+        "createdAt": "2019-11-28T16:00:46.352Z",
+        "updatedAt": "2019-11-28T16:00:46.352Z",
+        "content_type": "image/png",
+        "copyright": "",
+        "files": {
+          "original": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/original.png",
+          "l": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/l.png",
+          "m": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/m.png",
+          "s": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/s.png",
+          "xs": "/uploads/customers/5ddfc614e21d4f5a9a88e740/contents/5ddfee27e1da34097700b8d3/images/5ddfef2ee1da34097700b8d6/xs.png"
+        },
+        "file_hash": "865ab54879c726ae54ccd7933d176131",
+        "title": ""
+      }
+    }
+
+
+%hr
+- api = '/api/customers/v1/contents/:content_id/images/destroy_all.json'
+%h3
+  Alle Bilder eines Inhaltes löschen
+  %small== DELETE #{api}
+%p Im Pfad muss die :content_id gesetzt werden von dem Content, dem ein Bild hinzugefügt werden soll: z.Bsp.: 5ddfe70ee1da34097700b8cd
+
+%h4 Request
+%pre
+  == curl -X DELETE -H "Authorization: Bearer #{access_token}" #{host}#{api.gsub(':content_id', '5ddfe70ee1da34097700b8cd')}
+
+%h4 JSON Response (Beispiel)
+%pre
+  :preserve
+    {}

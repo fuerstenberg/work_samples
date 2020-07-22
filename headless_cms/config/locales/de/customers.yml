@@ -1,0 +1,18 @@
+de:
+  customers:
+    edit:
+      title: Kunde "%{title}" bearbeiten
+    index:
+      title: Kunden
+      subtitle:
+        one: Ein Kunde
+        other: '%{count} Kunden'
+    new:
+      title: Kunde anlegen
+    show:
+      title: Kunde - %{title}
+
+  mongoid:
+    attributes:
+      customer:
+        name: Name

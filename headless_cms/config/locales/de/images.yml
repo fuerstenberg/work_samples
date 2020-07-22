@@ -1,0 +1,8 @@
+de:
+  mongoid:
+    attributes:
+      image:
+        copyright: Copyright
+        file: Bilddatei
+        file_hash: Datei-Hash
+        title: Titel

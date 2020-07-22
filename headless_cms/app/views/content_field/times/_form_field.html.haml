@@ -1,0 +1,13 @@
+.form-group
+  = form.label form_field.field_id, form_field.name, class: "control-label col-sm-2"
+  .col-sm-10
+    - if form_field.date_only
+      = form.date_select form_field.field_id, class: "form-control", placeholder: form_field.name
+    - else
+      = form.datetime_select form_field.field_id, class: "form-control", placeholder: form_field.name
+
+    =# form.date_select form_field.field_id, class: "form-control", placeholder: form_field.name
+    =# form.datetime_field form_field.field_id, class: "form-control", placeholder: form_field.name
+    =# form.date_field form_field.field_id, class: "form-control", placeholder: form_field.name
+    =# form.datetime_local_field form_field.field_id, class: "form-control", placeholder: form_field.name
+    =# form.time_field form_field.field_id, class: "form-control", placeholder: form_field.name

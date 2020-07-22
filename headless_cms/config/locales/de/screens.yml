@@ -1,0 +1,16 @@
+de:
+  screens:
+    index:
+      title: Geräte (%{count})
+    edit:
+      title: Gerät "%{title}" bearbeiten
+    new:
+      title: Gerät anlegen
+    show:
+      title: Gerät - %{title}
+
+  mongoid:
+    attributes:
+      screen:
+        name: Name
+        last_api_get_request: letzter API-GET-Request

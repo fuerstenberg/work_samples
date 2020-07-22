@@ -1,0 +1,25 @@
+.btn-group
+  %button.btn.btn-sm.btn-default-outline.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+    = t 'content_fields.button.new'
+    %span.caret
+  %ul.dropdown-menu.dropdown-menu-right
+    %li= link_to "Boolean",       link_prefix + [:boolean]
+    %li= link_to "Decimal",       link_prefix + [:decimal]
+    %li= link_to "Integer",       link_prefix + [:integer]
+    %li= link_to "Long text",     link_prefix + [:long_text]
+    %li= link_to "Short text",    link_prefix + [:short_text]
+    %li= link_to "Time",          link_prefix + [:time]
+    %li.divider
+    %li= link_to "Address",       link_prefix + [:address]
+    %li= link_to "Document",      link_prefix + [:document]
+    %li= link_to "Image",         link_prefix + [:image]
+    %li= link_to "Video",         link_prefix + [:video]
+    %li.divider
+    %li.disabled
+      %a{href: '#'} Date and Time
+    %li.disabled
+      %a{href: '#'} Location
+    %li.disabled
+      %a{href: '#'} JSON Object
+    %li.disabled
+      %a{href: '#'} Reference (Link)

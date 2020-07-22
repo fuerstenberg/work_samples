@@ -1,0 +1,23 @@
+- title @screen
+
+- if can? :destroy, @screen
+  - main_action_to t('button.destroy'), [@screen.customer, @screen], method: :delete, data: { confirm: t('confirmations.destroy') }, class: "btn btn-danger-outline p-x pull-right"
+- if can? :edit, @screen
+  - main_action_to t('button.edit'), [:edit, @screen.customer, @screen]
+
+%dl.dl-horizontal
+  %dt ID
+  %dd= @screen.id
+
+  %dt Name
+  %dd= @screen.name
+
+  = render @screen.address
+
+  %dt Last API get request
+  %dd
+    %span{ class: "text-#{@screen.last_api_get_request_status}" }
+      &bull;
+    =time_ago_in_words @screen.last_api_get_request, include_seconds: true rescue '-'
+
+= render partial: 'doorkeeper/applications/screen_api', collection: @screen.oauth_applications, as: :application

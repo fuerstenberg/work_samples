@@ -1,0 +1,18 @@
+- if document_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[document]
+  %td= document.name
+  %td= document._type
+  %td= document.field_id
+  %td= document.required
+  %td.text-right
+    - if document.global_content_type
+      = link_to "Settings", [:edit, document.global_content_type, document], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, document.content_type.customer, document.content_type, document], class: "btn btn-sm btn-default-outline"

@@ -1,0 +1,7 @@
+.col-xs-12.col-sm-4
+  .thumbnail
+    = video_tag video.file.url, controls: true, autobuffer: true, width: "100%"
+    .caption
+      %p
+        = video.title
+        %small.text-muted= video.copyright

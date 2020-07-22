@@ -1,0 +1,17 @@
+de:
+  contents:
+    buttons:
+      releases: Veröffentlichen
+    edit:
+      title: "Inhalt bearbeiten - %{title}"
+    index:
+      title: "Inhalte (%{count})"
+    new:
+      title: "Inhalt anlegen"
+    show:
+      title: "Inhalt - %{title}"
+
+  mongoid:
+    attributes:
+      content:
+        foreign_id: Fremd-ID

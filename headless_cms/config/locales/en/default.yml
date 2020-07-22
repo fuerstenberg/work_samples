@@ -1,0 +1,17 @@
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  confirmations:
+    destroy: Are you sure?
+
+  address: Address
+  api: API
+  general: General
+  name: Name
+  statistic: Statistic
+
+  link_to:
+    new: New
+    edit: Edit
+    show: Show

@@ -1,0 +1,47 @@
+-# - unless content[content_field.field_id].blank?
+-#   %dt
+-#     %abbr{ title: content_field.field_id }= content_field.name
+-#   %dd
+-#     = content[content_field.field_id]
+
+=# console
+%dt
+  - if defined?(content_field)
+    %abbr{ title: content_field.field_id }= content_field.name
+  - else
+    = t :address
+%dd
+  - if address.floor.present?
+    Etage:
+    = address.floor
+    %br
+
+  - if address.street.present?
+    = address.street
+    %br
+
+  - if address.zip.present? or address.city.present?
+    = address.zip
+    = address.city
+    %br
+
+  - if address.region.present?
+    = address.region
+    %br
+
+  - if address.state.present?
+    = address.state
+    %br
+
+  - if address.country.present? or address.country_code.present?
+    = address.country
+    == (#{address.country_code})
+    %br
+
+- if address.has_location?
+  %dt= t :coordinates
+  %dd= address.to_coordinates
+
+  %dt= t :map
+  %dd
+    .map{ data: { lng: address.coordinates[0], lat: address.coordinates[1] } }

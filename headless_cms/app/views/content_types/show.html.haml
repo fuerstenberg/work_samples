@@ -1,0 +1,20 @@
+- title @content_type
+
+- content_for :actions do
+  - if can? :update, @content_type
+    = link_to t('button.edit'), [:edit, @content_type.customer, @content_type], class: "btn btn-sm btn-success-outline"
+    = render partial: "content_fields/button_new", locals: { link_prefix: [:new, @customer, @content_type, :content_field] }
+  - if can? :destroy, @content_type and @content_type.contents.empty?
+    = link_to t('button.destroy'), [@content_type.customer, @content_type], method: :delete, data: { confirm: t('confirmations.destroy') }, class: "btn btn-sm btn-danger-outline"
+
+.row
+  .col-xs-12
+    %table.table
+      %tr
+        %th Type
+        %td= @content_type.type
+      %tr
+        %th auto publish
+        %td= @content_type.auto_publish
+
+    %table.table= render partial: "content_fields/content_field", collection: @content_type.content_fields

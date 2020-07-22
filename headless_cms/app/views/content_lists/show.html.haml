@@ -1,0 +1,9 @@
+- title @content_list
+
+- content_for :actions do
+  - if can? :destroy, @content_list
+    = link_to t('link_to.destroy'), [Current.customer, @content_list], method: :delete, class: 'btn btn-danger-outline p-x pull-right', data: { confirm: t('confirmations.destroy') }
+
+- if can? :update, @content_list
+  - content_for :actions do
+    = link_to t('link_to.edit'), [:edit, Current.customer, @content_list], class: 'btn btn-success-outline'

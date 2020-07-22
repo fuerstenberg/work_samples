@@ -1,0 +1,7 @@
+en:
+  customers:
+    index:
+      title: Customers
+      subtitle:
+        one: One customer
+        other: '%{count} customers'

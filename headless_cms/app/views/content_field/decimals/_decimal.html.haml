@@ -1,0 +1,18 @@
+- if decimal_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[decimal]
+  %td= decimal.name
+  %td= decimal._type
+  %td= decimal.field_id
+  %td= decimal.required
+  %td.text-right
+    - if decimal.global_content_type
+      = link_to "Settings", [:edit, decimal.global_content_type, decimal], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, decimal.content_type.customer, decimal.content_type, decimal], class: "btn btn-sm btn-default-outline"

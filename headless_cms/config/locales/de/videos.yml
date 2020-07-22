@@ -1,0 +1,8 @@
+de:
+  mongoid:
+    attributes:
+      video:
+        copyright: Copyright
+        file_hash: Datei-Hash
+        file: Videodatei
+        title: Titel

@@ -1,0 +1,21 @@
+- title @user
+
+- main_action_to_if can?(:update, @user), t('link_to.edit'), [:edit, @user]
+
+%dl.dl-horizontal
+  %dt eMail
+  %dd= @user.email
+
+  - if @user.god?
+    %dt.text-danger God
+    %dd.text-danger
+      %span.icon.icon-check
+
+- unless @user.god?
+  %table.table.table-striped
+    - @user.roles.each_with_index do |role, index|
+      = render partial: 'roles/role', object: role, locals: { edit_role: @role, role_counter: index }
+
+- if !@user.has_roles_for_all_customers && can?(:create, Role)
+  .pull-right
+    = link_to 'Add role', [:new, @user, :role], class: 'btn btn-default-outline'

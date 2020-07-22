@@ -1,0 +1,10 @@
+.col-xs-6.col-sm-4
+  .thumbnail
+    = link_to image.file.url do
+      = image_tag image.file.url(:m), alt: image.title
+    .caption
+      %p
+        = image.id
+      %p
+        = image.title
+        %small.text-muted= image.copyright

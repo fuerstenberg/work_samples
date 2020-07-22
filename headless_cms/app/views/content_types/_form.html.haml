@@ -1,0 +1,33 @@
+= form_for [form.customer, form], html: { class: "form-horizontal" } do |f|
+
+  = render partial: "shared/errors", object: f
+
+  .form-group
+    = f.label :name, class: "control-label col-sm-2"
+    .col-sm-10
+      = f.text_field :name, class: "form-control", placeholder: "Name", autofocus: true
+
+  .form-group
+    = f.label :description, class: "control-label col-sm-2"
+    .col-sm-10
+      = f.text_area :description, class: "form-control", placeholder: "Description"
+
+  .form-group
+    = f.label :type, class: "control-label col-sm-2"
+    .col-sm-10
+      = f.text_field :type, class: "form-control", placeholder: "Type", disabled: f.object.persisted?
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      .checkbox
+        = f.label :auto_publish, class: 'checkbox-inline' do
+          = f.check_box :auto_publish
+          automatisch veröffentlichen
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit t('button.save'), class: "btn btn-primary-outline"
+      - if f.object.new_record?
+        = link_to t('button.cancel'), [f.object.customer, :content_types], class: "btn btn-default-outline"
+      - else
+        = link_to t('button.cancel'), [f.object.customer, f.object], class: "btn btn-default-outline"

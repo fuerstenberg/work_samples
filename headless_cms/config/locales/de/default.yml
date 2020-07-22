@@ -1,0 +1,46 @@
+de:
+  confirmations:
+    destroy: Wirklich löschen?
+
+  defaults:
+    content_types: Inhaltstypen
+    content_lists: Inhaltslisten
+    contents: Inhalte
+    customers: Kunden
+    global_content_types: Globale Inhaltstypen
+    screens: Geräte
+    settings: Einstellungen
+    users: Benutzer
+
+  address: Adresse
+  api: API
+  coordinates: Koordinaten
+  general: Allgemein
+  map: Karte
+  name: Name
+  statistic: Statistik
+  users: Benutzer
+
+  link_to:
+    new: Neu
+    edit: Bearbeiten
+    show: Anzeigen
+    destroy: Löschen
+
+  button:
+    back: Zurück
+    cancel: Abbrechen
+    destroy: Löschen
+    edit: Bearbeiten
+    new: Anlegen
+    save: Speichern
+
+i18n:
+  transliterate:
+    rule:
+      ä: "ae"
+      ü: "ue"
+      ö: "oe"
+      Ä: "Ae"
+      Ü: "Ue"
+      Ö: "Oe"

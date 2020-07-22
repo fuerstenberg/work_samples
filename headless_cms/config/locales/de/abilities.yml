@@ -1,0 +1,6 @@
+de:
+  mongoid:
+    attributes:
+      ability:
+        ability: Aktion
+        class_name: Klassenname

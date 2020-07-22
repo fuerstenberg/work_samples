@@ -1,0 +1,11 @@
+.col-xs-6.col-sm-4
+  - if document.file.file.extension == 'svg'
+    .thumbnail
+      = link_to document.file.url do
+        = image_tag document.file.url, alt: document.title, style: 'max-width: 300px; max-height: 300px;'
+  - else
+    = link_to document.file.url, document.file.url
+  .caption
+    %p
+      = document.title
+      %small.text-muted= document.copyright

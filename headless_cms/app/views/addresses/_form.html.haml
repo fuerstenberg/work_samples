@@ -1,0 +1,28 @@
+- form.object.build_address unless form.object.address
+
+= form.fields_for :address do |address_fields|
+  .form-group
+    = address_fields.label :street, class: "control-label col-sm-2"
+    .col-sm-10
+      = address_fields.text_field :street, class: "form-control", placeholder: "Street"
+  .form-group
+    .col-sm-2.control-label
+      = address_fields.label :zip
+      \/
+      = address_fields.label :city
+    .col-sm-2
+      = address_fields.text_field :zip,  class: "form-control", placeholder: "Zip"
+    .col-sm-8
+      = address_fields.text_field :city, class: "form-control", placeholder: "City"
+  .form-group
+    = address_fields.label :region, class: "control-label col-sm-2"
+    .col-sm-10
+      = address_fields.text_field :region, class: "form-control", placeholder: "Region"
+  .form-group
+    = address_fields.label :state, class: "control-label col-sm-2"
+    .col-sm-10
+      = address_fields.text_field :state, class: "form-control", placeholder: "State"
+  .form-group
+    = address_fields.label :country, class: "control-label col-sm-2"
+    .col-sm-10
+      = address_fields.text_field :country, class: "form-control", placeholder: "Country"

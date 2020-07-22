@@ -1,0 +1,6 @@
+en:
+  content_types:
+    index:
+      new: "Create copy from %{title}"
+    show:
+      title: "Content type - %{title}"

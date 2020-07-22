@@ -1,0 +1,11 @@
+- if notice or alert
+  .container-fluid.m-y
+    .row
+      .col-sm-12
+        .alerts
+          .row
+            .col-xs-12
+              - if notice
+                %p.alert.alert-success= notice
+              - if alert
+                %p.alert.alert-danger= alert

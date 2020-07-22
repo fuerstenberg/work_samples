@@ -1,0 +1,7 @@
+.form-group
+  .col-sm-offset-2.col-sm-10
+    = buttons.submit t('button.save'), class: "btn btn-primary-outline"
+    - if buttons.object.global_content_type
+      = link_to t('button.cancel'), buttons.object.global_content_type, class: "btn btn-default-outline"
+    - else
+      = link_to t('button.cancel'), [buttons.object.content_type.customer, buttons.object.content_type], class: "btn btn-default-outline"

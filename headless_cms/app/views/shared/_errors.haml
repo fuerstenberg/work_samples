@@ -1,0 +1,8 @@
+- if errors.object.errors.any?
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      .alert.alert-danger#error_explanation
+        %strong= "#{pluralize(errors.object.errors.count, "error")} prohibited this customer from being saved:"
+        %ul
+          - errors.object.errors.full_messages.each do |msg|
+            %li= msg

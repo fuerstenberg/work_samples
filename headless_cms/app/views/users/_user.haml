@@ -1,0 +1,6 @@
+- if can? :read, user
+  = link_to [Current.customer, user], class: 'list-group-item' do
+    %span.pull-right.text-muted
+      last sign in
+      = time_ago_in_words user.last_sign_in_at rescue nil
+    = user.name

@@ -1,0 +1,15 @@
+.container-fluid.container-fluid-spacious.m-y
+  .row
+    .col-sm-12
+      .dashhead
+        .dashhead-titles
+          %h1.dashhead-title= yield :title
+          - if content_for? :subtitle
+            %h6.dashhead-subtitle
+              =# render 'layouts/breadcrumbs'
+              -# = yield :breadcrumbs
+              = yield :subtitle
+        .dashhead-toolbar.btn-toolbar
+          - if content_for? :actions
+            = yield :actions
+        .clearfix

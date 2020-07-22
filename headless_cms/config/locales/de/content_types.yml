@@ -1,0 +1,20 @@
+de:
+  content_types:
+    index:
+      title: Inhaltstypen (%{count})
+      button:
+        copy_hint: Globalen Inhaltstyp kopieren
+        copy: "%{title} kopieren"
+    edit:
+      title: Inhaltstyp "%{title}" bearbeiten
+    new:
+      title: Inhaltstyp anlegen
+    show:
+      title: Inhaltstyp - %{title}
+
+  mongoid:
+    attributes:
+      content_type:
+        description: Beschreibung
+        name: Name
+        type: Typ

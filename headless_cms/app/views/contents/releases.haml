@@ -1,0 +1,19 @@
+= form_for [:releases, @content.customer, @content] do |f|
+
+  - f.object.customer.screens.each do |screen|
+    - release = f.object.releases.where(screen_id: screen.id).first
+    - release = f.object.releases.build(screen_id: screen.id) unless release
+
+  = f.fields_for :releases do |release|
+    .form-group
+      = release.hidden_field :screen_id
+
+      %label{for: release.object.screen_id, class: "p-r checkbox-inline"}
+        = release.check_box :_destroy, { checked: release.object.persisted? }, 0, 1 # inverted values to activate or deactivate
+        = release.object.screen
+        %small= release.object.screen_id
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit t('button.save'), class: "btn btn-primary-outline"
+      = link_to t('button.cancel'), [f.object.customer, f.object], class: "btn btn-default"

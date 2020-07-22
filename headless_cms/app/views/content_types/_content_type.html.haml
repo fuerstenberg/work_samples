@@ -1,0 +1,10 @@
+= link_to [content_type.customer, content_type], class: 'list-group-item' do
+  .pull-right
+    .text-muted
+      = content_type.contents.count
+      contents
+    .text-muted
+      = content_type.content_fields.count
+      fields
+  = content_type
+  .clearfix

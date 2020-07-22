@@ -1,0 +1,5 @@
+- title @users
+
+- main_action_to_if can?(:create, User), t('link_to.new'), [:new, Current.customer, :user]
+
+.list-group= render @users

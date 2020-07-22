@@ -1,0 +1,12 @@
+de:
+  mongoid:
+    attributes:
+      address:
+        city: Stadt
+        coordinates: Koordinaten
+        country: Land
+        country_code: Ländercode
+        floor: Etage
+        state: Bundesland
+        street: Straße
+        zip: Postleitzahl

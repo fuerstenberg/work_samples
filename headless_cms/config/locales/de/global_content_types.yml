@@ -1,0 +1,17 @@
+de:
+  global_content_types:
+    index:
+      title: Globale Vorlagen
+    edit:
+      title: Globale Vorlage "%{title}" bearbeiten
+    new:
+      title: Globale Vorlage anlegen
+    show:
+      title: Globale Vorlage "%{title}"
+
+  mongoid:
+    attributes:
+      global_content_type:
+        description: Beschreibung
+        name: Name
+        type: Typ

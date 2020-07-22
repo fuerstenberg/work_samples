@@ -1,0 +1,10 @@
+de:
+  content_lists:
+    index:
+      title: Inhaltslisten (%{count})
+    edit:
+      title: Inhaltsliste "%{title}" bearbeiten
+    new:
+      title: Inhaltsliste anlegen
+    show:
+      title: Inhaltsliste - %{title}

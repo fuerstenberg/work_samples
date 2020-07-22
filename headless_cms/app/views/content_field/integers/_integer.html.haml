@@ -1,0 +1,18 @@
+- if integer_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[integer]
+  %td= integer.name
+  %td= integer._type
+  %td= integer.field_id
+  %td= integer.required
+  %td.text-right
+    - if integer.global_content_type
+      = link_to "Settings", [:edit, integer.global_content_type, integer], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, integer.content_type.customer, integer.content_type, integer], class: "btn btn-sm btn-default-outline"

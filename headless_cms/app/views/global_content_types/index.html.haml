@@ -1,0 +1,8 @@
+- title @global_content_types
+
+- if can? :create, GlobalContentType
+  - main_action_to t('button.new'), [:new, :global_content_type]
+
+.row
+  .col-xs-12
+    .list-group= render @global_content_types

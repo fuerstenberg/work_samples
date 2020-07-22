@@ -1,0 +1,18 @@
+- if boolean_counter == 0
+  %tr
+    %th Name
+    %th Field type
+    %th Field id
+    %th required
+    %th
+
+%tr[boolean]
+  %td= boolean.name
+  %td= boolean._type
+  %td= boolean.field_id
+  %td= boolean.required
+  %td.text-right
+    - if boolean.global_content_type
+      = link_to "Settings", [:edit, boolean.global_content_type, boolean], class: "btn btn-sm btn-default-outline"
+    - else
+      = link_to "Settings", [:edit, boolean.content_type.customer, boolean.content_type, boolean], class: "btn btn-sm btn-default-outline"

@@ -1,0 +1,2 @@
+module ContentListsHelper
+end

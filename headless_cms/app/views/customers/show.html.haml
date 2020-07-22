@@ -1,0 +1,54 @@
+- title @customer
+
+- content_for :actions do
+  - if can? :destroy, @customer
+    = link_to t('link_to.destroy'), @customer, method: :delete, class: 'btn btn-danger-outline p-x pull-right', data: { confirm: t('confirmations.destroy') }
+
+- if can? :update, @customer
+  - content_for :actions do
+    = link_to t('link_to.edit'), [:edit, @customer], class: 'btn btn-success-outline'
+
+.hr-divider.m-b-md
+  %ul.nav.nav-pills.hr-divider-content.hr-divider-nav{role: "tablist"}
+    %li.active{role: "presentation"}
+      %a{"aria-controls": "general", "data-toggle": "tab", href: "#general", role: "tab"} General
+    - if can? :read, Doorkeeper::Application
+      %li{role: "presentation"}
+        %a{"aria-controls": "api", "data-toggle": "tab", href: "#api", role: "tab"} API
+
+.tab-content.m-b
+  #general.tab-pane.active{role: "tabpanel"}
+    .row
+      - if @customer.logo?
+        .col-sm-3.text-xs-center.text-sm-left
+          = image_tag @customer.logo.url(:sm)
+      .col-sm-9
+        %dl.dl-horizontal= render @customer.address if @customer.address
+
+    .row
+      .col-xs-6.col-sm-3.statcard.p-a-md.text-center
+        %h3.statcard-number= @customer.contents.count
+        .statcard-desc= t 'defaults.contents'
+        - if can? :read, Content
+          = link_to t('link_to.show'), [@customer, :contents], class: "btn btn-sm btn-success-outline m-y"
+      .col-xs-6.col-sm-3.statcard.p-a-md.text-center
+        %h3.statcard-number= @customer.screens.count
+        .statcard-desc= t 'defaults.screens'
+        - if can? :read, Screen
+          = link_to t('link_to.show'), [@customer, :screens], class: "btn btn-sm btn-success-outline m-y"
+      .col-xs-6.col-sm-3.statcard.p-a-md.text-center
+        %h3.statcard-number= @customer.content_types.count
+        .statcard-desc= t 'defaults.content_types'
+        - if can? :read, ContentType
+          = link_to t('link_to.show'), [@customer, :content_types], class: "btn btn-sm btn-success-outline m-y"
+      .col-xs-6.col-sm-3.statcard.p-a-md.text-center
+        %h3.statcard-number= @customer.users.count
+        .statcard-desc= t 'defaults.users'
+        - if can? :read, User
+          = link_to t('link_to.show'), [@customer, :users], class: "btn btn-sm btn-success-outline m-y"
+
+  - if can? :read, Doorkeeper::Application
+    #api.tab-pane{role: "tabpanel"}
+      .row
+        .col-xs-12
+          = render partial: 'doorkeeper/applications/customer_api', collection: @customer.oauth_applications, as: :application

@@ -1,0 +1,5 @@
+- unless content[content_field.field_id].blank?
+  %dt
+    %abbr{ title: content_field.field_id }= content_field.name
+  %dd
+    = content[content_field.field_id]

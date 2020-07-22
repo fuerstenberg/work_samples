@@ -1,0 +1,7 @@
+%h1 Editing content_list
+
+= render partial: 'form', object: @content_list
+
+= link_to 'Show', [Current.customer, @content_list]
+\|
+= link_to 'Back', [Current.customer, :content_lists]

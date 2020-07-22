@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "required": ["contents"],
+  "properties": {
+    "contents" : {
+      "type" : "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "content_type",
+          "foreign_id",
+          "_checksum"
+        ],
+        "properties" : {
+          "id" : { "type" : "string" },
+          "content_type" : { "type" : "string" },
+          "createdAt" : { "type" : "date-time" },
+          "updatedAt" : { "type" : "date-time" },
+          "foreign_id" : { "type" : "string" },
+          "_checksum" : { "type" : "string" }
+        }
+      }
+    }
+  }
+}

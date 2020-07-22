@@ -1,0 +1,17 @@
+= form_for [form.customer, form], html: { class: "form-horizontal" } do |f|
+
+  = render partial: "shared/errors", object: f
+
+  - if f.object.new_record?
+    = f.hidden_field :content_type_id
+
+  - f.object.content_type.content_fields.all.each_with_index do |content_field, index|
+    = render partial: "content_field/#{content_field._type.to_s.demodulize.underscore.downcase.pluralize}/form_field", object: content_field, locals: {form: f, form_field_counter: index, autofocus: (index == 0)}
+
+  .row
+    .col-sm-offset-2.col-sm-10
+      = f.submit t('button.save'), class: "btn btn-primary-outline"
+      - if f.object.new_record?
+        = link_to t('button.cancel'), [f.object.customer, :contents], class: "btn btn-default-outline"
+      - else
+        = link_to t('button.cancel'), [f.object.customer, f.object], class: "btn btn-default-outline"
