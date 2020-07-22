@@ -6,7 +6,7 @@ gem 'mongoid', '6.3.0'
 gem 'mongoid_rails_migrations', '1.1.0'
 gem 'mongoid_search'
 gem 'mongoid-tree'
-gem 'puma', '~> 3.10' # Use Puma as the app server
+gem 'puma', '~> 3.12' # Use Puma as the app server
 
 # ASSETS
 gem 'carrierwave', '1.0.0'

@@ -227,7 +227,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (4.0.1)
-    puma (3.12.1)
+    puma (3.12.6)
     rack (2.0.7)
     rack-cors (1.1.0)
       rack (>= 2.0.0)
@@ -382,7 +382,7 @@ DEPENDENCIES
   mongoid-tree
   mongoid_rails_migrations (= 1.1.0)
   mongoid_search
-  puma (~> 3.10)
+  puma (~> 3.12)
   rack-cors
   rails (~> 5.1.0)
   rails-i18n
