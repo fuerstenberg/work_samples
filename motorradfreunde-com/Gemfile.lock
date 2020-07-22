@@ -164,7 +164,7 @@ GEM
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     gemoji (2.1.0)
-    geocoder (1.4.3)
+    geocoder (1.6.1)
     gherkin (4.1.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
@@ -489,7 +489,7 @@ DEPENDENCIES
   enumerize
   factory_girl_rails (= 4.2.1)
   font-awesome-sass (~> 4.7.0)
-  geocoder (= 1.4.3)
+  geocoder (= 1.6.1)
   gon
   haml-rails
   has_scope
